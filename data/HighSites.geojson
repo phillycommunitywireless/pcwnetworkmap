@@ -6,6 +6,6 @@
 { "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ] ] } }
 ],
 [
-{ "type": "Feature", "properties": { "fid": 2, "qc_id": 0, "name": "Jasper Studios", "description": "2930 Jasper St", "hs_id": "00002" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.11818920373796, 39.992775343026445, 0.0 ] ] } }
+{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Jasper Studios", "description": "2930 Jasper St", "hs_id": "00002" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.11818920373796, 39.992775343026445, 0.0 ] ] } }
 ]
 }
