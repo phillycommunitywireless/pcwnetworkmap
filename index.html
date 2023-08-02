@@ -531,7 +531,10 @@ function toggleNewLine() {
       0.8, 'rgba(0, 255, 0, 1)'
     ],
     // Heatmap radius
-    'heatmap-radius': {default: 12
+    'heatmap-radius': {
+       stops: [
+        [24, 40],
+        [28, 110]
       ]
     },
     // Heatmap opacity
