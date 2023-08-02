@@ -1,0 +1,634 @@
+
+<!--This code implements animated lines for the network nodes-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PhillyCommunity Wireless Network</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+  <link href='https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css' rel='stylesheet'>
+  <script src='https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.js'></script>
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+    .map-overlay {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgb(227,229,230);
+      padding: 0px;
+      border-radius: 10px;
+      font-family: Arial, sans-serif;
+      z-index: 1;
+    }
+
+    .layer-icon {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        margin-right: 5px;
+      }
+
+    .bookmarks {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: rgb(227,229,230);
+      padding: 10px;
+      border-radius: 4px;
+      font-family: Arial, sans-serif;
+      z-index: 1;
+    }
+
+    .switch-container {
+      display: flex;
+      align-items: center;
+      margin-right: 10px; /* Add margin to the right */
+    }
+
+    .switch-container div:last-child {
+      margin-left: 10px; /* Add margin to the left for the text */
+    }
+
+
+
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+    <div class="map-overlay">
+
+
+  </div>
+  
+  <div class="bookmarks">
+    <div>Select layers:</div>
+    <div class='relative bg-gray-lighter mx6 my6 w180 round'>
+      <label class='checkbox-container'>
+        <input type='checkbox' id="layer1" checked/>
+        <div class='checkbox mr6 checkbox--s-label'>
+          <svg class='icon'><use xlink:href='#icon-check' /></svg>
+        </div>
+        <img class="layer-icon" src="https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/high_sites.png"> High Sites
+      </label>
+      <label class='checkbox-container'>
+        <input type='checkbox' id="layer2" checked/>
+        <div class='checkbox mr6 checkbox--s-label'>
+          <svg class='icon'><use xlink:href='#icon-check' /></svg>
+        </div>
+        <img class="layer-icon" src="https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/RooftopHub.png"> Rooftop Hubs
+      </label>
+      <label class='checkbox-container'>
+        <input type='checkbox' id="layer3" checked/>
+        <div class='checkbox mr6 checkbox--s-label'>
+          <svg class='icon'><use xlink:href='#icon-check' /></svg>
+        </div>
+        <img class="layer-icon" src="https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/icon1.png"> Mesh Nodes
+      </label>
+      <label class='checkbox-container'>
+        <input type='checkbox' id="layer4" />
+        <div class='checkbox mr6 checkbox--s-label'>
+          <svg class='icon'><use xlink:href='#icon-check' /></svg>
+        </div>
+        Heatmap
+      </label>
+    </div>
+    <div>Navigate to:</div>
+    <div class="inline-flex flex--column">
+    <button class="btn btn--gray btn--pill-vt" onclick="navigateToBookmark(1, 0, 0)">Norris Square Park</button>
+    <button class="btn btn--gray btn--pill-vc" onclick="navigateToBookmark(2, 0, 90)">Existing Network</button>
+    <button class="btn btn--gray btn--pill-vb" onclick="navigateToBookmark(3, 60, 180)">3D View</button>
+    </div>
+    <div>Animate Network:</div>
+    <label class="switch-container">
+      <input type="checkbox" id="toggleNetworkLinks" />
+      <div class="switch"></div>
+      <div>Level 1</div>
+    </label>
+    <label class="switch-container">
+      <input type="checkbox" id="toggleNetworkLinks2" />
+      <div class="switch"></div>
+      <div>Level 2</div>
+    </label>
+  </div>
+
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZm12YWxkZXpnODQiLCJhIjoiY2xqajJzZXZ2MDU3ZTNybHBrdHo4OWo4aSJ9.ENnejUYGtJT-74gG0opSQA';
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/dark-v11',
+      zoom: 14,
+      center: [-75.1405, 39.9839],
+      pitch: 0,
+      bearing: 0,
+    });
+
+    // Define an array of GeoJSON layer URLs and their associated icons
+    const layers = [
+      {
+        url: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/high_sites.geojson',
+        icon: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/high_sites.png',
+        id: 'high-sites-layer',
+        name: 'High Sites',
+        popup: '<h3>High Sites</h3><p>{name}</p>'
+      },
+      {
+        url: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/rooftop_hubs.geojson',
+        icon: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/RooftopHub.png',
+        id: 'rooftop-hubs-layer',
+        name: 'Rooftop Hubs',
+        popup: '<h3>Rooftop Hubs</h3><p>{name}</p>'
+      },
+      {
+        url: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/mesh_nodes.geojson',
+        icon: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/icon1.png',
+        id: 'mesh-nodes-layer',
+        name: 'Mesh Nodes',
+        popup: '<h3>Mesh Nodes</h3><p>{name}</p>'
+      },
+      {
+        url: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/network-points.geojson',
+        icon: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/icon1.png',
+        id: 'mesh-nodes-layer',
+        name: 'Mesh Nodes',
+        popup: '<h3>Mesh Nodes</h3><p>{name}</p>'
+      },
+    ];
+
+    // Add the GeoJSON layers to the map
+    layers.forEach(layer => {
+      map.on('load', () => {
+        map.loadImage(layer.icon, (error, image) => {
+          if (error) throw error;
+          map.addImage(layer.icon, image);
+          map.addSource(layer.id, {
+            type: 'geojson',
+            data: layer.url
+          });
+          map.addLayer({
+            id: layer.id,
+            type: 'symbol',
+            source: layer.id,
+            layout: {
+              'icon-image': layer.icon,
+              'icon-size': ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.7],
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'text-field': ['get','names'],
+              'text-size': ['interpolate', ['linear'], ['zoom'], 0, 12, 17, 16],
+              'text-anchor': 'left',
+              'text-justify': 'left',
+              'text-offset': [1.2,0],
+            },
+            paint: {
+              'icon-opacity': 0.9,
+              'text-halo-color': 'rgb(255, 255, 255)',
+              'text-halo-width': 2,
+              'text-halo-blur': 0.5,
+            },
+            sourceLayer: 'default',
+            minzoom: 12,
+            maxzoom: 22,
+            visible: layer.visible // Set the initial visibility to true
+          });
+        });
+      });
+    });
+    
+    map.on('load', () => {
+        map.addSource('line', {
+            type: 'geojson',
+            data: 'https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/data/level1.geojson'
+        });
+
+        map.addSource('new-line', {
+            type: 'geojson',
+            data: 'https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/data/level2.geojson'
+          });
+
+
+        // add a line layer without line-dasharray defined to fill the gaps in the dashed line
+        //map.addLayer({
+            //type: 'line',
+            //source: 'line',
+            //id: 'line-background',
+            //visibility: 'none',
+            //minzoom: 13,
+            //paint: {
+                //'line-color': 'lime',
+                //'line-width': 4,
+                //'line-opacity': 0.4
+            //}
+        //});
+
+        // add a line layer with line-dasharray set to the first value in dashArraySequence
+        map.addLayer({
+            type: 'line',
+            source: 'line',
+            id: 'line-dashed',
+            visibility: 'none',
+            minzoom: 13,
+            paint: {
+                'line-color': 'lime',
+                'line-width': 4,
+                'line-dasharray': [0, 4, 3]
+            }
+        });
+
+        //map.addLayer({
+            //type: 'line',
+            //source: 'new-line',
+            //id: 'new-line-background',
+            //visibility: 'none',
+            //minzoom: 13,
+            //paint: {
+              //'line-color': 'magenta',
+              //'line-width': 4,
+              //'line-opacity': 0.4
+            //}
+          //});
+
+          // Add a line layer with line-dasharray set to the first value in dashArraySequence for the new layer
+          map.addLayer({
+            type: 'line',
+            source: 'new-line',
+            id: 'new-line-dashed',
+            visibility: 'none',
+            minzoom: 13,
+            paint: {
+              'line-color': 'magenta',
+              'line-width': 4,
+              'line-dasharray': [0, 4, 3]
+            }
+          });
+
+        // technique based on https://jsfiddle.net/2mws8y3q/
+        // an array of valid line-dasharray values, specifying the lengths of the alternating dashes and gaps that form the dash pattern
+        const dashArraySequence = [
+            [0, 4, 3],
+            [0.5, 4, 2.5],
+            [1, 4, 2],
+            [1.5, 4, 1.5],
+            [2, 4, 1],
+            [2.5, 4, 0.5],
+            [3, 4, 0],
+            [0, 0.5, 3, 3.5],
+            [0, 1, 3, 3],
+            [0, 1.5, 3, 2.5],
+            [0, 2, 3, 2],
+            [0, 2.5, 3, 1.5],
+            [0, 3, 3, 1],
+            [0, 3.5, 3, 0.5]
+        ];
+
+        let step = 0;
+
+        function animateDashArray(timestamp) {
+            // Update line-dasharray using the next value in dashArraySequence. The
+            // divisor in the expression `timestamp / 100` controls the animation speed.
+            const newStep = parseInt((timestamp / 100) % dashArraySequence.length);
+
+            if (newStep !== step) {
+                map.setPaintProperty('line-dashed', 'line-dasharray', dashArraySequence[step]);
+                step = newStep;
+            }
+
+            // Request the next frame of the animation.
+            requestAnimationFrame(animateDashArray);
+        }
+
+        const dashArraySequence2 = [
+            [0, 4, 3],
+            [0.5, 4, 2.5],
+            [1, 4, 2],
+            [1.5, 4, 1.5],
+            [2, 4, 1],
+            [2.5, 4, 0.5],
+            [3, 4, 0],
+            [0, 0.5, 3, 3.5],
+            [0, 1, 3, 3],
+            [0, 1.5, 3, 2.5],
+            [0, 2, 3, 2],
+            [0, 2.5, 3, 1.5],
+            [0, 3, 3, 1],
+            [0, 3.5, 3, 0.5]
+        ];
+
+        let step2 = 0;
+
+        function animateNewLine(timestamp) {
+            // Update line-dasharray using the next value in dashArraySequence for the new layer.
+            const newStep2 = parseInt((timestamp / 200) % dashArraySequence2.length);
+
+            if (newStep2 !== step2) {
+                map.setPaintProperty('new-line-dashed', 'line-dasharray', dashArraySequence2[step2]);
+                step2 = newStep2;
+            }
+
+            // Request the next frame of the animation.
+            requestAnimationFrame(animateNewLine);
+        }
+
+        // Start the animations
+        animateDashArray(0);
+        animateNewLine(0);
+
+
+    });
+
+// Add event listener to the checkbox input
+const toggleCheckbox = document.getElementById('toggleNetworkLinks');
+toggleCheckbox.addEventListener('change', () => {
+  toggleAnimateNetworkLinks();
+});
+
+function toggleAnimateNetworkLinks() {
+  const lineBackgroundLayer = map.getLayer('line-background');
+  const lineDashedLayer = map.getLayer('line-dashed');
+
+  // If the checkbox is checked, make both layers visible
+  if (toggleCheckbox.checked) {
+    map.setLayoutProperty('line-background', 'visibility', 'visible');
+    map.setLayoutProperty('line-dashed', 'visibility', 'visible');
+  } else {
+    // Otherwise, make both layers invisible
+    map.setLayoutProperty('line-background', 'visibility', 'none');
+    map.setLayoutProperty('line-dashed', 'visibility', 'none');
+  }
+}
+
+  // Add event listener to the checkbox input for the new layer
+const newLayerCheckbox = document.getElementById('toggleNetworkLinks2');
+newLayerCheckbox.addEventListener('change', () => {
+  toggleNewLine();
+});
+
+function toggleNewLine() {
+  const newLineBackgroundLayer = map.getLayer('new-line-background');
+  const newLineDashedLayer = map.getLayer('new-line-dashed');
+
+  // If the checkbox is checked, make both layers visible and start the animation
+  if (newLayerCheckbox.checked) {
+    map.setLayoutProperty('new-line-background', 'visibility', 'visible');
+    map.setLayoutProperty('new-line-dashed', 'visibility', 'visible');
+    step2 = 0;
+    animateNewLine(0); // Start the animation
+  } else {
+    // Otherwise, make both layers invisible
+    map.setLayoutProperty('new-line-background', 'visibility', 'none');
+    map.setLayoutProperty('new-line-dashed', 'visibility', 'none');
+    cancelAnimationFrame(animateNewLine);
+  }
+}
+
+    // Toggle layer visibility based on checkbox state
+    const toggleLayer = (layerId, checked) => {
+      const visibility = checked ? 'visible' : 'none';
+      map.setLayoutProperty(layerId, 'visibility', visibility);
+      if (layerId === heatmapLayer.id) {
+    // Toggle heatmap layer visibility
+        map.setLayoutProperty('heatmap-layer', 'visibility', visibility);
+      } else {
+        map.setLayoutProperty(layerId, 'visibility', visibility);
+      }
+    };
+
+
+    // Attach event listeners to layer checkboxes
+    const layer1Checkbox = document.getElementById('layer1');
+    layer1Checkbox.addEventListener('change', () => {
+      toggleLayer(layers[0].id, layer1Checkbox.checked);
+    });
+
+    const layer2Checkbox = document.getElementById('layer2');
+    layer2Checkbox.addEventListener('change', () => {
+      toggleLayer(layers[1].id, layer2Checkbox.checked);
+    });
+
+    const layer3Checkbox = document.getElementById('layer3');
+    layer3Checkbox.addEventListener('change', () => {
+      toggleLayer(layers[2].id, layer3Checkbox.checked);
+    });
+
+    const layer4Checkbox = document.getElementById('layer4');
+    layer4Checkbox.addEventListener('change', () => {
+      toggleLayer(heatmapLayer.id, layer4Checkbox.checked);
+    });
+
+    // Add popup functionality
+    const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
+
+    map.on('mouseenter', 'high-sites-layer', (e) => {
+      map.getCanvas().style.cursor = 'pointer';
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/high_sites.geojson');
+      const nameProperty = e.features[0].properties.name;
+      const popupContent = layers[layerIndex].popup.replace('{name}', nameProperty);
+      popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
+    });
+
+    map.on('mouseenter', 'mesh-nodes-layer', (e) => {
+      map.getCanvas().style.cursor = 'pointer';
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/mesh_nodes.geojson');
+      const nameProperty = e.features[0].properties.name;
+      const popupContent = layers[layerIndex].popup.replace('{name}', nameProperty);
+      popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
+    });
+
+    map.on('mouseenter', 'rooftop-hubs-layer', (e) => {
+      map.getCanvas().style.cursor = 'pointer';
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/rooftop_hubs.geojson');
+      const nameProperty = e.features[0].properties.name;
+      const popupContent = layers[layerIndex].popup.replace('{name}', nameProperty);
+      popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
+    });
+
+    map.on('mouseleave', 'high-sites-layer', () => {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+    });
+
+    map.on('mouseleave', 'mesh-nodes-layer', () => {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+    });
+
+    map.on('mouseleave', 'rooftop-hubs-layer', () => {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+    });
+
+    // Function to navigate to a bookmark
+    function navigateToBookmark(bookmarkId, pitch, bearing) {
+      switch (bookmarkId) {
+          case 1:
+            map.flyTo({
+              center: [-75.13537, 39.98299],
+              zoom: 16.7,
+              pitch: pitch,
+              bearing: bearing,
+              speed: 0.8,
+              curve: 1.2,
+            });
+            break;
+          case 2:
+            map.flyTo({
+              center: [-75.1300, 39.9825],
+              zoom: 13.7,
+              pitch: pitch,
+              bearing: bearing,
+              speed: 0.8,
+              curve: 1.2,
+            });
+            break;
+          case 3:
+            map.flyTo({
+              center: [-75.1358, 39.9840],
+              zoom: 17,
+              pitch: pitch,
+              bearing: bearing,
+              speed: 0.8,
+              curve: 1.2,
+            });
+            break;
+          default:
+            break;
+        }
+      
+      //map.flyTo({ center, zoom });
+    }
+
+  
+  const heatmapLayer = {
+  id: 'heatmap-layer',
+  type: 'heatmap',
+  source: 'heatmap-source',
+  minzoom: 12,
+  maxzoom: 20,
+  paint: {
+    // Heatmap intensity range
+    'heatmap-intensity': {
+      stops: [
+        [10, 0.5],
+        [20, 10]
+      ]
+    },
+    // Heatmap color gradient
+    'heatmap-color': [
+      'interpolate',
+      ['linear'],
+      ['heatmap-density'],
+      0, 'rgba(0, 0, 255, 0)', // adjust the color gradient as needed
+      0.2, 'rgba(255, 0, 0, 1)',
+      0.4, 'rgba(255, 165, 0, 1)',
+      0.6, 'rgba(255, 255, 0, 1)',
+      0.8, 'rgba(0, 255, 0, 1)'
+    ],
+    // Heatmap radius
+    'heatmap-radius': {
+      stops: [
+        [14, 30],
+        [18, 100]
+      ]
+    },
+    // Heatmap opacity
+    'heatmap-opacity': {
+        default: 1,
+        stops: [
+          [14, 0.5],
+          [20, 0.2]
+        ]
+    }
+  },
+  visibility: 'none'
+};
+
+map.on('style.load', () => {
+// Insert the layer beneath any symbol layer.
+  const layers = map.getStyle().layers;
+  const labelLayerId = layers.find(
+  (layer) => layer.type === 'symbol' && layer.layout['text-field']
+  ).id;
+  
+  // The 'building' layer in the Mapbox Streets
+  // vector tileset contains building height data
+  // from OpenStreetMap.
+  map.addLayer(
+    {
+    'id': 'add-3d-buildings',
+    'source': 'composite',
+    'source-layer': 'building',
+    'filter': ['==', 'extrude', 'true'],
+    'type': 'fill-extrusion',
+    'minzoom': 15,
+    'visibility': 'none',
+    'paint': {
+      'fill-extrusion-color': '#aaa',
+      
+      // Use an 'interpolate' expression to
+      // add a smooth transition effect to
+      // the buildings as the user zooms in.
+      'fill-extrusion-height': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        15,
+        0,
+        15.05,
+        ['get', 'height']
+      ],
+      'fill-extrusion-base': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        15,
+        0,
+        15.05,
+        ['get', 'min_height']
+      ],
+      'fill-extrusion-opacity': 0.6
+      }
+    },
+  labelLayerId
+  );
+  });
+
+
+fetch('https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/network-points.geojson')
+  .then(response => response.json())
+  .then(data => {
+    map.addSource('heatmap-source', {
+        type: 'geojson',
+        data: data
+    });
+
+    map.addLayer(heatmapLayer);
+    
+    map.setLayoutProperty(heatmapLayer.id, 'visibility', 'none');
+
+    map.on('load', () => {
+      map.setLayoutProperty(heatmapLayer.id, 'visibility', 'none');
+      map.setLayoutProperty('line-background', 'visibility', 'none');
+      map.setLayoutProperty('line-dashed', 'visibility', 'none');
+      map.setLayoutProperty('new-line-background', 'visibility', 'none');
+      map.setLayoutProperty('new-line-dashed', 'visibility', 'none');
+    });
+
+
+    map.getSource('heatmap-source').setData(data);
+    
+  });
+
+const nav = new mapboxgl.NavigationControl({
+visualizePitch: true
+});
+map.addControl(nav, 'bottom-right');
+  </script>
+</body>
+</html>
