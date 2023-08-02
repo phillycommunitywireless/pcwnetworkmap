@@ -130,28 +130,28 @@
     // Define an array of GeoJSON layer URLs and their associated icons
     const layers = [
       {
-        url: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/high_sites.geojson',
+        url: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/HighSites.geojson',
         icon: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/high_sites.png',
         id: 'high-sites-layer',
         name: 'High Sites',
         popup: '<h3>High Sites</h3><p>{name}</p>'
       },
       {
-        url: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/rooftop_hubs.geojson',
+        url: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/rooftop_hubs.geojson',
         icon: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/RooftopHub.png',
         id: 'rooftop-hubs-layer',
         name: 'Rooftop Hubs',
         popup: '<h3>Rooftop Hubs</h3><p>{name}</p>'
       },
       {
-        url: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/mesh_nodes.geojson',
+        url: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/mesh_nodes.geojson',
         icon: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/icon1.png',
         id: 'mesh-nodes-layer',
         name: 'Mesh Nodes',
         popup: '<h3>Mesh Nodes</h3><p>{name}</p>'
       },
       {
-        url: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/network-points.geojson',
+        url: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/network-points.geojson',
         icon: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/icon1.png',
         id: 'mesh-nodes-layer',
         name: 'Mesh Nodes',
@@ -202,12 +202,12 @@
     map.on('load', () => {
         map.addSource('line', {
             type: 'geojson',
-            data: 'https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/data/level1.geojson'
+            data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/level1.geojson'
         });
 
         map.addSource('new-line', {
             type: 'geojson',
-            data: 'https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/data/level2.geojson'
+            data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/level2.geojson'
           });
 
 
@@ -425,7 +425,7 @@ function toggleNewLine() {
     map.on('mouseenter', 'high-sites-layer', (e) => {
       map.getCanvas().style.cursor = 'pointer';
       const coordinates = e.features[0].geometry.coordinates.slice();
-      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/high_sites.geojson');
+      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/high_sites.geojson');
       const nameProperty = e.features[0].properties.name;
       const popupContent = layers[layerIndex].popup.replace('{name}', nameProperty);
       popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
@@ -434,7 +434,7 @@ function toggleNewLine() {
     map.on('mouseenter', 'mesh-nodes-layer', (e) => {
       map.getCanvas().style.cursor = 'pointer';
       const coordinates = e.features[0].geometry.coordinates.slice();
-      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/mesh_nodes.geojson');
+      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/mesh_nodes.geojson');
       const nameProperty = e.features[0].properties.name;
       const popupContent = layers[layerIndex].popup.replace('{name}', nameProperty);
       popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
@@ -443,7 +443,7 @@ function toggleNewLine() {
     map.on('mouseenter', 'rooftop-hubs-layer', (e) => {
       map.getCanvas().style.cursor = 'pointer';
       const coordinates = e.features[0].geometry.coordinates.slice();
-      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/rooftop_hubs.geojson');
+      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/rooftop_hubs.geojson');
       const nameProperty = e.features[0].properties.name;
       const popupContent = layers[layerIndex].popup.replace('{name}', nameProperty);
       popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
