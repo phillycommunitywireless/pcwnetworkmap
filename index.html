@@ -97,9 +97,9 @@
     </div>
     <div>Navigate to:</div>
     <div class="inline-flex flex--column">
-    <button class="btn btn--gray btn--pill-vt" onclick="navigateToBookmark(1, 0, 0)">Norris Square Park</button>
-    <button class="btn btn--gray btn--pill-vc" onclick="navigateToBookmark(2, 0, 90)">Existing Network</button>
-    <button class="btn btn--gray btn--pill-vb" onclick="navigateToBookmark(3, 60, 180)">3D View</button>
+    <button class="btn btn--gray btn--pill-vt" onclick="navigateToBookmark(1, 67, -120.83)">Norris Square Park</button>
+    <button class="btn btn--gray btn--pill-vc" onclick="navigateToBookmark(2, 64, -168.84)">Fairhill Square Park</button>
+    <button class="btn btn--gray btn--pill-vb" onclick="navigateToBookmark(3, 64.21, -118.40)">McPherson Square Park</button>
     </div>
     <div>Animate Network:</div>
     <label class="switch-container">
@@ -469,8 +469,8 @@ function toggleNewLine() {
       switch (bookmarkId) {
           case 1:
             map.flyTo({
-              center: [-75.13537, 39.98299],
-              zoom: 16.7,
+              center: [-75.13430, 39.98393],
+              zoom: 16.50,
               pitch: pitch,
               bearing: bearing,
               speed: 0.8,
@@ -479,8 +479,8 @@ function toggleNewLine() {
             break;
           case 2:
             map.flyTo({
-              center: [-75.1300, 39.9825],
-              zoom: 13.7,
+              center: [-75.14355, 39.99292],
+              zoom: 15.20,
               pitch: pitch,
               bearing: bearing,
               speed: 0.8,
@@ -489,8 +489,8 @@ function toggleNewLine() {
             break;
           case 3:
             map.flyTo({
-              center: [-75.1358, 39.9840],
-              zoom: 17,
+              center: [-75.12032, 39.99309],
+              zoom: 16,
               pitch: pitch,
               bearing: bearing,
               speed: 0.8,
