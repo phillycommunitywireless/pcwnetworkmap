@@ -425,7 +425,7 @@ function toggleNewLine() {
     map.on('mouseenter', 'high-sites-layer', (e) => {
       map.getCanvas().style.cursor = 'pointer';
       const coordinates = e.features[0].geometry.coordinates.slice();
-      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/high_sites.geojson');
+      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/HighSites.geojson');
       const nameProperty = e.features[0].properties.name;
       const popupContent = layers[layerIndex].popup.replace('{name}', nameProperty);
       popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
@@ -434,7 +434,7 @@ function toggleNewLine() {
     map.on('mouseenter', 'mesh-nodes-layer', (e) => {
       map.getCanvas().style.cursor = 'pointer';
       const coordinates = e.features[0].geometry.coordinates.slice();
-      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/mesh_nodes.geojson');
+      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/MeshNodes.geojson');
       const nameProperty = e.features[0].properties.name;
       const popupContent = layers[layerIndex].popup.replace('{name}', nameProperty);
       popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
@@ -443,7 +443,7 @@ function toggleNewLine() {
     map.on('mouseenter', 'rooftop-hubs-layer', (e) => {
       map.getCanvas().style.cursor = 'pointer';
       const coordinates = e.features[0].geometry.coordinates.slice();
-      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/rooftop_hubs.geojson');
+      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/RoofTops.geojson');
       const nameProperty = e.features[0].properties.name;
       const popupContent = layers[layerIndex].popup.replace('{name}', nameProperty);
       popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
