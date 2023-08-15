@@ -1,5 +1,3 @@
-
-<!--This code implements animated lines for the network nodes-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
   <link href='https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css' rel='stylesheet'>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
   <script src='https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.js'></script>
   <style>
     body { margin: 0; padding: 0; }
@@ -52,15 +51,21 @@
       margin-left: 10px; /* Add margin to the left for the text */
     }
 
+    .popup-image-container {
+      margin-top: 10px;
+      text-align: center;
+    }
 
+    .popup-image {
+      max-width: 100%;
+      height: auto;
+    }
 
   </style>
 </head>
 <body>
   <div id="map"></div>
     <div class="map-overlay">
-
-
   </div>
   
   <div class="bookmarks">
@@ -71,21 +76,21 @@
         <div class='checkbox mr6 checkbox--s-label'>
           <svg class='icon'><use xlink:href='#icon-check' /></svg>
         </div>
-        <img class="layer-icon" src="https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/high_sites.png"> High Sites
+        <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png"> High Sites
       </label>
       <label class='checkbox-container'>
         <input type='checkbox' id="layer2" checked/>
         <div class='checkbox mr6 checkbox--s-label'>
           <svg class='icon'><use xlink:href='#icon-check' /></svg>
         </div>
-        <img class="layer-icon" src="https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/RooftopHub.png"> Rooftop Hubs
+        <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png"> Rooftop Hubs
       </label>
       <label class='checkbox-container'>
         <input type='checkbox' id="layer3" checked/>
         <div class='checkbox mr6 checkbox--s-label'>
           <svg class='icon'><use xlink:href='#icon-check' /></svg>
         </div>
-        <img class="layer-icon" src="https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/icon1.png"> Mesh Nodes
+        <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png"> Mesh Nodes
       </label>
       <label class='checkbox-container'>
         <input type='checkbox' id="layer4" />
@@ -121,85 +126,39 @@
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v11',
-      zoom: 15.50,
-      center: [-75.13552, 39.98285],
+      zoom: 14,
+      center: [-75.1405, 39.9839],
       pitch: 0,
       bearing: 0,
     });
+    
+    const images =[
+        {imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png', id: 'HS_icon'},
+        {imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png', id: 'RH_icon'},
+        {imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png', id: 'MN_icon'},
+        ]
 
-    // Define an array of GeoJSON layer URLs and their associated icons
-    const layers = [
-      {
-        url: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/HighSites.geojson',
-        icon: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/high_sites.png',
-        id: 'high-sites-layer',
-        name: 'High Sites',
-        popup: '<h3>High Sites</h3><p>{name}</p>'
-      },
-      {
-        url: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/RoofTops.geojson',
-        icon: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/RooftopHub.png',
-        id: 'rooftop-hubs-layer',
-        name: 'Rooftop Hubs',
-        popup: '<h3>Rooftop Hubs</h3><p>{name}</p>'
-      },
-      {
-        url: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/MeshNodes.geojson',
-        icon: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/icon1.png',
-        id: 'mesh-nodes-layer',
-        name: 'Mesh Nodes',
-        popup: '<h3>Mesh Nodes</h3><p>{name}</p>'
-      },
-      {
-        url: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/network-points.geojson',
-        icon: 'https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/icons/icon1.png',
-        id: 'mesh-nodes-layer',
-        name: 'Mesh Nodes',
-        popup: '<h3>Mesh Nodes</h3><p>{name}</p>'
-      },
-    ];
+        Promise.all(
+            images.map(img => new Promise((resolve, reject) => {
+                map.loadImage(img.imageUrl, function (error, res) {
+                    if (error) throw error;
+                    map.addImage(img.id, res);
+                    resolve();
+                });
+            }))
+        ).then(() => {
+            console.log("Images Loaded");
+        });
 
     // Add the GeoJSON layers to the map
-    layers.forEach(layer => {
-      map.on('load', () => {
-        map.loadImage(layer.icon, (error, image) => {
-          if (error) throw error;
-          map.addImage(layer.icon, image);
-          map.addSource(layer.id, {
-            type: 'geojson',
-            data: layer.url
-          });
-          map.addLayer({
-            id: layer.id,
-            type: 'symbol',
-            source: layer.id,
-            layout: {
-              'icon-image': layer.icon,
-              'icon-size': ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.7],
-              'icon-allow-overlap': true,
-              'icon-ignore-placement': true,
-              'text-field': ['get','names'],
-              'text-size': ['interpolate', ['linear'], ['zoom'], 0, 12, 17, 16],
-              'text-anchor': 'left',
-              'text-justify': 'left',
-              'text-offset': [1.2,0],
-            },
-            paint: {
-              'icon-opacity': 0.9,
-              'text-halo-color': 'rgb(255, 255, 255)',
-              'text-halo-width': 2,
-              'text-halo-blur': 0.5,
-            },
-            sourceLayer: 'default',
-            minzoom: 12,
-            maxzoom: 22,
-            visible: layer.visible // Set the initial visibility to true
-          });
-        });
-      });
-    });
     
     map.on('load', () => {
+
+        map.addSource('network-points', {
+            type: 'geojson',
+            data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/networkpoints.geojson'
+        });
+
         map.addSource('line', {
             type: 'geojson',
             data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/level1.geojson'
@@ -224,7 +183,30 @@
                 //'line-opacity': 0.4
             //}
         //});
-
+        map.addLayer({
+        'id': 'network-points-layer',
+        'type': 'symbol',
+        'source': 'network-points',
+        'layout': {
+            'icon-image': [
+                'match',
+                ['get','type'],
+                'HS', 'HS_icon',
+                'RH', 'RH_icon',
+                'MN','MN_icon',
+                'default-icon'
+            ],
+            'icon-size': ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.7],
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true,        
+            },
+        'paint': {
+              'icon-opacity': 0.9,
+              'text-halo-color': 'rgb(255, 255, 255)',
+              'text-halo-width': 2,
+              'text-halo-blur': 0.5,
+            },
+        });
         // add a line layer with line-dasharray set to the first value in dashArraySequence
         map.addLayer({
             type: 'line',
@@ -337,6 +319,30 @@
         animateDashArray(0);
         animateNewLine(0);
 
+      map.setLayoutProperty(heatmapLayer.id, 'visibility', 'none');
+      map.setLayoutProperty('line-background', 'visibility', 'none');
+      map.setLayoutProperty('line-dashed', 'visibility', 'none');
+      map.setLayoutProperty('new-line-background', 'visibility', 'none');
+      map.setLayoutProperty('new-line-dashed', 'visibility', 'none');
+
+
+      map.on('mouseenter', 'network-points-layer', (e) => {
+            map.getCanvas().style.cursor = 'pointer';
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const nameProperty = e.features[0].properties.name; // Make sure this property exists in your data
+            const imageLink = e.features[0].properties.image; // Make sure this property exists in your data
+            const popupContent = `
+            <div class="popup-image-container">
+                <h3>${nameProperty}</h3>
+              //  <img src="${imageLink}" alt="Image" class="popup-image">
+            </div>`;
+            popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
+        });
+
+        map.on('mouseleave', 'network-points-layer', () => {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
 
     });
 
@@ -385,84 +391,26 @@ function toggleNewLine() {
   }
 }
 
-    // Toggle layer visibility based on checkbox state
-    const toggleLayer = (layerId, checked) => {
-      const visibility = checked ? 'visible' : 'none';
-      map.setLayoutProperty(layerId, 'visibility', visibility);
-      if (layerId === heatmapLayer.id) {
-    // Toggle heatmap layer visibility
-        map.setLayoutProperty('heatmap-layer', 'visibility', visibility);
-      } else {
-        map.setLayoutProperty(layerId, 'visibility', visibility);
-      }
-    };
+const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
 
-
-    // Attach event listeners to layer checkboxes
-    const layer1Checkbox = document.getElementById('layer1');
-    layer1Checkbox.addEventListener('change', () => {
-      toggleLayer(layers[0].id, layer1Checkbox.checked);
-    });
-
-    const layer2Checkbox = document.getElementById('layer2');
-    layer2Checkbox.addEventListener('change', () => {
-      toggleLayer(layers[1].id, layer2Checkbox.checked);
-    });
-
-    const layer3Checkbox = document.getElementById('layer3');
-    layer3Checkbox.addEventListener('change', () => {
-      toggleLayer(layers[2].id, layer3Checkbox.checked);
-    });
-
-    const layer4Checkbox = document.getElementById('layer4');
-    layer4Checkbox.addEventListener('change', () => {
-      toggleLayer(heatmapLayer.id, layer4Checkbox.checked);
-    });
-
-    // Add popup functionality
-    const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
-
-    map.on('mouseenter', 'high-sites-layer', (e) => {
+map.on('mouseenter', 'network-points-layer', (e) => {
       map.getCanvas().style.cursor = 'pointer';
       const coordinates = e.features[0].geometry.coordinates.slice();
-      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/HighSites.geojson');
+      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/networkpoints.geojson');
       const nameProperty = e.features[0].properties.name;
-      const popupContent = layers[layerIndex].popup.replace('{name}', nameProperty);
+      const imageLink = e.features[0].properties.image;
+      const popupContent =  `
+        <div class="popup-image-container">
+          <h3>${nameProperty}</h3>
+// <img src="${imageLink}" alt="Image" class="popup-image">
+        </div>`;
       popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
     });
 
-    map.on('mouseenter', 'mesh-nodes-layer', (e) => {
-      map.getCanvas().style.cursor = 'pointer';
-      const coordinates = e.features[0].geometry.coordinates.slice();
-      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/MeshNodes.geojson');
-      const nameProperty = e.features[0].properties.name;
-      const popupContent = layers[layerIndex].popup.replace('{name}', nameProperty);
-      popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
-    });
-
-    map.on('mouseenter', 'rooftop-hubs-layer', (e) => {
-      map.getCanvas().style.cursor = 'pointer';
-      const coordinates = e.features[0].geometry.coordinates.slice();
-      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/RoofTops.geojson');
-      const nameProperty = e.features[0].properties.name;
-      const popupContent = layers[layerIndex].popup.replace('{name}', nameProperty);
-      popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
-    });
-
-    map.on('mouseleave', 'high-sites-layer', () => {
-      map.getCanvas().style.cursor = '';
-      popup.remove();
-    });
-
-    map.on('mouseleave', 'mesh-nodes-layer', () => {
-      map.getCanvas().style.cursor = '';
-      popup.remove();
-    });
-
-    map.on('mouseleave', 'rooftop-hubs-layer', () => {
-      map.getCanvas().style.cursor = '';
-      popup.remove();
-    });
+map.on('mouseleave', 'network-points-layer', () => {
+    map.getCanvas().style.cursor = '';
+    popup.remove();
+});
 
     // Function to navigate to a bookmark
     function navigateToBookmark(bookmarkId, pitch, bearing) {
@@ -501,10 +449,8 @@ function toggleNewLine() {
             break;
         }
       
-      //map.flyTo({ center, zoom });
     }
 
-  
   const heatmapLayer = {
   id: 'heatmap-layer',
   type: 'heatmap',
@@ -532,9 +478,9 @@ function toggleNewLine() {
     ],
     // Heatmap radius
     'heatmap-radius': {
-       stops: [
-        [40, 55],
-        [45, 125]
+      stops: [
+        [14, 30],
+        [18, 100]
       ]
     },
     // Heatmap opacity
@@ -600,7 +546,7 @@ map.on('style.load', () => {
   });
 
 
-fetch('https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/network-points.geojson')
+fetch('https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/networkpoints.geojson')
   .then(response => response.json())
   .then(data => {
     map.addSource('heatmap-source', {
@@ -610,20 +556,83 @@ fetch('https://raw.githubusercontent.com/fmvaldezg/PCWmap/main/data/network-poin
 
     map.addLayer(heatmapLayer);
     
-    map.setLayoutProperty(heatmapLayer.id, 'visibility', 'none');
-
-    map.on('load', () => {
-      map.setLayoutProperty(heatmapLayer.id, 'visibility', 'none');
-      map.setLayoutProperty('line-background', 'visibility', 'none');
-      map.setLayoutProperty('line-dashed', 'visibility', 'none');
-      map.setLayoutProperty('new-line-background', 'visibility', 'none');
-      map.setLayoutProperty('new-line-dashed', 'visibility', 'none');
-    });
-
-
     map.getSource('heatmap-source').setData(data);
     
   });
+
+// Create an object to track the visibility status of each layer
+const visibilityStatus = {
+  HS: true,
+  RH: true,
+  MN: true
+};
+
+// Create an object to store the filter expressions for each layer
+const layerFilters = {
+  HS: ['==', ['get', 'type'], 'HS'],
+  RH: ['==', ['get', 'type'], 'RH'],
+  MN: ['==', ['get', 'type'], 'MN']
+};
+
+// Function to update the visibility of points based on filters
+function updatePointsVisibility() {
+  const filters = ['any'];
+
+  for (const type in layerFilters) {
+    if (visibilityStatus[type]) {
+      filters.push(layerFilters[type]);
+    }
+  }
+
+  map.setFilter('network-points-layer', filters);
+}
+
+
+// Function to update the visibility of points based on filters
+function updatePointsVisibility() {
+  const filters = ['any'];
+
+  for (const type in layerFilters) {
+    if (visibilityStatus[type]) {
+      filters.push(layerFilters[type]);
+    }
+  }
+
+  map.setFilter('network-points-layer', filters);
+}
+
+// Add event listeners to the checkbox inputs for each layer
+const layer1Checkbox = document.getElementById('layer1');
+layer1Checkbox.addEventListener('change', () => {
+  visibilityStatus.HS = layer1Checkbox.checked;
+  updatePointsVisibility();
+});
+
+const layer2Checkbox = document.getElementById('layer2');
+layer2Checkbox.addEventListener('change', () => {
+  visibilityStatus.RH = layer2Checkbox.checked;
+  updatePointsVisibility();
+});
+
+const layer3Checkbox = document.getElementById('layer3');
+layer3Checkbox.addEventListener('change', () => {
+  visibilityStatus.MN = layer3Checkbox.checked;
+  updatePointsVisibility();
+});
+
+// Add event listener to the checkbox input for heatmap layer
+const layer4Checkbox = document.getElementById('layer4');
+layer4Checkbox.addEventListener('change', () => {
+  toggleHeatmapLayer();
+});
+
+function toggleHeatmapLayer() {
+  if (layer4Checkbox.checked) {
+    map.setLayoutProperty(heatmapLayer.id, 'visibility', 'visible');
+  } else {
+    map.setLayoutProperty(heatmapLayer.id, 'visibility', 'none');
+  }
+}
 
 const nav = new mapboxgl.NavigationControl({
 visualizePitch: true
