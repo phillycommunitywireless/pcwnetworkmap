@@ -393,24 +393,6 @@ function toggleNewLine() {
 
 const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
 
-map.on('mouseenter', 'network-points-layer', (e) => {
-      map.getCanvas().style.cursor = 'pointer';
-      const coordinates = e.features[0].geometry.coordinates.slice();
-      const layerIndex = layers.findIndex(layer => layer.url === 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/networkpoints.geojson');
-      const nameProperty = e.features[0].properties.name;
-      const imageLink = e.features[0].properties.image;
-      const popupContent =  `
-        <div class="popup-image-container">
-          <h3>${nameProperty}</h3>
-// <img src="${imageLink}" alt="Image" class="popup-image">
-        </div>`;
-      popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
-    });
-
-map.on('mouseleave', 'network-points-layer', () => {
-    map.getCanvas().style.cursor = '';
-    popup.remove();
-});
 
     // Function to navigate to a bookmark
     function navigateToBookmark(bookmarkId, pitch, bearing) {
