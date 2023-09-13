@@ -479,6 +479,27 @@ const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
   visibility: 'none'
 };
 
+fetch('https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/networkpoints.geojson')
+    .then(response => response.json())
+    .then(data => {
+      // Filter features by the "type" property
+      const filteredData = data.features.filter(feature => feature.properties.type === 'RH' || feature.properties.type === 'MN');
+
+      // Create a new GeoJSON object with the filtered features
+      const filteredGeoJSON = {
+        type: 'FeatureCollection',
+        features: filteredData
+      };
+
+      map.addSource('heatmap-source', {
+        type: 'geojson',
+        data: filteredGeoJSON // Use the filtered GeoJSON data
+      });
+
+      map.addLayer(heatmapLayer);
+    });
+
+
 map.on('style.load', () => {
 // Insert the layer beneath any symbol layer.
   const layers = map.getStyle().layers;
@@ -530,25 +551,7 @@ map.on('style.load', () => {
   });
 
 
-  fetch('https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/networkpoints.geojson')
-    .then(response => response.json())
-    .then(data => {
-      // Filter features by the "type" property
-      const filteredData = data.features.filter(feature => feature.properties.type === 'RH' || feature.properties.type === 'MN');
 
-      // Create a new GeoJSON object with the filtered features
-      const filteredGeoJSON = {
-        type: 'FeatureCollection',
-        features: filteredData
-      };
-
-      map.addSource('heatmap-source', {
-        type: 'geojson',
-        data: filteredGeoJSON // Use the filtered GeoJSON data
-      });
-
-      map.addLayer(heatmapLayer);
-    });
 
 // Create an object to track the visibility status of each layer
 const visibilityStatus = {
