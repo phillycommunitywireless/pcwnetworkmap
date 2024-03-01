@@ -51,6 +51,5 @@
 { "type": "Feature", "properties": { "name": "Casa Caribe", "id": "RH033", "Street address": "173 W Allegheny Ave", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.99922, "Longitude": -75.13243 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13243, 39.99922] ] } },
 { "type": "Feature", "properties": { "name": "Torres del Caribe", "id": "RH033", "Street address": "3238 N Mascher St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.99999, "Longitude": -75.13115 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13115, 39.99999] ] } },
 { "type": "Feature", "properties": { "name": "Caribe Towers", "id": "RH033", "Street address": "3231 N 2nd St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 40.00034, "Longitude": -75.13283 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13283, 40.00034] ] } }
-
 ]
 }
