@@ -1,2 +1,3 @@
 # networkmap
-Public map of network coverage
+
+This map of PCW's network coverage is built with MapBox. 
