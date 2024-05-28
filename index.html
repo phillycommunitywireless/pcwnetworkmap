@@ -102,16 +102,16 @@
     .sidebar {
         transition: transform 1s;
         z-index: 1;
-        width: 300px;
+        width: 200px;
         height: 300px;
     }
 
     .right.collapsed {
-        transform: translateX(295px);
+        transform: translateX(200px);
     }
 
     .bookmarks div[style*="font-weight: bold"] {
-      margin-top: 10px; /* Adjust this value to increase/decrease the space */
+      margin-top: 10px;
     }
 
 
@@ -123,7 +123,7 @@
       <div class="sidebar-content rounded-rect flex-center">
         <div class="bookmarks">
           <div style="font-weight: bold">Select layers:</div>
-          <div class='relative bg-gray-lighter mx6 my6 w180 round'>
+          
             <label class='checkbox-container'>
               <input type='checkbox' id="layer1" checked/>
               <div class='checkbox mr6 checkbox--s-label'>
@@ -152,7 +152,7 @@
               </div>
               Heatmap
             </label>
-          </div>
+          
           <div style="font-weight: bold">Navigate to:</div>
           <div class="inline-flex flex--column">
           <button class="btn btn--gray btn--pill-vt" onclick="navigateToBookmark(1, 67, -120.83)">Norris Square Park</button>
