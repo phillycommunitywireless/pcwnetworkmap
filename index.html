@@ -4,24 +4,13 @@
   <meta charset="utf-8">
   <title>PhillyCommunity Wireless Network</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
-  <link href='https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css' rel='stylesheet'>
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
-  <script src='https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.js'></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css" rel="stylesheet">
+  <link href='https://api.mapbox.com/mapbox-assembly/v1.5.1/assembly.min.css' rel='stylesheet'>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
+  <script src='https://api.mapbox.com/mapbox-assembly/v1.5.1/assembly.js'></script>
   <style>
     body { margin: 0; padding: 0; }
     #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-
-    .map-overlay {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: rgb(227,229,230);
-      padding: 0px;
-      border-radius: 10px;
-      font-family: Arial, sans-serif;
-      z-index: 1;
-    }
 
     .layer-icon {
         width: 20px;
@@ -31,24 +20,26 @@
       }
 
     .bookmarks {
-      position: absolute;
-      top: 20px;
-      right: 20px;
+      position:relative;
+      right: 10px;
       background-color: rgb(227,229,230);
       padding: 10px;
       border-radius: 4px;
       font-family: Arial, sans-serif;
       z-index: 1;
+      width:100%;
+      height:100%;
+      font-size: 14px;
     }
 
     .switch-container {
       display: flex;
       align-items: center;
-      margin-right: 10px; /* Add margin to the right */
+      margin-right: 1px; /* Add margin to the right */
     }
 
     .switch-container div:last-child {
-      margin-left: 10px; /* Add margin to the left for the text */
+      margin-left: 1px; /* Add margin to the left for the text */
     }
 
     .popup-image-container {
@@ -61,63 +52,132 @@
       height: auto;
     }
 
+    .rounded-rect {
+        background: rgb(227,229,230);
+        border-radius: 10px;
+        box-shadow: 0 0 50px -25px black;
+        top:1px;
+    }
+
+    .flex-center {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .flex-center.right {
+        right: 0px;
+    }
+
+    .sidebar-content {
+        position: absolute;
+        width: 90%;
+        font-family: Arial, Helvetica, sans-serif;
+        color: gray;
+    }
+
+    .sidebar-toggle {
+        position: absolute;
+        width: 2.5em; /* Increased width */
+        height: 2.5em; /* Increased height */
+        font-size: 1.5em; /* Increased font size */
+        overflow: visible;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top:auto;
+        left:auto;
+    }
+
+    .sidebar-toggle.right {
+        left: -1.8em;
+    }
+
+    .sidebar-toggle:hover {
+        color: #0aa1cf;
+        cursor: pointer;
+    }
+
+    .sidebar {
+        transition: transform 1s;
+        z-index: 1;
+        width: 300px;
+        height: 300px;
+    }
+
+    .right.collapsed {
+        transform: translateX(295px);
+    }
+
+    .bookmarks div[style*="font-weight: bold"] {
+      margin-top: 10px; /* Adjust this value to increase/decrease the space */
+    }
+
+
   </style>
 </head>
 <body>
-  <div id="map"></div>
-    <div class="map-overlay">
-  </div>
-  
-  <div class="bookmarks">
-    <div>Select layers:</div>
-    <div class='relative bg-gray-lighter mx6 my6 w180 round'>
-      <label class='checkbox-container'>
-        <input type='checkbox' id="layer1" checked/>
-        <div class='checkbox mr6 checkbox--s-label'>
-          <svg class='icon'><use xlink:href='#icon-check' /></svg>
+  <div id="map">
+    <div id="right" class="sidebar flex-center right collapsed">
+      <div class="sidebar-content rounded-rect flex-center">
+        <div class="bookmarks">
+          <div style="font-weight: bold">Select layers:</div>
+          <div class='relative bg-gray-lighter mx6 my6 w180 round'>
+            <label class='checkbox-container'>
+              <input type='checkbox' id="layer1" checked/>
+              <div class='checkbox mr6 checkbox--s-label'>
+                <svg class='icon'><use xlink:href='#icon-check' /></svg>
+              </div>
+              <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png"> High Sites
+            </label>
+            <label class='checkbox-container'>
+              <input type='checkbox' id="layer2" checked/>
+              <div class='checkbox mr6 checkbox--s-label'>
+                <svg class='icon'><use xlink:href='#icon-check' /></svg>
+              </div>
+              <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png"> Rooftop Hubs
+            </label>
+            <label class='checkbox-container'>
+              <input type='checkbox' id="layer3" checked/>
+              <div class='checkbox mr6 checkbox--s-label'>
+                <svg class='icon'><use xlink:href='#icon-check' /></svg>
+              </div>
+              <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png"> Mesh Nodes
+            </label>
+            <label class='checkbox-container'>
+              <input type='checkbox' id="layer4" />
+              <div class='checkbox mr6 checkbox--s-label'>
+                <svg class='icon'><use xlink:href='#icon-check' /></svg>
+              </div>
+              Heatmap
+            </label>
+          </div>
+          <div style="font-weight: bold">Navigate to:</div>
+          <div class="inline-flex flex--column">
+          <button class="btn btn--gray btn--pill-vt" onclick="navigateToBookmark(1, 67, -120.83)">Norris Square Park</button>
+          <button class="btn btn--gray btn--pill-vc" onclick="navigateToBookmark(2, 64, -168.84)">Fairhill Square Park</button>
+          <button class="btn btn--gray btn--pill-vb" onclick="navigateToBookmark(3, 69, -124.80)">McPherson Square Park</button>
+          </div>
+          <div style="font-weight: bold">Animate Network:</div>
+          <label class="switch-container">
+            <input type="checkbox" id="toggleNetworkLinks" />
+            <div class="switch"></div>
+            <div>Level 1</div>
+          </label>
+          <label class="switch-container">
+            <input type="checkbox" id="toggleNetworkLinks2" />
+            <div class="switch"></div>
+            <div>Level 2</div>
+          </label>
         </div>
-        <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png"> High Sites
-      </label>
-      <label class='checkbox-container'>
-        <input type='checkbox' id="layer2" checked/>
-        <div class='checkbox mr6 checkbox--s-label'>
-          <svg class='icon'><use xlink:href='#icon-check' /></svg>
+          <div class="sidebar-toggle rounded-rect right" onclick="toggleSidebar('right')">
+            &larr;
         </div>
-        <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png"> Rooftop Hubs
-      </label>
-      <label class='checkbox-container'>
-        <input type='checkbox' id="layer3" checked/>
-        <div class='checkbox mr6 checkbox--s-label'>
-          <svg class='icon'><use xlink:href='#icon-check' /></svg>
-        </div>
-        <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png"> Mesh Nodes
-      </label>
-      <label class='checkbox-container'>
-        <input type='checkbox' id="layer4" />
-        <div class='checkbox mr6 checkbox--s-label'>
-          <svg class='icon'><use xlink:href='#icon-check' /></svg>
-        </div>
-        Heatmap
-      </label>
+      
     </div>
-    <div>Navigate to:</div>
-    <div class="inline-flex flex--column">
-    <button class="btn btn--gray btn--pill-vt" onclick="navigateToBookmark(1, 67, -120.83)">Norris Square Park</button>
-    <button class="btn btn--gray btn--pill-vc" onclick="navigateToBookmark(2, 64, -168.84)">Fairhill Square Park</button>
-    <button class="btn btn--gray btn--pill-vb" onclick="navigateToBookmark(3, 69, -124.80)">McPherson Square Park</button>
-    </div>
-    <div>Animate Network:</div>
-    <label class="switch-container">
-      <input type="checkbox" id="toggleNetworkLinks" />
-      <div class="switch"></div>
-      <div>Level 1</div>
-    </label>
-    <label class="switch-container">
-      <input type="checkbox" id="toggleNetworkLinks2" />
-      <div class="switch"></div>
-      <div>Level 2</div>
-    </label>
   </div>
+</div>
 
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
   <script>
@@ -631,6 +691,25 @@ const nav = new mapboxgl.NavigationControl({
 visualizePitch: true
 });
 map.addControl(nav, 'bottom-right');
+
+function toggleSidebar(id) {
+        const elem = document.getElementById(id);
+        // Add or remove the 'collapsed' CSS class from the sidebar element.
+        // Returns boolean "true" or "false" whether 'collapsed' is in the class list.
+        const collapsed = elem.classList.toggle('collapsed');
+        const padding = {};
+        // 'id' is 'right' or 'left'. When run at start, this object looks like: '{left: 300}';
+        padding[id] = collapsed ? 0 : 300; // 0 if collapsed, 300 px if not. This matches the width of the sidebars in the .sidebar CSS class.
+        // Use `map.easeTo()` with a padding option to adjust the map's center accounting for the position of sidebars.
+        map.easeTo({
+            padding: padding,
+            duration: 1000 // In ms. This matches the CSS transition duration property.
+        });
+    }
+
+    map.on('load', () => {
+        toggleSidebar('right');
+    });
   </script>
 </body>
 </html>
