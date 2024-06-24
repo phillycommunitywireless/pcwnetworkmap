@@ -129,28 +129,28 @@
               <div class='checkbox mr6 checkbox--s-label'>
                 <svg class='icon'><use xlink:href='#icon-check' /></svg>
               </div>
-              <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/toggle_key/icons/high_sites.png"> High Sites
+              <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png"> High Sites
             </label>
             <label class='checkbox-container'>
               <input type='checkbox' id="layer4" checked/>
               <div class='checkbox mr6 checkbox--s-label'>
                 <svg class='icon'><use xlink:href='#icon-check' /></svg>
               </div>
-              <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/toggle_key/icons/Rooftophubs2.png"> Main Router
+              <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png"> Main Router
             </label>
             <label class='checkbox-container'>
               <input type='checkbox' id="layer2" checked/>
               <div class='checkbox mr6 checkbox--s-label'>
                 <svg class='icon'><use xlink:href='#icon-check' /></svg>
               </div>
-              <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/toggle_key/icons/RooftopHub.png"> Access Points
+              <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png"> Access Points
             </label>
             <label class='checkbox-container'>
               <input type='checkbox' id="layer3" checked/>
               <div class='checkbox mr6 checkbox--s-label'>
                 <svg class='icon'><use xlink:href='#icon-check' /></svg>
               </div>
-              <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/toggle_key/icons/icon1.png"> Mesh Nodes
+              <img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png"> Mesh Nodes
             </label>
             <label class='checkbox-container'>
               <input type='checkbox' id="layer5" />
@@ -205,10 +205,10 @@
     });
     
     const images =[
-        {imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/toggle_key/icons/high_sites.png', id: 'HS_icon'},
-        {imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/toggle_key/icons/RooftopHub.png', id: 'RH_icon'},
-        {imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/toggle_key/icons/icon1.png', id: 'MN_icon'},
-        {imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/toggle_key/icons/Rooftophubs2.png', id: 'LB_icon'},
+        {imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png', id: 'HS_icon'},
+        {imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png', id: 'RH_icon'},
+        {imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png', id: 'MN_icon'},
+        {imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png', id: 'LB_icon'},
         ]
 
         Promise.all(
@@ -229,22 +229,22 @@
 
         map.addSource('network-points', {
             type: 'geojson',
-            data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/toggle_key/data/networkpoints.geojson'
+            data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/networkpoints.geojson'
         });
 
         map.addSource('line', {
             type: 'geojson',
-            data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/toggle_key/data/level1.geojson'
+            data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/level1.geojson'
         });
 
         map.addSource('new-line', {
             type: 'geojson',
-            data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/toggle_key/data/level2.geojson'
+            data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/level2.geojson'
           });
 
           map.addSource('new-line2', {
             type: 'geojson',
-            data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/toggle_key/data/level3.geojson'
+            data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/level3.geojson'
           });
 
 
