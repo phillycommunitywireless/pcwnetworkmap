@@ -625,7 +625,7 @@ const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
   visibility: 'none'
 };
 
-fetch('https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/networkpoints.geojson')
+fetch('https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_geojson')
     .then(response => response.json())
     .then(data => {
       // Filter features by the "type" property
