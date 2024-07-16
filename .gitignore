@@ -1,0 +1,3 @@
+# ignore all reflected build files 
+_site/*
+.jekyll-cache/*
