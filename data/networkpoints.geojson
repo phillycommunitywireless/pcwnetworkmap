@@ -1,81 +1,1630 @@
 {
-"type": "FeatureCollection",
-"name": "networkpoints",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "name": "Gotham Tower", "id": "HS001", "Street address": "2000 N 2nd St", "type": "HS", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.981349, "Longitude": -75.137339 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1373393, 39.9813486 ] ] } },
-{ "type": "Feature", "properties": { "name": "Jasper Studios", "id": "HS002", "Street address": "2930 Jasper St", "type": "HS", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.992775, "Longitude": -75.118189 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.118189203737955, 39.992775343026445 ] ] } },
-{ "type": "Feature", "properties": { "name": "J-centrel Apartments", "id": "HS003", "Street address": "3400 J St", "type": "HS", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.9994997, "Longitude": -75.1087566 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.108738865930619, 39.999513390001866 ] ] } },
-{ "type": "Feature", "properties": { "name": "2246 N Howard St", "id": "MN001", "Street address": "2246 N Howard St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.984494, "Longitude": -75.133482 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1334818, 39.984494 ] ] } },
-{ "type": "Feature", "properties": { "name": "2244 N Howard St", "id": "MN003", "Street address": "2244 N Howard St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.983092, "Longitude": -75.133623 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.133590888602953, 39.983093071136892 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA Apartments", "id": "MN005", "Street address": "2116 N Hancock St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.982845, "Longitude": -75.13593 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1359296, 39.9828454 ] ] } },
-{ "type": "Feature", "properties": { "name": "Grocery Store", "id": "MN006", "Street address": "2263 N Howard St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.984812, "Longitude": -75.133173 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1331725, 39.9848118 ] ] } },
-{ "type": "Feature", "properties": { "name": "Las Parcelas Mesh", "id": "MN007", "Street address": "2248 Palethorp St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.985142, "Longitude": -75.135809 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1358091, 39.9851417 ] ] } },
-{ "type": "Feature", "properties": { "name": "Colobo Gardens Solar Mesh ", "id": "MN008", "Street address": "2248 Palethorp St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.984897, "Longitude": -75.135458 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1354577, 39.9848971 ] ] } },
-{ "type": "Feature", "properties": { "name": "GALAEI", "id": "MN009", "Street address": "118 Fontain St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.981383, "Longitude": -75.134326 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1343264, 39.9813831 ] ] } },
-{ "type": "Feature", "properties": { "name": "Free Library Kensington South", "id": "RH001", "Street address": "104 W Dauphin St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.98447, "Longitude": -75.132786 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1327857, 39.9844695 ] ] } },
-{ "type": "Feature", "properties": { "name": "Free Library Kensington North", "id": "RH002", "Street address": "104 W Dauphin St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.984795, "Longitude": -75.132707 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1327066, 39.9847953 ] ] } },
-{ "type": "Feature", "properties": { "name": "114 Diamond St", "id": "RH003", "Street address": "114 Diamond St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.981595, "Longitude": -75.133736 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1337363, 39.9815949 ] ] } },
-{ "type": "Feature", "properties": { "name": "Halftime Goodtimes\n", "id": "RH004", "Street address": "120 Diamond St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.981751, "Longitude": -75.134091 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13408358725394, 39.981719357351729 ] ] } },
-{ "type": "Feature", "properties": { "name": "2119 N 2nd St\n", "id": "RH005", "Street address": "2119 N 2nd St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.982646, "Longitude": -75.136555 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.136634570674829, 39.982659410870006 ] ] } },
-{ "type": "Feature", "properties": { "name": "West Kensington Ministries\n", "id": "RH006", "Street address": "2136 N Hancock St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.983224, "Longitude": -75.135642 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.135605863532632, 39.983241671262419 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSNP", "id": "RH007", "Street address": "2141 N Howard St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.982848, "Longitude": -75.133617 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13361790289764, 39.982900988026543 ] ] } },
-{ "type": "Feature", "properties": { "name": "2311 N Howard St", "id": "RH008", "Street address": "2311 N Howard St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.985224, "Longitude": -75.133102 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1331022, 39.9852239 ] ] } },
-{ "type": "Feature", "properties": { "name": "Las Parcelas", "id": "RH009", "Street address": "2248 Palethorp St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.984766, "Longitude": -75.135861 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.135861, 39.9847664 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA Apartments ", "id": "RH010", "Street address": "147 Susquehannah Ave", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.983624, "Longitude": -75.134738 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.134751278966789, 39.983592711128004 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA Apartments", "id": "RH011", "Street address": "2114 N Hancock St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.982641, "Longitude": -75.135951 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.135751348814281, 39.982588973130788 ] ] } },
-{ "type": "Feature", "properties": { "name": "2130 N Hancock St", "id": "RH012", "Street address": "2130 N Hancock St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.983063, "Longitude": -75.135702 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.135649837649481, 39.983031453533066 ] ] } },
-{ "type": "Feature", "properties": { "name": "2024 N 4th St", "id": "RH013", "Street address": "2024 N 4th St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.98185, "Longitude": -75.140659 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.140628158217197, 39.981845253423067 ] ] } },
-{ "type": "Feature", "properties": { "name": "2141 N 2nd St", "id": "RH014", "Street address": "2141 N 2nd St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.983131, "Longitude": -75.136482 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.136530243095081, 39.983132418658279 ] ] } },
-{ "type": "Feature", "properties": { "name": "1425 N American St", "id": "RH015", "Street address": "1425 N American St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.97352, "Longitude": -75.139536 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.139763544231641, 39.973631942169042 ] ] } },
-{ "type": "Feature", "properties": { "name": "Iglesias Gardens / Angel\n", "id": "RH016", "Street address": "1941 N Lawrence St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.980842, "Longitude": -75.141518 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.141479652524836, 39.980847186615776 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA Apartments", "id": "RH017", "Street address": "137 Susquehannah Ave", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.983767, "Longitude": -75.134233 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1342331, 39.9837666 ] ] } },
-{ "type": "Feature", "properties": { "name": "Lillian Marrero Library", "id": "RH019", "Street address": "601 W Lehigh Ave", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.992783, "Longitude": -75.142415 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.142301786347545, 39.992676753966819 ] ] } },
-{ "type": "Feature", "properties": { "name": "Prevention Point", "id": "RH020", "Street address": "2913 Kensington Ave", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.992792, "Longitude": -75.119824 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.119823944060386, 39.992792016516518 ] ] } },
-{ "type": "Feature", "properties": { "name": "700 W Cambria St", "id": "RH021", "Street address": "700 W Cambria St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.995649, "Longitude": -75.143257 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.143259552360348, 39.995596942929701 ] ] } },
-{ "type": "Feature", "properties": { "name": "541 W Lehigh St", "id": "RH022", "Street address": "541 W Lehigh St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.992638, "Longitude": -75.141838 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.141837674901723, 39.992637805723682 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA St. Boniface Highschool Litebeam", "id": "LB018", "Street address": "1030 Mascher St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.981282, "Longitude": -75.135146 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13521186078286, 39.981253004073544 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA St. Boniface Highschool North AP", "id": "RH023", "Street address": "2014 N Mascher St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.981443, "Longitude": -75.13514 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.135140020270654, 39.981442817560676 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA St. Boniface Highschool East AP", "id": "RH024", "Street address": "2014 N Mascher St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.981236, "Longitude": -75.135104 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.135103810449067, 39.981236264663991 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA St. Boniface Highschool South AP", "id": "RH025", "Street address": "2014 N Mascher St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.981068, "Longitude": -75.135266 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.135266084095718, 39.981067733480693 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA Children's Center Hub", "id": "RH026", "Street address": "2014 N Mascher St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.980443, "Longitude": -75.1348 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.134799925343899, 39.980442888826282 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA Children's Center South AP", "id": "RH027", "Street address": "2014 N Mascher St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.980443, "Longitude": -75.1348 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.134748831546958, 39.980427734319839 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA Residence", "id": "MN009", "Street address": "126 W Norris St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.980259449128404, "Longitude": -75.134552331681633 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.134563890497247, 39.980259449128404 ] ] } },
-{ "type": "Feature", "properties": { "name": "Kensington Corridor Trust Gardens", "id": "RH029", "Street address": "3258 Kensington Ave", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.997606, "Longitude": -75.111783 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.111670002157808, 39.997553172069743 ] ] } },
-{ "type": "Feature", "properties": { "name": "2036 Waterloo St", "id": "MN010", "Street address": "2036 Waterloo St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.981257689062353, "Longitude": -75.134566760840315 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.134566760840315, 39.981257689062353 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA Residence", "id": "MN011", "Street address": "140 W Norris St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.980254379391873, "Longitude": -75.13473601142006 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13473601142006, 39.980254379391873 ] ] } },
-{ "type": "Feature", "properties": { "name": "Taller Puertoriqueno", "id": "RH031", "Street address": "2600 N 5th St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.991375768133416, "Longitude": -75.1406877 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1409667083893, 39.990966396279553 ] ] } },
-{ "type": "Feature", "properties": { "name": "1919 Waterloo St", "id": "RH033", "Street address": "1919 Waterloo St", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.979434224996616, "Longitude": -75.1348685865091 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1348685865091, 39.979434224996616 ] ] } },
-{ "type": "Feature", "properties": { "name": "Casa Caribe", "id": "RH033", "Street address": "173 W Allegheny Ave", "type": "RH", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.99922, "Longitude": -75.13243 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13243, 39.99922 ] ] } },
-{ "type": "Feature", "properties": { "name": "Torres del Caribe", "id": "RH033", "Street address": "3238 N Mascher St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.99999, "Longitude": -75.13115 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13115, 39.99999 ] ] } },
-{ "type": "Feature", "properties": { "name": "Caribe Towers", "id": "RH033", "Street address": "3231 N 2nd St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 40.00034, "Longitude": -75.13283 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13283, 40.00034 ] ] } },
-{ "type": "Feature", "properties": { "name": "HACE South", "id": "RH033", "Street address": "167 W Allegheny", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 40.00034, "Longitude": -75.13283 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13169109205036, 39.999030949169281 ] ] } },
-{ "type": "Feature", "properties": { "name": "HACE West", "id": "RH033", "Street address": "3203 N Hancock St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 40.00034, "Longitude": -75.13283 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.132002807982516, 39.999221882505815 ] ] } },
-{ "type": "Feature", "properties": { "name": "122 W Norris St", "id": "RH033", "Street address": "122 W Norris St", "type": "MN", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 40.00034, "Longitude": -75.13283 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.134413793902368, 39.980208070936158 ] ] } },
-{ "type": "Feature", "properties": { "name": "2024 N 4th St", "id": "LB013", "Street address": "2024 N 4th St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.98185, "Longitude": -75.140659 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.140678890446083, 39.98186476486201 ] ] } },
-{ "type": "Feature", "properties": { "name": "Iglesias Gardens / Angel", "id": "LB016", "Street address": "1941 N Lawrence St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.980842, "Longitude": -75.141518 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.141539959835939, 39.980854440546949 ] ] } },
-{ "type": "Feature", "properties": { "name": "1425 N American St", "id": "LB015", "Street address": "1425 N American St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.97352, "Longitude": -75.139536 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.139690171457644, 39.97349768242487 ] ] } },
-{ "type": "Feature", "properties": { "name": "1919 Waterloo St", "id": "LB033", "Street address": "1919 Waterloo St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.979434224996616, "Longitude": -75.1348685865091 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.134804586679834, 39.979427172273866 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA Children's Center Hub", "id": "LB026", "Street address": "2014 N Mascher St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.980443, "Longitude": -75.1348 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.134799301487064, 39.98049700080972 ] ] } },
-{ "type": "Feature", "properties": { "name": "114 Diamond St", "id": "LB003", "Street address": "114 Diamond St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.981595, "Longitude": -75.133736 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.133702151584231, 39.981623984909113 ] ] } },
-{ "type": "Feature", "properties": { "name": "Halftime Goodtimes", "id": "LB0004", "Street address": "120 Diamond St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.981751, "Longitude": -75.134091 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.134096011641162, 39.981607503875985 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSNP", "id": "LB007", "Street address": "2141 N Howard St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.982848, "Longitude": -75.133617 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.133520057407708, 39.982916420902811 ] ] } },
-{ "type": "Feature", "properties": { "name": "Free Library Kensington", "id": "LB001", "Street address": "104 W Dauphin St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.98447, "Longitude": -75.132786 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13265797755497, 39.984633803539246 ] ] } },
-{ "type": "Feature", "properties": { "name": "2311 N Howard St", "id": "LB008", "Street address": "2311 N Howard St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.985224, "Longitude": -75.133102 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13305511361169, 39.985231487307729 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA Apartments East", "id": "LB017", "Street address": "137 W Susquehannah Ave", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.983767, "Longitude": -75.134233 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13431131259415, 39.983589772407498 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA Apartments West", "id": "LB010", "Street address": "147 W Susquehannah Ave", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.983624, "Longitude": -75.134738 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.1347619957712, 39.983640600988892 ] ] } },
-{ "type": "Feature", "properties": { "name": "NSCA Apartmens South", "id": "LB011", "Street address": "2114 N Hancock St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.982641, "Longitude": -75.135951 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.135882203077074, 39.98263138960457 ] ] } },
-{ "type": "Feature", "properties": { "name": "2130 N Hancock St", "id": "LB012", "Street address": "2130 N Hancock St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.983063, "Longitude": -75.135702 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13575464286744, 39.98305493540235 ] ] } },
-{ "type": "Feature", "properties": { "name": "West Kensington Ministries", "id": "LB006", "Street address": "2136 N Hancock St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.983224, "Longitude": -75.135642 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.135669602727702, 39.983270779847025 ] ] } },
-{ "type": "Feature", "properties": { "name": "2119 N 2nd St", "id": "LB005", "Street address": "2119 N 2nd St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.982646, "Longitude": -75.136555 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.13658378422997, 39.982651752443381 ] ] } },
-{ "type": "Feature", "properties": { "name": "2141 N 2nd St", "id": "LB014", "Street address": "2141 N 2nd St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.983131, "Longitude": -75.136482 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.136442936498526, 39.983132313677913 ] ] } },
-{ "type": "Feature", "properties": { "name": "Las Parcelas", "id": "LB009", "Street address": "2248 Palethorp St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.984766, "Longitude": -75.135861 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.135973821441965, 39.984678268928917 ] ] } },
-{ "type": "Feature", "properties": { "name": "Casa Caribe", "id": "LB033", "Street address": "173 W Allegheny Ave", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.99922, "Longitude": -75.13243 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.132439351375368, 39.999184986957111 ] ] } },
-{ "type": "Feature", "properties": { "name": "Taller Puertoriqueno", "id": "LB031", "Street address": "2600 N 5th St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.991375768133416, "Longitude": -75.1406877 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.140754737590413, 39.990904865758417 ] ] } },
-{ "type": "Feature", "properties": { "name": "541 W Lehigh Ave", "id": "LB022", "Street address": "541 W Lehigh Ave", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.992638, "Longitude": -75.141838 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.14180425126429, 39.99256169212196 ] ] } },
-{ "type": "Feature", "properties": { "name": "Lillian Marrero Library", "id": "LB019", "Street address": "601 W Lehigh Ave", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.992783, "Longitude": -75.142415 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.142489793118955, 39.99277418243846 ] ] } },
-{ "type": "Feature", "properties": { "name": "700 W Cambria St", "id": "LB021", "Street address": "700 W Cambria St", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.995649, "Longitude": -75.143257 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.143286602154362, 39.995547607614739 ] ] } },
-{ "type": "Feature", "properties": { "name": "Prevention Point", "id": "LB020", "Street address": "2913 Kensington Ave", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.992792, "Longitude": -75.119824 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.119642128808394, 39.992737398013595 ] ] } },
-{ "type": "Feature", "properties": { "name": "Kensington Corridor Trust Gardens", "id": "LB029", "Street address": "3258 Kensington Ave", "type": "LB", "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg", "Latitude": 39.997606, "Longitude": -75.111783 }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -75.111690377128497, 39.997612960927974 ] ] } }
-]
+    "type": "FeatureCollection",
+    "name": "networkpoints",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Gotham Tower",
+                "id": "HS001",
+                "Street address": "2000 N 2nd St",
+                "type": "HS",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.981349,
+                "Longitude": -75.137339
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Jasper Studios",
+                "id": "HS002",
+                "Street address": "2930 Jasper St",
+                "type": "HS",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.992775,
+                "Longitude": -75.118189
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.118189203737955,
+                        39.992775343026445
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "J-centrel Apartments",
+                "id": "HS003",
+                "Street address": "3400 J St",
+                "type": "HS",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.9994997,
+                "Longitude": -75.1087566
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.108738865930619,
+                        39.999513390001866
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2246 N Howard St",
+                "id": "MN001",
+                "Street address": "2246 N Howard St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.984494,
+                "Longitude": -75.133482
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1334818,
+                        39.984494
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2244 N Howard St",
+                "id": "MN003",
+                "Street address": "2244 N Howard St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.983092,
+                "Longitude": -75.133623
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.133590888602953,
+                        39.983093071136892
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA Apartments",
+                "id": "MN005",
+                "Street address": "2116 N Hancock St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.982845,
+                "Longitude": -75.13593
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1359296,
+                        39.9828454
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Grocery Store",
+                "id": "MN006",
+                "Street address": "2263 N Howard St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.984812,
+                "Longitude": -75.133173
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1331725,
+                        39.9848118
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Las Parcelas Mesh",
+                "id": "MN007",
+                "Street address": "2248 Palethorp St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.985142,
+                "Longitude": -75.135809
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1358091,
+                        39.9851417
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Colobo Gardens Solar Mesh ",
+                "id": "MN008",
+                "Street address": "2248 Palethorp St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.984897,
+                "Longitude": -75.135458
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1354577,
+                        39.9848971
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "GALAEI",
+                "id": "MN009",
+                "Street address": "118 Fontain St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.981383,
+                "Longitude": -75.134326
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1343264,
+                        39.9813831
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Free Library Kensington South",
+                "id": "RH001",
+                "Street address": "104 W Dauphin St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.98447,
+                "Longitude": -75.132786
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1327857,
+                        39.9844695
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Free Library Kensington North",
+                "id": "RH002",
+                "Street address": "104 W Dauphin St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.984795,
+                "Longitude": -75.132707
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1327066,
+                        39.9847953
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "114 Diamond St",
+                "id": "RH003",
+                "Street address": "114 Diamond St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.981595,
+                "Longitude": -75.133736
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1337363,
+                        39.9815949
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Halftime Goodtimes\n",
+                "id": "RH004",
+                "Street address": "120 Diamond St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.981751,
+                "Longitude": -75.134091
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13408358725394,
+                        39.981719357351729
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2119 N 2nd St\n",
+                "id": "RH005",
+                "Street address": "2119 N 2nd St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.982646,
+                "Longitude": -75.136555
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.136634570674829,
+                        39.982659410870006
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "West Kensington Ministries\n",
+                "id": "RH006",
+                "Street address": "2136 N Hancock St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.983224,
+                "Longitude": -75.135642
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.135605863532632,
+                        39.983241671262419
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSNP",
+                "id": "RH007",
+                "Street address": "2141 N Howard St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.982848,
+                "Longitude": -75.133617
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13361790289764,
+                        39.982900988026543
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2311 N Howard St",
+                "id": "RH008",
+                "Street address": "2311 N Howard St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.985224,
+                "Longitude": -75.133102
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1331022,
+                        39.9852239
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Las Parcelas",
+                "id": "RH009",
+                "Street address": "2248 Palethorp St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.984766,
+                "Longitude": -75.135861
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.135861,
+                        39.9847664
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA Apartments ",
+                "id": "RH010",
+                "Street address": "147 Susquehannah Ave",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.983624,
+                "Longitude": -75.134738
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.134751278966789,
+                        39.983592711128004
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA Apartments",
+                "id": "RH011",
+                "Street address": "2114 N Hancock St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.982641,
+                "Longitude": -75.135951
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.135751348814281,
+                        39.982588973130788
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2130 N Hancock St",
+                "id": "RH012",
+                "Street address": "2130 N Hancock St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.983063,
+                "Longitude": -75.135702
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.135649837649481,
+                        39.983031453533066
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2024 N 4th St",
+                "id": "RH013",
+                "Street address": "2024 N 4th St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.98185,
+                "Longitude": -75.140659
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.140628158217197,
+                        39.981845253423067
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2141 N 2nd St",
+                "id": "RH014",
+                "Street address": "2141 N 2nd St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.983131,
+                "Longitude": -75.136482
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.136530243095081,
+                        39.983132418658279
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "1425 N American St",
+                "id": "RH015",
+                "Street address": "1425 N American St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.97352,
+                "Longitude": -75.139536
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.139763544231641,
+                        39.973631942169042
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Iglesias Gardens / Angel\n",
+                "id": "RH016",
+                "Street address": "1941 N Lawrence St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.980842,
+                "Longitude": -75.141518
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.141479652524836,
+                        39.980847186615776
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA Apartments",
+                "id": "RH017",
+                "Street address": "137 Susquehannah Ave",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.983767,
+                "Longitude": -75.134233
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1342331,
+                        39.9837666
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Lillian Marrero Library",
+                "id": "RH019",
+                "Street address": "601 W Lehigh Ave",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.992783,
+                "Longitude": -75.142415
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.142301786347545,
+                        39.992676753966819
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Prevention Point",
+                "id": "RH020",
+                "Street address": "2913 Kensington Ave",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.992792,
+                "Longitude": -75.119824
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.119823944060386,
+                        39.992792016516518
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "700 W Cambria St",
+                "id": "RH021",
+                "Street address": "700 W Cambria St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.995649,
+                "Longitude": -75.143257
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.143259552360348,
+                        39.995596942929701
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "541 W Lehigh St",
+                "id": "RH022",
+                "Street address": "541 W Lehigh St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.992638,
+                "Longitude": -75.141838
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.141837674901723,
+                        39.992637805723682
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA St. Boniface Highschool Litebeam",
+                "id": "LB018",
+                "Street address": "1030 Mascher St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.981282,
+                "Longitude": -75.135146
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13521186078286,
+                        39.981253004073544
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA St. Boniface Highschool North AP",
+                "id": "RH023",
+                "Street address": "2014 N Mascher St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.981443,
+                "Longitude": -75.13514
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.135140020270654,
+                        39.981442817560676
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA St. Boniface Highschool East AP",
+                "id": "RH024",
+                "Street address": "2014 N Mascher St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.981236,
+                "Longitude": -75.135104
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.135103810449067,
+                        39.981236264663991
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA St. Boniface Highschool South AP",
+                "id": "RH025",
+                "Street address": "2014 N Mascher St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.981068,
+                "Longitude": -75.135266
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.135266084095718,
+                        39.981067733480693
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA Children's Center Hub",
+                "id": "RH026",
+                "Street address": "2014 N Mascher St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.980443,
+                "Longitude": -75.1348
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.134799925343899,
+                        39.980442888826282
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA Children's Center South AP",
+                "id": "RH027",
+                "Street address": "2014 N Mascher St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.980443,
+                "Longitude": -75.1348
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.134748831546958,
+                        39.980427734319839
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA Residence",
+                "id": "MN009",
+                "Street address": "126 W Norris St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.980259449128404,
+                "Longitude": -75.134552331681633
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.134563890497247,
+                        39.980259449128404
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Kensington Corridor Trust Gardens",
+                "id": "RH029",
+                "Street address": "3258 Kensington Ave",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.997606,
+                "Longitude": -75.111783
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.111670002157808,
+                        39.997553172069743
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2036 Waterloo St",
+                "id": "MN010",
+                "Street address": "2036 Waterloo St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.981257689062353,
+                "Longitude": -75.134566760840315
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.134566760840315,
+                        39.981257689062353
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA Residence",
+                "id": "MN011",
+                "Street address": "140 W Norris St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.980254379391873,
+                "Longitude": -75.13473601142006
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13473601142006,
+                        39.980254379391873
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Taller Puertoriqueno",
+                "id": "RH031",
+                "Street address": "2600 N 5th St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.991375768133416,
+                "Longitude": -75.1406877
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1409667083893,
+                        39.990966396279553
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "1919 Waterloo St",
+                "id": "RH033",
+                "Street address": "1919 Waterloo St",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.979434224996616,
+                "Longitude": -75.1348685865091
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1348685865091,
+                        39.979434224996616
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Casa Caribe",
+                "id": "RH033",
+                "Street address": "173 W Allegheny Ave",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.99922,
+                "Longitude": -75.13243
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13243,
+                        39.99922
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Torres del Caribe",
+                "id": "RH033",
+                "Street address": "3238 N Mascher St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.99999,
+                "Longitude": -75.13115
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13115,
+                        39.99999
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Caribe Towers",
+                "id": "RH033",
+                "Street address": "3231 N 2nd St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 40.00034,
+                "Longitude": -75.13283
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13283,
+                        40.00034
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "HACE South",
+                "id": "RH033",
+                "Street address": "167 W Allegheny",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 40.00034,
+                "Longitude": -75.13283
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13169109205036,
+                        39.999030949169281
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "HACE West",
+                "id": "RH033",
+                "Street address": "3203 N Hancock St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 40.00034,
+                "Longitude": -75.13283
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.132002807982516,
+                        39.999221882505815
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "122 W Norris St",
+                "id": "RH033",
+                "Street address": "122 W Norris St",
+                "type": "MN",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 40.00034,
+                "Longitude": -75.13283
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.134413793902368,
+                        39.980208070936158
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2024 N 4th St",
+                "id": "LB013",
+                "Street address": "2024 N 4th St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.98185,
+                "Longitude": -75.140659
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.140678890446083,
+                        39.98186476486201
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Iglesias Gardens / Angel",
+                "id": "LB016",
+                "Street address": "1941 N Lawrence St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.980842,
+                "Longitude": -75.141518
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.141539959835939,
+                        39.980854440546949
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "1425 N American St",
+                "id": "LB015",
+                "Street address": "1425 N American St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.97352,
+                "Longitude": -75.139536
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.139690171457644,
+                        39.97349768242487
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "1919 Waterloo St",
+                "id": "LB033",
+                "Street address": "1919 Waterloo St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.979434224996616,
+                "Longitude": -75.1348685865091
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.134804586679834,
+                        39.979427172273866
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA Children's Center Hub",
+                "id": "LB026",
+                "Street address": "2014 N Mascher St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.980443,
+                "Longitude": -75.1348
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.134799301487064,
+                        39.98049700080972
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "114 Diamond St",
+                "id": "LB003",
+                "Street address": "114 Diamond St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.981595,
+                "Longitude": -75.133736
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.133702151584231,
+                        39.981623984909113
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Halftime Goodtimes",
+                "id": "LB0004",
+                "Street address": "120 Diamond St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.981751,
+                "Longitude": -75.134091
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.134096011641162,
+                        39.981607503875985
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSNP",
+                "id": "LB007",
+                "Street address": "2141 N Howard St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.982848,
+                "Longitude": -75.133617
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.133520057407708,
+                        39.982916420902811
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Free Library Kensington",
+                "id": "LB001",
+                "Street address": "104 W Dauphin St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.98447,
+                "Longitude": -75.132786
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13265797755497,
+                        39.984633803539246
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2311 N Howard St",
+                "id": "LB008",
+                "Street address": "2311 N Howard St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.985224,
+                "Longitude": -75.133102
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13305511361169,
+                        39.985231487307729
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA Apartments East",
+                "id": "LB017",
+                "Street address": "137 W Susquehannah Ave",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.983767,
+                "Longitude": -75.134233
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13431131259415,
+                        39.983589772407498
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA Apartments West",
+                "id": "LB010",
+                "Street address": "147 W Susquehannah Ave",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.983624,
+                "Longitude": -75.134738
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.1347619957712,
+                        39.983640600988892
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "NSCA Apartmens South",
+                "id": "LB011",
+                "Street address": "2114 N Hancock St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.982641,
+                "Longitude": -75.135951
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.135882203077074,
+                        39.98263138960457
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2130 N Hancock St",
+                "id": "LB012",
+                "Street address": "2130 N Hancock St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.983063,
+                "Longitude": -75.135702
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13575464286744,
+                        39.98305493540235
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "West Kensington Ministries",
+                "id": "LB006",
+                "Street address": "2136 N Hancock St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.983224,
+                "Longitude": -75.135642
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.135669602727702,
+                        39.983270779847025
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2119 N 2nd St",
+                "id": "LB005",
+                "Street address": "2119 N 2nd St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.982646,
+                "Longitude": -75.136555
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.13658378422997,
+                        39.982651752443381
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "2141 N 2nd St",
+                "id": "LB014",
+                "Street address": "2141 N 2nd St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.983131,
+                "Longitude": -75.136482
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.136442936498526,
+                        39.983132313677913
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Las Parcelas",
+                "id": "LB009",
+                "Street address": "2248 Palethorp St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.984766,
+                "Longitude": -75.135861
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.135973821441965,
+                        39.984678268928917
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Casa Caribe",
+                "id": "LB033",
+                "Street address": "173 W Allegheny Ave",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.99922,
+                "Longitude": -75.13243
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.132439351375368,
+                        39.999184986957111
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Taller Puertoriqueno",
+                "id": "LB031",
+                "Street address": "2600 N 5th St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.991375768133416,
+                "Longitude": -75.1406877
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.140754737590413,
+                        39.990904865758417
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "541 W Lehigh Ave",
+                "id": "LB022",
+                "Street address": "541 W Lehigh Ave",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.992638,
+                "Longitude": -75.141838
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.14180425126429,
+                        39.99256169212196
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Lillian Marrero Library",
+                "id": "LB019",
+                "Street address": "601 W Lehigh Ave",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.992783,
+                "Longitude": -75.142415
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.142489793118955,
+                        39.99277418243846
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "700 W Cambria St",
+                "id": "LB021",
+                "Street address": "700 W Cambria St",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.995649,
+                "Longitude": -75.143257
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.143286602154362,
+                        39.995547607614739
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Prevention Point",
+                "id": "LB020",
+                "Street address": "2913 Kensington Ave",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.992792,
+                "Longitude": -75.119824
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.119642128808394,
+                        39.992737398013595
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Kensington Corridor Trust Gardens",
+                "id": "LB029",
+                "Street address": "3258 Kensington Ave",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.997606,
+                "Longitude": -75.111783
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.111690377128497,
+                        39.997612960927974
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "New Kensington CDC (NKCDC)",
+                "id": "LB030",
+                "Street address": "2771 Ruth St Suite 1, Philadelphia PA 19134",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.990319,
+                "Longitude": -75.122298
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.122298,
+                        39.990319
+                    ]
+                ]
+            }
+        }, 
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "New Kensington CDC (NKCDC) Northwest Corner",
+                "id": "RH034",
+                "Street address": "2771 Ruth St Suite 1, Philadelphia PA 19134",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.990788,
+                "Longitude": -75.122094
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.122094,
+                        39.990788
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "New Kensington CDC (NKCDC) Southwest Corner",
+                "id": "RH035",
+                "Street address": "2771 Ruth St Suite 1, Philadelphia PA 19134",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.990356,
+                "Longitude": -75.122808
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.122808,
+                        39.990356
+                    ]
+                ]
+            }
+        } 
+
+    ]
 }
