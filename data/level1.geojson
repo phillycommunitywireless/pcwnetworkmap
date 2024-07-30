@@ -844,6 +844,37 @@
                     ]
                 ]
             }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "J-centrel Apartments",
+                "description": "2000 N 2nd St",
+                "hs_id": "00003",
+                "fid_2": 22,
+                "qc_id_2": 24,
+                "name_2": "Zerbe Artz",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00025"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.108738865930619,
+                        39.999513390001866,
+                        0.0
+                    ],
+                    [
+                        -75.110491,
+                        39.998280,
+                        0.0
+                    ]
+                ]
+            }
         }
     ]
 }

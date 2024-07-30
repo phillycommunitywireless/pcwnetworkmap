@@ -1624,7 +1624,50 @@
                     ]
                 ]
             }
-        } 
+        }, 
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Zerbe Artz",
+                "id": "LB034",
+                "Street address": "3312 Kensington Ave, Philadelphia, PA 19134",
+                "type": "LB",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.998280,
+                "Longitude": -75.110491
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.110491,
+                        39.998280
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Zerbe Artz",
+                "id": "RH036",
+                "Street address": "3312 Kensington Ave, Philadelphia, PA 19134",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.998210,
+                "Longitude": -75.110475
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.110475,
+                        39.998210
+                    ]
+                ]
+            }
+        }
+
 
     ]
 }
