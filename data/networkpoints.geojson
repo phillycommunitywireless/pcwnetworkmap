@@ -1666,6 +1666,29 @@
                     ]
                 ]
             }
+        },
+
+        
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Tusculum Garden",
+                "id": "RH037",
+                "Street address": "2721 Kensington Ave, Philadelphia, PA 19134",
+                "type": "RH",
+                "image": "https://raw.githubusercontent.com/fmvaldezg/PCW_animatedlines/main/img/img1.jpg",
+                "Latitude": 39.990349,
+                "Longitude": -75.124185
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        -75.124185,
+                        39.990349
+                    ]
+                ]
+            }
         }
 
 
