@@ -227,29 +227,80 @@
     // Add the GeoJSON layers to the map
     
     map.on('load', () => {
+        // fetch datasources
+        // networkpoints 
+        const networkpoints_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_geojson'
+        // layer1 
+        const level1_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level1'
+        // layer2 
+        const level2_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level2'
+        // layer3 
+        const level3_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level3'
+    
+        // define promises for data to fetch
+        fetch_promises = [
+          fetch(networkpoints_url).then(
+            response => response.json()
+          ).then(
+            data => {
+              console.log(data)
+              return data
+            }
+          ),
+
+          fetch(level1_url).then(
+            response => response.json()
+          ).then(
+            data => {
+              console.log(data)
+              return data
+            }
+          ),
+
+          fetch(level2_url).then(
+            response => response.json()
+          ).then(
+            data => {
+              console.log(data)
+              return data
+            }
+          ),
+
+          fetch(level3_url).then(
+            response => response.json()
+          ).then(
+            data => {
+              console.log(data)
+              return data
+            }
+          )
+        ]
+
+        // wait for all promises to resolve before adding data to Sources
+        const [networkpoints_data, level1_data, level2_data, level3_data] = await Promise.all(fetch_promises)
 
         map.addSource('network-points', {
             type: 'geojson',
             // data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/networkpoints.geojson'
-            data: 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_geojson'
+            data: networkpoints_data
           });
 
         map.addSource('line', {
             type: 'geojson',
             // data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/level1.geojson'
-            data: 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level1'
+            data: level1_data
           });
 
         map.addSource('new-line', {
             type: 'geojson',
             // data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/level2.geojson'
-            data: 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level2'
+            data: level2_data
           });
 
           map.addSource('new-line2', {
             type: 'geojson',
             // data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/level3.geojson'
-            data: 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level3'
+            data: level3_data
           });
 
 
