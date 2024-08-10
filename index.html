@@ -382,92 +382,6 @@
 
       map.addLayer(heatmapLayer);
 
-      // technique based on https://jsfiddle.net/2mws8y3q/
-      // an array of valid line-dasharray values, specifying the lengths of the alternating dashes and gaps that form the dash pattern
-      const dashArraySequence = [
-        [0, 4, 3],
-        [0.5, 4, 2.5],
-        [1, 4, 2],
-        [1.5, 4, 1.5],
-        [2, 4, 1],
-        [2.5, 4, 0.5],
-        [3, 4, 0],
-        [0, 0.5, 3, 3.5],
-        [0, 1, 3, 3],
-        [0, 1.5, 3, 2.5],
-        [0, 2, 3, 2],
-        [0, 2.5, 3, 1.5],
-        [0, 3, 3, 1],
-        [0, 3.5, 3, 0.5]
-      ];
-
-      let step = 0;
-
-      function animateDashArray(timestamp) {
-        // Update line-dasharray using the next value in dashArraySequence. The
-        // divisor in the expression `timestamp / 100` controls the animation speed.
-        const newStep = parseInt((timestamp / 100) % dashArraySequence.length);
-
-        if (newStep !== step) {
-          map.setPaintProperty('line-dashed', 'line-dasharray', dashArraySequence[step]);
-          step = newStep;
-        }
-
-        // Request the next frame of the animation.
-        requestAnimationFrame(animateDashArray);
-      }
-
-      const dashArraySequence2 = [
-        [0, 4, 3],
-      ];
-
-      let step2 = 0;
-
-      function animateNewLine(timestamp) {
-        //Update line-dasharray using the next value in dashArraySequence for the new layer.
-        const newStep2 = parseInt((timestamp / 200) % dashArraySequence2.length);
-
-        if (newStep2 !== step2) {
-          map.setPaintProperty('new-line-dashed', 'line-dasharray', dashArraySequence2[step2]);
-          step2 = newStep2;
-        }
-
-        // Request the next frame of the animation.
-        requestAnimationFrame(animateNewLine);
-      }
-
-      const dashArraySequence3 = [
-        [0, 4, 3],
-        [0.5, 4, 2.5],
-        [1, 4, 2],
-        [1.5, 4, 1.5],
-        [2, 4, 1],
-        [2.5, 4, 0.5],
-        [3, 4, 0],
-        [0, 0.5, 3, 3.5],
-        [0, 1, 3, 3],
-        [0, 1.5, 3, 2.5],
-        [0, 2, 3, 2],
-        [0, 2.5, 3, 1.5],
-        [0, 3, 3, 1],
-        [0, 3.5, 3, 0.5]
-      ];
-
-      let step3 = 0;
-
-      function animateNewLine2(timestamp) {
-        // Update line-dasharray using the next value in dashArraySequence for the new layer.
-        const newStep3 = parseInt((timestamp / 200) % dashArraySequence3.length);
-
-        if (newStep3 !== step3) {
-          map.setPaintProperty('new-line-dashed2', 'line-dasharray', dashArraySequence3[step3]);
-          step3 = newStep3;
-        }
-
-        // Request the next frame of the animation.
-        requestAnimationFrame(animateNewLine2);
-      }
-
       // Start the animations
       animateDashArray(0);
       animateNewLine(0);
@@ -501,6 +415,93 @@
       });
 
     }); //end map.on('load')
+
+
+    // technique based on https://jsfiddle.net/2mws8y3q/
+    // an array of valid line-dasharray values, specifying the lengths of the alternating dashes and gaps that form the dash pattern
+    const dashArraySequence = [
+      [0, 4, 3],
+      [0.5, 4, 2.5],
+      [1, 4, 2],
+      [1.5, 4, 1.5],
+      [2, 4, 1],
+      [2.5, 4, 0.5],
+      [3, 4, 0],
+      [0, 0.5, 3, 3.5],
+      [0, 1, 3, 3],
+      [0, 1.5, 3, 2.5],
+      [0, 2, 3, 2],
+      [0, 2.5, 3, 1.5],
+      [0, 3, 3, 1],
+      [0, 3.5, 3, 0.5]
+    ];
+
+    let step = 0;
+
+    function animateDashArray(timestamp) {
+      // Update line-dasharray using the next value in dashArraySequence. The
+      // divisor in the expression `timestamp / 100` controls the animation speed.
+      const newStep = parseInt((timestamp / 100) % dashArraySequence.length);
+
+      if (newStep !== step) {
+        map.setPaintProperty('line-dashed', 'line-dasharray', dashArraySequence[step]);
+        step = newStep;
+      }
+
+      // Request the next frame of the animation.
+      requestAnimationFrame(animateDashArray);
+    }
+
+    const dashArraySequence2 = [
+      [0, 4, 3],
+    ];
+
+    let step2 = 0;
+
+    function animateNewLine(timestamp) {
+      //Update line-dasharray using the next value in dashArraySequence for the new layer.
+      const newStep2 = parseInt((timestamp / 200) % dashArraySequence2.length);
+
+      if (newStep2 !== step2) {
+        map.setPaintProperty('new-line-dashed', 'line-dasharray', dashArraySequence2[step2]);
+        step2 = newStep2;
+      }
+
+      // Request the next frame of the animation.
+      requestAnimationFrame(animateNewLine);
+    }
+
+    const dashArraySequence3 = [
+      [0, 4, 3],
+      [0.5, 4, 2.5],
+      [1, 4, 2],
+      [1.5, 4, 1.5],
+      [2, 4, 1],
+      [2.5, 4, 0.5],
+      [3, 4, 0],
+      [0, 0.5, 3, 3.5],
+      [0, 1, 3, 3],
+      [0, 1.5, 3, 2.5],
+      [0, 2, 3, 2],
+      [0, 2.5, 3, 1.5],
+      [0, 3, 3, 1],
+      [0, 3.5, 3, 0.5]
+    ];
+
+    let step3 = 0;
+
+    function animateNewLine2(timestamp) {
+      // Update line-dasharray using the next value in dashArraySequence for the new layer.
+      const newStep3 = parseInt((timestamp / 200) % dashArraySequence3.length);
+
+      if (newStep3 !== step3) {
+        map.setPaintProperty('new-line-dashed2', 'line-dasharray', dashArraySequence3[step3]);
+        step3 = newStep3;
+      }
+
+      // Request the next frame of the animation.
+      requestAnimationFrame(animateNewLine2);
+    }
 
     // Add event listener to the checkbox input
     const toggleCheckbox = document.getElementById('toggleNetworkLinks');
