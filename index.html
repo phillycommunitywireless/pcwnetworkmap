@@ -138,7 +138,6 @@
             response => response.json()
           ).then(
             data => {
-              console.log(data)
               return data
             }
           ),
@@ -147,7 +146,6 @@
             response => response.json()
           ).then(
             data => {
-              console.log(data)
               return data
             }
           ),
@@ -156,7 +154,6 @@
             response => response.json()
           ).then(
             data => {
-              console.log(data)
               return data
             }
           ),
@@ -165,7 +162,6 @@
             response => response.json()
           ).then(
             data => {
-              console.log(data)
               return data
             }
           )
@@ -212,6 +208,8 @@
                 //'line-opacity': 0.4
             //}
         //});
+
+        // Add Network Points Layer
         map.addLayer({
         'id': 'network-points-layer',
         'type': 'symbol',
@@ -237,6 +235,8 @@
               'text-halo-blur': 0.5,
             },
         });
+
+        // Level 1
         // add a line layer with line-dasharray set to the first value in dashArraySequence
         map.addLayer({
             type: 'line',
@@ -265,6 +265,7 @@
             //}
           //});
 
+          // Level 2
           // Add a line layer with line-dasharray set to the first value in dashArraySequence for the new layer
           map.addLayer({
             type: 'line',
@@ -279,6 +280,7 @@
             }
           });
 
+          // Level 3
           map.addLayer({
             type: 'line',
             source: 'new-line2',
@@ -292,6 +294,70 @@
               'line-opacity':0.65,
             }
           });
+
+      // Don't add heatmap source/layer until data is loaded and source created
+
+      // Filter features by the "type" property
+      const filteredData = networkpoints_data.features.filter(feature => feature.properties.type === 'RH' || feature.properties.type === 'MN' || feature.properties.type === 'LB');
+
+      // Create a new GeoJSON object with the filtered features
+      const filteredGeoJSON = {
+        type: 'FeatureCollection',
+        features: filteredData
+      };
+
+      map.addSource('heatmap-source', {
+        type: 'geojson',
+        data: filteredGeoJSON // Use the filtered GeoJSON data
+      });
+
+        const heatmapLayer = {
+          id: 'heatmap-layer',
+          type: 'heatmap',
+          source: 'heatmap-source',
+          minzoom: 12,
+          maxzoom: 20,
+          paint: {
+
+            'heatmap-weight': 5,
+            // Heatmap intensity range
+            'heatmap-intensity': 1,
+            // Heatmap color gradient
+            'heatmap-color': [
+              'interpolate',
+              ['linear'],
+              ['heatmap-density'],
+              0, 'rgba(0, 0, 255, 0)', // adjust the color gradient as needed
+              0.2, 'rgba(255, 0, 0, 1)',
+              0.4, 'rgba(255, 165, 0, 1)',
+              0.6, 'rgba(255, 255, 0, 1)',
+              0.8, 'rgba(0, 255, 0, 1)'
+            ],
+            // Heatmap radius
+            'heatmap-radius': {
+                stops: [
+                  [9, 2],
+                  [11, 10],
+                  [13, 20],
+                  [15, 100],
+                  [17, 200],
+                  [19, 500],
+                  [23, 1000]
+                ]
+              },
+            // Heatmap opacity
+            'heatmap-opacity': {
+                default: 1,
+                stops: [
+                  [14, 0.5],
+                  [20, 0.2]
+                ]
+            }
+          },
+          visibility: 'none'
+        };
+
+        map.addLayer(heatmapLayer);
 
         // technique based on https://jsfiddle.net/2mws8y3q/
         // an array of valid line-dasharray values, specifying the lengths of the alternating dashes and gaps that form the dash pattern
@@ -411,7 +477,7 @@
             popup.remove();
         });
 
-    });
+  }); //end map.on('load')
 
 // Add event listener to the checkbox input
 const toggleCheckbox = document.getElementById('toggleNetworkLinks');
@@ -525,72 +591,6 @@ const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
         }
       
     }
-
-  const heatmapLayer = {
-  id: 'heatmap-layer',
-  type: 'heatmap',
-  source: 'heatmap-source',
-  minzoom: 12,
-  maxzoom: 20,
-  paint: {
-
-    'heatmap-weight': 5,
-    // Heatmap intensity range
-    'heatmap-intensity': 1,
-    // Heatmap color gradient
-    'heatmap-color': [
-      'interpolate',
-      ['linear'],
-      ['heatmap-density'],
-      0, 'rgba(0, 0, 255, 0)', // adjust the color gradient as needed
-      0.2, 'rgba(255, 0, 0, 1)',
-      0.4, 'rgba(255, 165, 0, 1)',
-      0.6, 'rgba(255, 255, 0, 1)',
-      0.8, 'rgba(0, 255, 0, 1)'
-    ],
-    // Heatmap radius
-    'heatmap-radius': {
-        stops: [
-          [9, 2],
-          [11, 10],
-          [13, 20],
-          [15, 100],
-          [17, 200],
-          [19, 500],
-          [23, 1000]
-        ]
-      },
-    // Heatmap opacity
-    'heatmap-opacity': {
-        default: 1,
-        stops: [
-          [14, 0.5],
-          [20, 0.2]
-        ]
-    }
-  },
-  visibility: 'none'
-};
-
-fetch('https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_geojson')
-    .then(response => response.json())
-    .then(data => {
-      // Filter features by the "type" property
-      const filteredData = data.features.filter(feature => feature.properties.type === 'RH' || feature.properties.type === 'MN' || feature.properties.type === 'LB');
-
-      // Create a new GeoJSON object with the filtered features
-      const filteredGeoJSON = {
-        type: 'FeatureCollection',
-        features: filteredData
-      };
-
-      map.addSource('heatmap-source', {
-        type: 'geojson',
-        data: filteredGeoJSON // Use the filtered GeoJSON data
-      });
-
-      map.addLayer(heatmapLayer);
-    });
 
 
 map.on('style.load', () => {
@@ -722,9 +722,9 @@ layer5Checkbox.addEventListener('change', () => {
 
 function toggleHeatmapLayer() {
   if (layer5Checkbox.checked) {
-    map.setLayoutProperty(heatmapLayer.id, 'visibility', 'visible');
+    map.setLayoutProperty('heatmap-layer', 'visibility', 'visible');
   } else {
-    map.setLayoutProperty(heatmapLayer.id, 'visibility', 'none');
+    map.setLayoutProperty('heatmap-layer', 'visibility', 'none');
   }
 }
 
