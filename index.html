@@ -121,7 +121,7 @@
 
     // Add the GeoJSON layers to the map
     
-    map.on('load', () => {
+    map.on('load', async() => {
         // fetch datasources
         // networkpoints 
         const networkpoints_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_geojson'
