@@ -1,33 +1,880 @@
 {
-"type": "FeatureCollection",
-"name": "level1",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 1, "qc_id_2": 0, "name_2": "104 W Dauphin St. Free Library Kensington South West corner", "description_2": null, "hs_id_2": "00001", "rt_id": "00001" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.132650070109037, 39.984635678901576, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 3, "qc_id_2": 2, "name_2": "114 Diamond St - Dave", "description_2": null, "hs_id_2": "00001", "rt_id": "00003" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.133700155680245, 39.981624992030234, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 4, "qc_id_2": 3, "name_2": "120 Diamond St - Tony's bar Halftime Goodtimes\n", "description_2": null, "hs_id_2": "00001", "rt_id": "00004" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.134098255125537, 39.98161118511306, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 5, "qc_id_2": 4, "name_2": "2119 N 2nd St - Sarah from Free Library Kensington branch\n", "description_2": null, "hs_id_2": "00001", "rt_id": "00005" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.136583772857549, 39.982651573070335, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 6, "qc_id_2": 5, "name_2": "2136 N Hancock St - Adan at West Kensington Ministries\n", "description_2": null, "hs_id_2": "00001", "rt_id": "00006" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.13566892290838, 39.983271038900781, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 7, "qc_id_2": 6, "name_2": "2141 N Howard St - NSNP", "description_2": null, "hs_id_2": "00001", "rt_id": "00007" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.133518364604058, 39.982918239939245, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 8, "qc_id_2": 7, "name_2": "2311 N Howard St. - Liz", "description_2": null, "hs_id_2": "00001", "rt_id": "00008" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.133053867490588, 39.985231188031328, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 9, "qc_id_2": 8, "name_2": "2248 Palethorp St - NSNP Las Parcelas", "description_2": null, "hs_id_2": "00001", "rt_id": "00009" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.135972828786194, 39.984679462317636, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 10, "qc_id_2": 9, "name_2": "147 Susquehannah - NSCA ", "description_2": null, "hs_id_2": "00001", "rt_id": "00010" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.134761683489785, 39.98364139237561, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 11, "qc_id_2": 10, "name_2": "2114-2116 Hancock St - NSCA ", "description_2": null, "hs_id_2": "00001", "rt_id": "00011" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.135881687183883, 39.98263061858335, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 12, "qc_id_2": 11, "name_2": "2130 N Hancock St - PW customer", "description_2": "This access point Mark Steckel created as a first node of wifi to the park. Not sure if it will mesh with our APs well", "hs_id_2": "00001", "rt_id": "00012" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.13575351255372, 39.98305636375003, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 13, "qc_id_2": 12, "name_2": "2024 N 4th St", "description_2": null, "hs_id_2": "00001", "rt_id": "00013" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.140677878635771, 39.981866101880129, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 14, "qc_id_2": 13, "name_2": "2141 N 2nd St", "description_2": null, "hs_id_2": "00001", "rt_id": "00014" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.136443665506633, 39.983133861482209, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 15, "qc_id_2": 13, "name_2": "1425 N American St", "description_2": null, "hs_id_2": "00001", "rt_id": "00015" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.139688958539637, 39.97349688159165, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 16, "qc_id_2": 15, "name_2": "1941 N Lawrence St - Iglesias Gardens / Angel\n", "description_2": null, "hs_id_2": "00001", "rt_id": "00016" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.141545277963559, 39.980856201234204, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 17, "qc_id_2": 16, "name_2": "137 Susquehannah", "description_2": null, "hs_id_2": "00001", "rt_id": "00017" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.134312043103236, 39.983589007087851, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 18, "qc_id_2": 17, "name_2": "1030 Mascher St", "description_2": null, "hs_id_2": "00001", "rt_id": "00018" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.135212013111243, 39.981252205266429, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 19, "qc_id_2": 18, "name_2": "Lillian Marrero Library", "description_2": null, "hs_id_2": "00001", "rt_id": "00019" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.142490153434181, 39.992774586652573, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Jasper Studios", "description": "2000 N 2nd St", "hs_id": "00002", "fid_2": 20, "qc_id_2": 19, "name_2": "Prevention Point", "description_2": null, "hs_id_2": "00001", "rt_id": "00029" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.118189203737955, 39.992775343026445, 0.0 ], [ -75.119642856340434, 39.992737850982621, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 21, "qc_id_2": 20, "name_2": "700 W Cambria St", "description_2": null, "hs_id_2": "00001", "rt_id": "00021" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.143287146052955, 39.99554622296283, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 21, "qc_id_2": 20, "name_2": "541 W Lehigh St", "description_2": null, "hs_id_2": "00001", "rt_id": "00021" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.141801970282103, 39.992559650682836, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 22, "qc_id_2": 24, "name_2": "NSCA Children's Center", "description_2": null, "hs_id_2": "00001", "rt_id": "00025" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.134799091242797, 39.980496280028184, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "J-centrel Apartments", "description": "2000 N 2nd St", "hs_id": "00003", "fid_2": 22, "qc_id_2": 24, "name_2": "Kensington Corridor Trust Gardens", "description_2": null, "hs_id_2": "00001", "rt_id": "00025" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.108738865930619, 39.999513390001866, 0.0 ], [ -75.111688669547846, 39.997609121573547, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 22, "qc_id_2": 24, "name_2": "Taller Puertoriqueno", "description_2": null, "hs_id_2": "00001", "rt_id": "00025" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.140752193072373, 39.990895803739271, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 22, "qc_id_2": 24, "name_2": "1919 Waterloo St", "description_2": null, "hs_id_2": "00001", "rt_id": "00025" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.134803587257849, 39.979428036102512, 0.0 ] ] } },
-{ "type": "Feature", "properties": { "fid": 1, "qc_id": 0, "name": "Gotham Tower", "description": "2000 N 2nd St", "hs_id": "00001", "fid_2": 22, "qc_id_2": 24, "name_2": "Casa Caribe", "description_2": null, "hs_id_2": "00001", "rt_id": "00025" }, "geometry": { "type": "LineString", "coordinates": [ [ -75.1373393, 39.9813486, 0.0 ], [ -75.132439406734051, 39.999184790865428, 0.0 ] ] } }
-]
+    "type": "FeatureCollection",
+    "name": "level1",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 1,
+                "qc_id_2": 0,
+                "name_2": "104 W Dauphin St. Free Library Kensington South West corner",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00001"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.132650070109037,
+                        39.984635678901576,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 3,
+                "qc_id_2": 2,
+                "name_2": "114 Diamond St - Dave",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00003"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.133700155680245,
+                        39.981624992030234,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 4,
+                "qc_id_2": 3,
+                "name_2": "120 Diamond St - Tony's bar Halftime Goodtimes\n",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00004"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.134098255125537,
+                        39.98161118511306,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 5,
+                "qc_id_2": 4,
+                "name_2": "2119 N 2nd St - Sarah from Free Library Kensington branch\n",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00005"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.136583772857549,
+                        39.982651573070335,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 6,
+                "qc_id_2": 5,
+                "name_2": "2136 N Hancock St - Adan at West Kensington Ministries\n",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00006"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.13566892290838,
+                        39.983271038900781,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 7,
+                "qc_id_2": 6,
+                "name_2": "2141 N Howard St - NSNP",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00007"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.133518364604058,
+                        39.982918239939245,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 8,
+                "qc_id_2": 7,
+                "name_2": "2311 N Howard St. - Liz",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00008"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.133053867490588,
+                        39.985231188031328,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 9,
+                "qc_id_2": 8,
+                "name_2": "2248 Palethorp St - NSNP Las Parcelas",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00009"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.135972828786194,
+                        39.984679462317636,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 10,
+                "qc_id_2": 9,
+                "name_2": "147 Susquehannah - NSCA ",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00010"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.134761683489785,
+                        39.98364139237561,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 11,
+                "qc_id_2": 10,
+                "name_2": "2114-2116 Hancock St - NSCA ",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00011"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.135881687183883,
+                        39.98263061858335,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 12,
+                "qc_id_2": 11,
+                "name_2": "2130 N Hancock St - PW customer",
+                "description_2": "This access point Mark Steckel created as a first node of wifi to the park. Not sure if it will mesh with our APs well",
+                "hs_id_2": "00001",
+                "rt_id": "00012"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.13575351255372,
+                        39.98305636375003,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 13,
+                "qc_id_2": 12,
+                "name_2": "2024 N 4th St",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00013"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.140677878635771,
+                        39.981866101880129,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 14,
+                "qc_id_2": 13,
+                "name_2": "2141 N 2nd St",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00014"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.136443665506633,
+                        39.983133861482209,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 15,
+                "qc_id_2": 13,
+                "name_2": "1425 N American St",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00015"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.139688958539637,
+                        39.97349688159165,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 16,
+                "qc_id_2": 15,
+                "name_2": "1941 N Lawrence St - Iglesias Gardens / Angel\n",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00016"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.141545277963559,
+                        39.980856201234204,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 17,
+                "qc_id_2": 16,
+                "name_2": "137 Susquehannah",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00017"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.134312043103236,
+                        39.983589007087851,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 18,
+                "qc_id_2": 17,
+                "name_2": "1030 Mascher St",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00018"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.135212013111243,
+                        39.981252205266429,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 19,
+                "qc_id_2": 18,
+                "name_2": "Lillian Marrero Library",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00019"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.142490153434181,
+                        39.992774586652573,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Jasper Studios",
+                "description": "2000 N 2nd St",
+                "hs_id": "00002",
+                "fid_2": 20,
+                "qc_id_2": 19,
+                "name_2": "Prevention Point",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00029"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.118189203737955,
+                        39.992775343026445,
+                        0.0
+                    ],
+                    [
+                        -75.119642856340434,
+                        39.992737850982621,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 21,
+                "qc_id_2": 20,
+                "name_2": "700 W Cambria St",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00021"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.143287146052955,
+                        39.99554622296283,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 21,
+                "qc_id_2": 20,
+                "name_2": "541 W Lehigh St",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00021"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.141801970282103,
+                        39.992559650682836,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 22,
+                "qc_id_2": 24,
+                "name_2": "NSCA Children's Center",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00025"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.134799091242797,
+                        39.980496280028184,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "J-centrel Apartments",
+                "description": "2000 N 2nd St",
+                "hs_id": "00003",
+                "fid_2": 22,
+                "qc_id_2": 24,
+                "name_2": "Kensington Corridor Trust Gardens",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00025"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.108738865930619,
+                        39.999513390001866,
+                        0.0
+                    ],
+                    [
+                        -75.111688669547846,
+                        39.997609121573547,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 22,
+                "qc_id_2": 24,
+                "name_2": "Taller Puertoriqueno",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00025"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.140752193072373,
+                        39.990895803739271,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 22,
+                "qc_id_2": 24,
+                "name_2": "1919 Waterloo St",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00025"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.134803587257849,
+                        39.979428036102512,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Gotham Tower",
+                "description": "2000 N 2nd St",
+                "hs_id": "00001",
+                "fid_2": 22,
+                "qc_id_2": 24,
+                "name_2": "Casa Caribe",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00025"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.1373393,
+                        39.9813486,
+                        0.0
+                    ],
+                    [
+                        -75.132439406734051,
+                        39.999184790865428,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "Jasper Studios",
+                "description": "2000 N 2nd St",
+                "hs_id": "00002",
+                "fid_2": 24,
+                "qc_id_2": 24,
+                "name_2": "New Kensington CDC (NKCDC)",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00025"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.118189203737955,
+                        39.992775343026445,
+                        0.0
+                    ],
+                    [
+                        -75.122298,
+                        39.990319,
+                        0.0
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "qc_id": 0,
+                "name": "J-centrel Apartments",
+                "description": "2000 N 2nd St",
+                "hs_id": "00003",
+                "fid_2": 22,
+                "qc_id_2": 24,
+                "name_2": "Zerbe Artz",
+                "description_2": null,
+                "hs_id_2": "00001",
+                "rt_id": "00025"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.108738865930619,
+                        39.999513390001866,
+                        0.0
+                    ],
+                    [
+                        -75.110491,
+                        39.998280,
+                        0.0
+                    ]
+                ]
+            }
+        }
+    ]
 }
