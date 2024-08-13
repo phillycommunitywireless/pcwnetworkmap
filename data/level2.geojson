@@ -1030,6 +1030,37 @@
                     ]
                 ]
             }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": null,
+                "qc_id": null,
+                "name": null,
+                "description": null,
+                "hs_id": null,
+                "rt_id": null,
+                "fid_2": null,
+                "qc_id_2": null,
+                "name_2": null,
+                "description_2": null,
+                "rt_id_2": null
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -75.122808,
+                        39.990356,
+                        0.0
+                    ],
+                    [
+                        -75.124185,
+                        39.990349,
+                        0.0
+                    ]
+                ]
+            }
         }
     ]
 }
