@@ -2,6 +2,8 @@
 
 This map of PCW's network coverage is built with MapBox via Jekyll.
 
+The live deploy of the map is availabe here - https://phillycommunitywireless.github.io/pcwnetworkmap/
+
 # Local Development 
 You can run this site locally in a container using Docker
 * clone the repo with `git clone`
