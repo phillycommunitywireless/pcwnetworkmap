@@ -16,6 +16,7 @@
 </head>
 
 <body>
+  <div id="loading">Loading...</div>
   <div id="map">
     <div id="right" class="sidebar flex-center right collapsed">
       <div class="sidebar-content rounded-rect flex-center">
@@ -152,7 +153,7 @@
       { imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png', id: 'RH_icon' },
       { imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png', id: 'MN_icon' },
       { imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png', id: 'LB_icon' },
-    ]
+    ];
 
     Promise.all(
       images.map(img => new Promise((resolve, reject) => {
@@ -215,7 +216,15 @@
       ]
 
       // wait for all promises to resolve before adding data to Sources
-      const [networkpoints_data, level1_data, level2_data, level3_data] = await Promise.all(fetch_promises)
+      const [networkpoints_data, level1_data, level2_data, level3_data] = await Promise.all(fetch_promises);
+
+      // hide loading message now that all data has been fetched
+      const loadingMessage = document.querySelector('#loading');
+      if (loadingMessage) {
+        // This if statement should always be true, but this avoids crashing the site if somehow the element
+        // has been removed.
+        loadingMessage.style.display = 'none';
+      }
 
       map.addSource('network-points', {
         type: 'geojson',

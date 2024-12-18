@@ -1,4 +1,14 @@
-body { margin: 0; padding: 0; }
+html { height: 100%; }
+
+body {
+  margin: 0;
+  padding: 0;
+
+  /* Needed to easily vertically center the loading message */
+  display: flex;
+  height: 100%;
+}
+
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 
 .layer-icon {
@@ -101,5 +111,15 @@ body { margin: 0; padding: 0; }
 
 .bookmarks div[style*="font-weight: bold"] {
   margin-top: 10px; /* Adjust this value to increase/decrease the space */
+}
+
+#loading {
+  /* Chosen to contrast with the sidebar colors, since it's rendered above the sidebar on small enough viewports. */
+  background: white;
+
+  border-radius: 4px;
+  padding: 1rem;
+  margin: auto;
+  z-index: 999; /** Needs to be larger than the map, sidebar, and other future elements. */
 }
 
