@@ -172,13 +172,19 @@
     map.on('load', async () => {
       // fetch datasources
       // networkpoints 
-      const networkpoints_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_geojson'
+      // const networkpoints_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_geojson'
       // layer1 
-      const level1_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level1'
+      // const level1_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level1'
       // layer2 
-      const level2_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level2'
+      // const level2_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level2'
       // layer3 
-      const level3_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level3'
+      // const level3_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level3'
+
+      // new and faster!
+      const networkpoints_url = "https://pcwnetworkmap-internal-api-170f675937bb.herokuapp.com/get_networkpoints"
+      const level1_url = "https://pcwnetworkmap-internal-api-170f675937bb.herokuapp.com/get_level1"
+      const level2_url = "https://pcwnetworkmap-internal-api-170f675937bb.herokuapp.com/get_level2"
+      const level3_url = "https://pcwnetworkmap-internal-api-170f675937bb.herokuapp.com/get_level3"
 
       // define promises for data to fetch
       fetch_promises = [
