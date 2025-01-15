@@ -1,5 +1,6 @@
 import { toggleSidebar } from '/js/bind-elements.js';
 import initHeatmap from '/js/init-heatmap.js';
+import loadNeighborhoodsLayer from '/js/neighborhoods-layer.js';
 import { loadNetworkLayers, loadNetworkPoints } from '/js/network-layers.js';
 
 export default () => {
@@ -13,6 +14,7 @@ export default () => {
 		}
 
 		loadNetworkLayers();
+		loadNeighborhoodsLayer();
 
 		// Create heatmap based on features' "type" property
 		initHeatmap(network_points_data);
