@@ -1,4 +1,4 @@
-import { fetchJSON } from "/js/util.js";
+import { fetchJSON } from "./util.js";
 
 export const loadNetworkLayer = async (endpoint, name) => {
 	const api_endpoint =
