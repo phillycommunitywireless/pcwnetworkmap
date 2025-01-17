@@ -47,10 +47,13 @@ export default async () => {
 	let currentPopup = null;
 	let currentFeatureId = null;
 	const cleanupPopup = () => {
-		currentPopup.remove();
+		currentPopup?.remove();
 		currentPopup = null;
 		currentFeatureId = null;
 	};
+
+	map.on('close-income-popup', cleanupPopup);
+
 	const handlePopup = (e) => {
 		const [feature] = map.queryRenderedFeatures(e.point, {
 			layers: ['income-layer'],
@@ -78,8 +81,6 @@ export default async () => {
 					currentPopup.on('close', () => {
 						currentPopup = null;
 					});
-
-					map.on('close-income-popup', cleanupPopup);
 
 					currentPopup.addTo(map);
 				}
