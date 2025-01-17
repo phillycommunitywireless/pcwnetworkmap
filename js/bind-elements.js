@@ -86,6 +86,14 @@ export default () => {
 				map.fire('close-income-popup');
 			}
 		});
+		
+		document
+		.getElementById('show-income-popup')
+		.addEventListener('change', function () {
+			if (!this.checked) {
+				map.fire('close-income-popup');
+			}
+		});
 
 	// navigation bindings
 	const norrisSq = 'norris_square';

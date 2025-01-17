@@ -64,6 +64,10 @@ export default async () => {
 				console.warn("couldn't match expression for zoneId");
 			}
 
+			if (!document.getElementById('show-income-popup').checked) {
+				return;
+			}
+
 			if (currentFeatureId !== featureId) {
 				const featureCentroid = centroidDict[featureId];
 				if (!currentPopup) {
@@ -103,7 +107,9 @@ export default async () => {
 	map.on('touchstart', 'income-layer', handlePopup);
 	map.on('mouseleave', 'income-layer', (e) => {
 		// close any open popup on leaving the parent layer
-		const features = map.queryRenderedFeatures(e.point, {layers: ["income-layer"]});
+		const features = map.queryRenderedFeatures(e.point, {
+			layers: ['income-layer'],
+		});
 		if (!features.length) {
 			map.fire('close-income-popup');
 		}
