@@ -83,6 +83,19 @@ export default () => {
 			});
 		});
 
+	document
+		.getElementById('income-blocks')
+		.addEventListener('change', function () {
+			map.setLayoutProperty(
+				'income-layer',
+				'visibility',
+				this.checked ? 'visible' : 'none'
+			);
+			if (!this.checked) {
+				map.fire('close-income-popup');
+			}
+		});
+
 	// navigation bindings
 	const norrisSq = 'norris_square';
 	const norrisSqBtn = document.getElementById(norrisSq);

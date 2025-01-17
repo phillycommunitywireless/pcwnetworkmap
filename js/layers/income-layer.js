@@ -12,7 +12,6 @@ const currencyFormatter = Intl.NumberFormat('en-US', {
 	trailingZeroDisplay: 'stripIfInteger',
 });
 
-let showSecond = false;
 export default async () => {
 	const data_url = '/data/income-inequality.geojson';
 	const data = await fetchJSON(data_url);
@@ -35,9 +34,9 @@ export default async () => {
 		id: 'income-layer',
 		type: 'fill',
 		source: 'income-source',
-		// layout: {
-		// 	visibility: 'none',
-		// },
+		layout: {
+			visibility: 'none',
+		},
 		paint: {
 			'fill-color': colorExpression,
 			'fill-opacity': 0.25,
@@ -47,13 +46,12 @@ export default async () => {
 
 	let currentPopup = null;
 	let currentFeatureId = null;
+	const cleanupPopup = () => {
+		currentPopup.remove();
+		currentPopup = null;
+		currentFeatureId = null;
+	};
 	const handlePopup = (e) => {
-		if (showSecond) {
-			debugger;
-		}
-		if (!showSecond) {
-			showSecond = true;
-		}
 		const [feature] = map.queryRenderedFeatures(e.point, {
 			layers: ['income-layer'],
 		});
@@ -76,6 +74,9 @@ export default async () => {
 					currentPopup.on('close', () => {
 						currentPopup = null;
 					});
+
+					map.on('close-income-popup', cleanupPopup);
+
 					currentPopup.addTo(map);
 				}
 
@@ -92,9 +93,7 @@ export default async () => {
 				currentFeatureId = featureId;
 			}
 		} else if (!feature && currentFeatureId && currentPopup) {
-			currentPopup.remove();
-			currentPopup = null;
-			currentFeatureId = null;
+			cleanupPopup();
 		}
 
 		map.getCanvas().style.cursor = feature ? 'pointer' : '';
