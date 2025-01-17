@@ -1,7 +1,7 @@
 import {
 	initAnimateNetworkLine,
 	loadNetworkLayer,
-} from '/js/network-layers.util.js';
+} from '/js/layers/network-layers.util.js';
 
 export const loadNetworkPoints = async () => {
 	const network_points_data = await loadNetworkLayer(

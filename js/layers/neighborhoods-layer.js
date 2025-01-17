@@ -1,39 +1,5 @@
-import { fetchJSON } from '/js/util.js';
+import { createColorExpression, fetchJSON } from '/js/util.js';
 
-function getRandomColor() {
-	var letters = '0123456789ABCDEF';
-	var color = '#';
-	for (var i = 0; i < 6; i++) {
-		color += letters[Math.floor(Math.random() * 16)];
-	}
-	return color;
-}
-const createColorExpression = (data) => {
-	const colorExpression = ['match', ['get', 'cartodb_id']];
-	data.features.forEach((feature) => {
-		const id = feature.properties.cartodb_id;
-		// Generate random hex color
-		const color = '#000000'.replace(/0/g, () =>
-			(~~(Math.random() * 16)).toString(16)
-		);
-		colorExpression.push(Number(id), color);
-	});
-	colorExpression.push('#000000'); // to handle "undefined"
-	return colorExpression;
-};
-const generateCentroids = (geojsonData) => {
-	return geojsonData.features.map((feature) => {
-		const centroid = turf.centroid(feature);
-		return {
-			type: 'Feature',
-			properties: {
-				id: feature.properties.cartodb_id,
-				label: feature.properties.name,
-			},
-			geometry: centroid.geometry,
-		};
-	});
-};
 export default async () => {
 	const data_url =
 		'https://raw.githubusercontent.com/blackmad/neighborhoods/refs/heads/master/philadelphia.geojson';
