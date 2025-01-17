@@ -22,6 +22,9 @@ export default () => {
 
 		// Create heatmap based on features' "type" property
 		initHeatmap(network_points_data);
-		toggleSidebar();
+
+		if (document.body.clientWidth > 500) {
+			toggleSidebar();
+		}
 	});
 };
