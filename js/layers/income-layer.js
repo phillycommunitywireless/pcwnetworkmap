@@ -101,4 +101,11 @@ export default async () => {
 
 	map.on('mousemove', 'income-layer', handlePopup);
 	map.on('touchstart', 'income-layer', handlePopup);
+	map.on('mouseleave', 'income-layer', (e) => {
+		// close any open popup on leaving the parent layer
+		const features = map.queryRenderedFeatures(e.point, {layers: ["income-layer"]});
+		if (!features.length) {
+			map.fire('close-income-popup');
+		}
+	});
 };
