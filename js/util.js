@@ -43,7 +43,7 @@ export const createRangeColorExpression = (
 	return [
 		'interpolate',
 		['linear'],
-		['get', data_id],
+		['to-number', ['get', data_id]],
 		minIncome,
 		minColor,
 		maxIncome,
@@ -59,7 +59,7 @@ export const createRangeColorExpression = (
  * @returns {string[]}
  */
 export const createRandomColorExpression = (data, data_id) => {
-	const colorExpression = ['match', ['get', data_id]];
+	const colorExpression = ['match', ['to-number', ['get', data_id]]];
 	if (!data?.features?.[0]?.properties?.[data_id]) {
 		throw ReferenceError("feature data doesn't contain the expected data_id");
 	}
