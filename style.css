@@ -37,8 +37,13 @@ body {
   margin-right: 1px; /* Add margin to the right */
 }
 
-.switch-container div:last-child {
-  margin-left: 1px; /* Add margin to the left for the text */
+/* override "top" value of 3px for aligning with switch text */
+.switch {
+  top: unset
+}
+
+.ms-small { 
+  margin-left: 0.25rem;
 }
 
 .popup-image-container {
