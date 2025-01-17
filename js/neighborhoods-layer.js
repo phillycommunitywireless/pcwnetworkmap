@@ -1,4 +1,4 @@
-import { fetchJSON } from './js/util.js';
+import { fetchJSON } from './util.js';
 
 function getRandomColor() {
 	var letters = '0123456789ABCDEF';
