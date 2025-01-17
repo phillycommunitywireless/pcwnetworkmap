@@ -128,3 +128,9 @@ body {
   z-index: 999; /** Needs to be larger than the map, sidebar, and other future elements. */
 }
 
+
+/* mapbox overrides */
+button.mapboxgl-popup-close-button {
+  padding: 4px 8px;
+  font-size: 24px;
+}

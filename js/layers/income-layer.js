@@ -1,8 +1,26 @@
-import { createRangeColorExpression, fetchJSON } from '../util.js';
+import {
+	createRangeColorExpression,
+	fetchJSON,
+	generateCentroids,
+} from '../util.js';
 
+const getZoneId = (feature) =>
+	feature.properties.name.match(/^([A-Z0-9]+),\s/)?.[1];
+const currencyFormatter = Intl.NumberFormat('en-US', {
+	style: 'currency',
+	currency: 'USD',
+	trailingZeroDisplay: 'stripIfInteger',
+});
+
+let showSecond = false;
 export default async () => {
 	const data_url = '/data/income-inequality.geojson';
 	const data = await fetchJSON(data_url);
+	const centroids = generateCentroids(data, 'spatial_id', getZoneId);
+	const centroidDict = centroids.reduce((acc, c) => {
+		acc[c.properties.id] = c;
+		return acc;
+	}, {});
 	const colorExpression = createRangeColorExpression(
 		data,
 		'median_household_income'
@@ -12,6 +30,7 @@ export default async () => {
 		type: 'geojson',
 		data,
 	});
+
 	map.addLayer({
 		id: 'income-layer',
 		type: 'fill',
@@ -28,7 +47,13 @@ export default async () => {
 
 	let currentPopup = null;
 	let currentFeatureId = null;
-	map.on('mousemove', 'income-layer', function (e) {
+	const handlePopup = (e) => {
+		if (showSecond) {
+			debugger;
+		}
+		if (!showSecond) {
+			showSecond = true;
+		}
 		const [feature] = map.queryRenderedFeatures(e.point, {
 			layers: ['income-layer'],
 		});
@@ -42,9 +67,11 @@ export default async () => {
 			}
 
 			if (currentFeatureId !== featureId) {
+				const featureCentroid = centroidDict[featureId];
 				if (!currentPopup) {
 					currentPopup = new mapboxgl.Popup({
 						anchor: 'bottom',
+						closeOnClick: false,
 					});
 					currentPopup.on('close', () => {
 						currentPopup = null;
@@ -52,10 +79,15 @@ export default async () => {
 					currentPopup.addTo(map);
 				}
 
-				currentPopup.setLngLat(e.lngLat).setHTML(
-					`<strong>ID:</strong> ${zoneId}<br>
-                     <strong>Median Household Income:</strong> ${incomeValue}`
-				);
+				const formattedIncome = currencyFormatter.format(incomeValue);
+				currentPopup
+					.setLngLat(featureCentroid?.geometry.coordinates || e.lngLat)
+					.setHTML(
+						`<strong>ID:</strong> ${zoneId}<br>
+                     <strong>Median Household Income:</strong> ${
+												incomeValue ? formattedIncome : 'Unknown'
+											}`
+					);
 
 				currentFeatureId = featureId;
 			}
@@ -66,5 +98,8 @@ export default async () => {
 		}
 
 		map.getCanvas().style.cursor = feature ? 'pointer' : '';
-	});
+	};
+
+	map.on('mousemove', 'income-layer', handlePopup);
+	map.on('touchstart', 'income-layer', handlePopup);
 };

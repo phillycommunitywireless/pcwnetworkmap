@@ -102,19 +102,24 @@ export const createRandomColorExpression = (data, data_id) => {
  *
  * @param {GeoJSON} data
  * @param {string} data_id
+ * @param {string | (feature: FeatureData) => string} label_ref - if a string, provide the key within the properties obj
  * @returns {FeatureData}
  */
-export const generateCentroids = (data, data_id) => {
+export const generateCentroids = (data, data_id, label_ref) => {
 	if (!data?.features?.[0]?.properties?.[data_id]) {
 		throw ReferenceError("feature data doesn't contain the expected data_id");
 	}
 	return data.features.map((feature) => {
 		const centroid = turf.centroid(feature);
+		const label =
+			typeof label_ref === 'string'
+				? feature.properties[label_ref]
+				: label_ref(feature);
 		return {
 			type: 'Feature',
 			properties: {
-				id: feature.properties.data_id,
-				label: feature.properties.name,
+				id: feature.properties[data_id],
+				label,
 			},
 			geometry: centroid.geometry,
 		};
