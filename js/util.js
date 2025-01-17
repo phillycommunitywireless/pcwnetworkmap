@@ -2,7 +2,7 @@ export const fetchJSON = (url) => fetch(url).then((r) => r.json());
 
 /**
  * Generates randomized hex colors
- * 
+ *
  * @returns {string}
  */
 export const getRandomColor = () => {
@@ -15,16 +15,53 @@ export const getRandomColor = () => {
 };
 
 /**
- * Generates centroid from geojson data for use as label anchors, etc.
+ * Generates a random color from geojson data for 'fill-color' prop
  *
- * @param {GeoJSON} data 
- * @param {string} data_id 
- * @returns {string[]} 
+ * @param {GeoJSON} data
+ * @param {string} data_id
+ * @param {string} [minColor] - default red
+ * @param {string} [maxColor] - default blue
+ * @returns {string[]}
  */
-export const createColorExpression = (data, data_id) => {
+export const createRangeColorExpression = (
+	data,
+	data_id,
+	minColor = '#ff0000',
+	maxColor = '#0000ff'
+) => {
+	if (!data?.features?.[0]?.properties?.[data_id]) {
+		throw new ReferenceError(
+			"Feature data doesn't contain the expected data_id"
+		);
+	}
+	const incomeValues = data.features.map(
+		(feature) => feature.properties[data_id]
+	);
+	const minIncome = Math.min(...incomeValues);
+	const maxIncome = Math.max(...incomeValues);
+
+	return [
+		'interpolate',
+		['linear'],
+		['get', data_id],
+		minIncome,
+		minColor,
+		maxIncome,
+		maxColor,
+	];
+};
+
+/**
+ * Generates a random color from geojson data for 'fill-color' prop
+ *
+ * @param {GeoJSON} data
+ * @param {string} data_id
+ * @returns {string[]}
+ */
+export const createRandomColorExpression = (data, data_id) => {
 	const colorExpression = ['match', ['get', data_id]];
-	if (!data?.features?.[0]?.[data_id]) {
-		throw ReferenceError("feature data doesn't contain the expected data_id")
+	if (!data?.features?.[0]?.properties?.[data_id]) {
+		throw ReferenceError("feature data doesn't contain the expected data_id");
 	}
 	data.features.forEach((feature) => {
 		const id = feature.properties[data_id];
@@ -38,17 +75,16 @@ export const createColorExpression = (data, data_id) => {
 	return colorExpression;
 };
 
-
 /**
  * Generates centroid from geojson data for use as label anchors, etc.
  *
- * @param {GeoJSON} data 
- * @param {string} data_id 
- * @returns {FeatureData} 
+ * @param {GeoJSON} data
+ * @param {string} data_id
+ * @returns {FeatureData}
  */
 export const generateCentroids = (data, data_id) => {
-	if (!data?.features?.[0]?.[data_id]) {
-		throw ReferenceError("feature data doesn't contain the expected data_id")
+	if (!data?.features?.[0]?.properties?.[data_id]) {
+		throw ReferenceError("feature data doesn't contain the expected data_id");
 	}
 	return data.features.map((feature) => {
 		const centroid = turf.centroid(feature);
