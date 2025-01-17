@@ -1,4 +1,4 @@
-import { NavBookmarks } from '/js/const.js';
+import { NavBookmarks } from './js/const.js';
 
 export const toggleSidebar = () => {
 	const sidebar = document.getElementById('right-sidebar');
