@@ -1,11 +1,12 @@
-import { createColorExpression, fetchJSON } from '../util.js';
+import { createRandomColorExpression, fetchJSON, generateCentroids } from '../util.js';
 
 export default async () => {
 	const data_url =
 		'https://raw.githubusercontent.com/blackmad/neighborhoods/refs/heads/master/philadelphia.geojson';
 	const data = await fetchJSON(data_url);
-	const centroids = generateCentroids(data);
-	const colorExpression = createColorExpression(data);
+	console.log(data);
+	const centroids = generateCentroids(data, 'cartodb_id');
+	const colorExpression = createRandomColorExpression(data, 'cartodb_id');
 
 	map.addSource('neighborhood-source', {
 		type: 'geojson',
