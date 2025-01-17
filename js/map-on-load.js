@@ -1,7 +1,8 @@
 import { toggleSidebar } from './bind-elements.js';
 import initHeatmap from './init-heatmap.js';
-import loadNeighborhoodsLayer from './neighborhoods-layer.js';
-import { loadNetworkLayers, loadNetworkPoints } from './network-layers.js';
+import loadIncomeLayer from './layers/income-layer.js';
+import loadNeighborhoodsLayer from './layers/neighborhoods-layer.js';
+import { loadNetworkLayers, loadNetworkPoints } from './layers/network-layers.js';
 
 export default () => {
 	map.on('load', async () => {
@@ -13,8 +14,11 @@ export default () => {
 			loadingMessage.style.display = 'none';
 		}
 
+		// load async layers
 		loadNetworkLayers();
 		loadNeighborhoodsLayer();
+		loadIncomeLayer();
+		// end async layers
 
 		// Create heatmap based on features' "type" property
 		initHeatmap(network_points_data);
