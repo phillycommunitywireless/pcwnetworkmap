@@ -1,4 +1,4 @@
-import { createRangeColorExpression, fetchJSON } from '/js/util.js';
+import { createRangeColorExpression, fetchJSON } from '../util.js';
 
 export default async () => {
 	const data_url = '/data/income-inequality.geojson';
