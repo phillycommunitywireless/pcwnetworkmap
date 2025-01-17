@@ -23,9 +23,9 @@ export default async () => {
 		},
 	});
 
-	// add polygon fill layer
+	// add fill layer
 	map.addLayer({
-		id: 'neighborhood-layer',
+		id: 'neighborhood-fill-layer',
 		type: 'fill',
 		source: 'neighborhood-source',
 		layout: {
@@ -34,6 +34,20 @@ export default async () => {
 		paint: {
 			'fill-color': colorExpression,
 			'fill-opacity': 0.25,
+		},
+		filter: ['==', '$type', 'Polygon'],
+	});
+	// add outline layer
+	map.addLayer({
+		id: 'neighborhood-outline-layer',
+		type: 'line',
+		source: 'neighborhood-source',
+		layout: {
+			visibility: 'none',
+		},
+		paint: {
+			'line-color': 'lightblue',
+			'line-width': 1,
 		},
 		filter: ['==', '$type', 'Polygon'],
 	});
