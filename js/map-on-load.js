@@ -1,6 +1,6 @@
-import { toggleSidebar } from '/js/bind-elements.js';
-import initHeatmap from '/js/init-heatmap.js';
-import { loadNetworkLayers, loadNetworkPoints } from '/js/network-layers.js';
+import { toggleSidebar } from './bind-elements.js';
+import initHeatmap from './init-heatmap.js';
+import { loadNetworkLayers, loadNetworkPoints } from './network-layers.js';
 
 export default () => {
 	map.on('load', async () => {
