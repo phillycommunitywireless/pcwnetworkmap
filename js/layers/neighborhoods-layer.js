@@ -8,7 +8,6 @@ export default async () => {
 	const data_url =
 		'https://raw.githubusercontent.com/blackmad/neighborhoods/refs/heads/master/philadelphia.geojson';
 	const data = await fetchJSON(data_url);
-	console.log(data);
 	const centroids = generateCentroids(data, 'cartodb_id');
 	const colorExpression = createRandomColorExpression(data, 'cartodb_id');
 
