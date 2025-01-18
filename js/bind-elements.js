@@ -1,6 +1,7 @@
 import {
-	toggleNeighborhoodLayer,
-	toggleNeighborhoodOutline,
+	setIncomeLayer,
+	setNeighborhoodLayer,
+	setNeighborhoodOutline,
 } from './bind-elements.util.js';
 import { NavBookmarks } from './const.js';
 
@@ -65,29 +66,22 @@ export default () => {
 	document
 		.getElementById('neighborhood-boundaries')
 		.addEventListener('click', function () {
-			toggleNeighborhoodLayer(this.checked);
+			setNeighborhoodLayer(this.checked);
 		});
 
 	document
 		.getElementById('neighborhood-outline-only')
 		.addEventListener('change', function () {
-			toggleNeighborhoodOutline(this.checked);
+			setNeighborhoodOutline(this.checked);
 		});
 
 	document
 		.getElementById('income-blocks')
 		.addEventListener('change', function () {
-			map.setLayoutProperty(
-				'income-layer',
-				'visibility',
-				this.checked ? 'visible' : 'none'
-			);
-			if (!this.checked) {
-				map.fire('close-income-popup');
-			}
+			setIncomeLayer(this.checked);
 		});
-		
-		document
+
+	document
 		.getElementById('show-income-popup')
 		.addEventListener('change', function () {
 			if (!this.checked) {

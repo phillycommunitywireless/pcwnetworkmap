@@ -1,26 +1,31 @@
-export const toggleNeighborhoodLayer = (showLayer) => {
-	const showOutline = document.getElementById(
-		'neighborhood-outline-only'
-	).checked;
-
-	if (showOutline) {
-		map.setLayoutProperty(
-			'neighborhood-outline-layer',
-			'visibility',
-			showLayer ? 'visible' : 'none'
-		);
-	} else {
-		map.setLayoutProperty(
-			'neighborhood-fill-layer',
-			'visibility',
-			showLayer ? 'visible' : 'none'
-		);
-	}
-
+/**
+ * @param {boolean} visible
+ */
+const setNeighborhoodFillViz = (visible) => {
+	map.setLayoutProperty(
+		'neighborhood-fill-layer',
+		'visibility',
+		visible ? 'visible' : 'none'
+	);
+};
+/**
+ * @param {boolean} visible
+ */
+const setNeighborhoodOutlineViz = (visible) => {
+	map.setLayoutProperty(
+		'neighborhood-outline-layer',
+		'visibility',
+		visible ? 'visible' : 'none'
+	);
+};
+/**
+ * @param {boolean} visible
+ */
+const setNeighborhoodLabelsViz = (visible) => {
 	map.setLayoutProperty(
 		'neighborhood-labels',
 		'visibility',
-		showLayer ? 'visible' : 'none'
+		visible ? 'visible' : 'none'
 	);
 
 	// trade places with map-generated neighborhood labels as they conflict visually
@@ -29,25 +34,76 @@ export const toggleNeighborhoodLayer = (showLayer) => {
 			map.setLayoutProperty(
 				layer.id,
 				'visibility',
-				showLayer ? 'none' : 'visible'
+				visible ? 'none' : 'visible'
 			);
 		}
 	});
 };
 
-export const toggleNeighborhoodOutline = (showOutline) => {
-	document.getElementById('neighborhood-boundaries').checked = true;
-	toggleNeighborhoodLayer(true);
+const setIncomeVisibility = (visible) => {
+	map.setLayoutProperty(
+		'income-layer',
+		'visibility',
+		visible ? 'visible' : 'none'
+	);
+};
 
-	if (showOutline) {
-		map.setLayoutProperty('neighborhood-fill-layer', 'visibility', 'none');
-		map.setLayoutProperty(
-			'neighborhood-outline-layer',
-			'visibility',
-			'visible'
-		);
+/**
+ * internally checks 'outline' checked state. could be passed, but eh.
+ *
+ * @param {boolean} showLayer
+ */
+export const setNeighborhoodLayer = (showLayer) => {
+	const showOutline = document.getElementById(
+		'neighborhood-outline-only'
+	).checked;
+
+	if (showLayer) {
+		if (showOutline) {
+			setNeighborhoodFillViz(false);
+			setNeighborhoodOutlineViz(true);
+		} else {
+			setNeighborhoodFillViz(true);
+			setNeighborhoodOutlineViz(false);
+		}
 	} else {
-		map.setLayoutProperty('neighborhood-fill-layer', 'visibility', 'visible');
-		map.setLayoutProperty('neighborhood-outline-layer', 'visibility', 'none');
+		setNeighborhoodFillViz(false);
+		setNeighborhoodOutlineViz(false);
+	}
+
+	setNeighborhoodLabelsViz(showLayer);
+};
+
+/**
+ * forces neighborhood layer on
+ * implicitly sets checked state
+ * @param {boolean} showLayer
+ */
+export const setNeighborhoodOutline = (showLayer) => {
+	if (showLayer) {
+		document.getElementById('neighborhood-boundaries').checked = true;
+	}
+	setNeighborhoodLayer(
+		document.getElementById('neighborhood-boundaries').checked
+	);
+};
+
+/**
+ * @param {boolean} showLayer
+ */
+export const setIncomeLayer = (showLayer) => {
+	setIncomeVisibility(showLayer);
+
+	const showNeighborhoods = document.getElementById(
+		'neighborhood-boundaries'
+	).checked;
+
+	if (showLayer && showNeighborhoods) {
+		document.getElementById('neighborhood-outline-only').checked = true;
+		setNeighborhoodOutline();
+	}
+
+	if (!showLayer) {
+		map.fire('close-income-popup');
 	}
 };
