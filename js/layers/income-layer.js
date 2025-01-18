@@ -12,6 +12,21 @@ const currencyFormatter = Intl.NumberFormat('en-US', {
 	trailingZeroDisplay: 'stripIfInteger',
 });
 
+const generateIncomeLabel = (feature, event) => {
+	const zoneId = feature.properties.name.match(/^([A-Z0-9]+),\s/)?.[1];
+	if (!zoneId) {
+		console.warn("couldn't match expression for zoneId");
+	}
+	let point = turf.point(event.lngLat.toArray());
+	const neighborhood = map
+		.getSource('neighborhood-source')
+		._data.features.find((feature) => {
+			return turf.booleanPointInPolygon(point, feature);
+		});
+	const useLabel = neighborhood?.properties.name || zoneId;
+	return useLabel;
+};
+
 export default async () => {
 	const data_url = '/data/income-inequality.geojson';
 	const data = await fetchJSON(data_url);
@@ -62,10 +77,6 @@ export default async () => {
 		if (feature) {
 			const incomeValue = feature.properties.median_household_income;
 			const featureId = feature.properties.spatial_id;
-			const zoneId = feature.properties.name.match(/^([A-Z0-9]+),\s/)?.[1];
-			if (!zoneId) {
-				console.warn("couldn't match expression for zoneId");
-			}
 
 			if (!document.getElementById('show-income-popup').checked) {
 				return;
@@ -85,14 +96,15 @@ export default async () => {
 					currentPopup.addTo(map);
 				}
 
-				const formattedIncome = currencyFormatter.format(incomeValue);
+				const useLabel = generateIncomeLabel(feature, e);
+				const formattedIncome = incomeValue
+					? currencyFormatter.format(incomeValue)
+					: 'Unknown';
 				currentPopup
 					.setLngLat(featureCentroid?.geometry.coordinates || e.lngLat)
 					.setHTML(
-						`<strong>ID:</strong> ${zoneId}<br>
-                     <strong>Median Household Income:</strong> ${
-												incomeValue ? formattedIncome : 'Unknown'
-											}`
+						`<strong>Area:</strong> ${useLabel}<br>
+                     <strong>Median Household Income:</strong> ${formattedIncome}`
 					);
 
 				currentFeatureId = featureId;
