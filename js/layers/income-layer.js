@@ -4,8 +4,8 @@ import {
 	fetchJSON,
 	generateCentroids,
 	generateLabelFromNeighborhood,
-	getZoneId
-} from '../util.js';
+	getZoneId,
+} from '../util/util.js';
 
 export default async () => {
 	const data_url = '/data/income-inequality.geojson';
@@ -39,6 +39,13 @@ export default async () => {
 		filter: ['==', '$type', 'Polygon'],
 	});
 
+	const managePopup = ({
+		baseLabel = 'income',
+		onCloseLabel = '',
+		popupLayerLabel = '',
+		popupCheckboxLabel = '',
+		popupHtml = () => ''
+	}) => {};
 	let currentPopup = null;
 	let currentFeatureId = null;
 	const cleanupPopup = () => {

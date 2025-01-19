@@ -2,7 +2,7 @@ import {
 	createRandomColorExpression,
 	fetchJSON,
 	generateCentroids,
-} from '../util.js';
+} from '../util/util.js';
 
 export default async () => {
 	const data_url =
