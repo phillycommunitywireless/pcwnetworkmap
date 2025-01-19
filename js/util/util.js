@@ -28,24 +28,27 @@ const getIntervals = (
 };
 
 /**
- * Generates a random color from geojson data for 'fill-color' prop
+ * Generates a linear, interpolated gradient from geojson data for `paint.fill-color`
  *
  * @param {GeoJSON} data
  * @param {string} value_id
- * @param {string} [undefColor] - default gray #80
- * @param {string[]} [colorSteps] - colorSteps, defaults red -> green
+ * @param {Object} param2
+ * @param {string} [param2.undefColor] - default gray #80
+ * @param {string[]} [param2.colorSteps] - colorSteps, defaults red -> green in 5 steps
  */
 export const createRangeColorExpression = (
 	data,
 	value_id,
-	undefColor = '#808080',
-	colorSteps = [
-		'#ff0000', // Red
-		'#ff8000', // Orange
-		'#ffff00', // Yellow
-		'#80ff00', // Light green
-		'#00ff00', // Green
-	]
+	{
+		undefColor = '#808080',
+		colorSteps = [
+			'#ff0000', // Red
+			'#ff8000', // Orange
+			'#ffff00', // Yellow
+			'#80ff00', // Light green
+			'#00ff00', // Green
+		],
+	}
 ) => {
 	if (!data?.features?.[0]?.properties?.hasOwnProperty(value_id)) {
 		throw ReferenceError("Feature data doesn't contain the expected value_id");
