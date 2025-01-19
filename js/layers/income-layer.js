@@ -1,3 +1,4 @@
+import popupHandler from '../util/popup-handler.js';
 import {
 	createRangeColorExpression,
 	currencyFormatter,
@@ -39,79 +40,22 @@ export default async () => {
 		filter: ['==', '$type', 'Polygon'],
 	});
 
-	const managePopup = ({
-		baseLabel = 'income',
-		onCloseLabel = '',
-		popupLayerLabel = '',
-		popupCheckboxLabel = '',
-		popupHtml = () => ''
-	}) => {};
-	let currentPopup = null;
-	let currentFeatureId = null;
-	const cleanupPopup = () => {
-		currentPopup?.remove();
-		currentPopup = null;
-		currentFeatureId = null;
+	const popupHtml = (feature, e) => {
+		const incomeValue = feature.properties.median_household_income;
+		const useLabel = generateLabelFromNeighborhood(feature, e);
+		const formattedIncome = incomeValue
+			? currencyFormatter.format(incomeValue)
+			: 'Unknown';
+		return `<strong>Area:</strong> ${useLabel}<br>
+						<strong>Median Household Income:</strong> ${formattedIncome}`;
 	};
 
-	map.on('close-income-popup', cleanupPopup);
-
-	const handlePopup = (e) => {
-		const [feature] = map.queryRenderedFeatures(e.point, {
-			layers: ['income-layer'],
-		});
-
-		if (feature) {
-			const incomeValue = feature.properties.median_household_income;
-			const featureId = feature.properties.spatial_id;
-
-			if (!document.getElementById('show-income-popup').checked) {
-				return;
-			}
-
-			if (currentFeatureId !== featureId) {
-				const featureCentroid = centroidDict[featureId];
-				if (!currentPopup) {
-					currentPopup = new mapboxgl.Popup({
-						anchor: 'bottom',
-						closeOnClick: false,
-					});
-					currentPopup.on('close', () => {
-						currentPopup = null;
-					});
-
-					currentPopup.addTo(map);
-				}
-
-				const useLabel = generateLabelFromNeighborhood(feature, e);
-				const formattedIncome = incomeValue
-					? currencyFormatter.format(incomeValue)
-					: 'Unknown';
-				currentPopup
-					.setLngLat(featureCentroid?.geometry.coordinates || e.lngLat)
-					.setHTML(
-						`<strong>Area:</strong> ${useLabel}<br>
-                     <strong>Median Household Income:</strong> ${formattedIncome}`
-					);
-
-				currentFeatureId = featureId;
-			}
-		} else if (!feature && currentFeatureId && currentPopup) {
-			cleanupPopup();
-		}
-
-		map.getCanvas().style.cursor = feature ? 'pointer' : '';
-	};
-
-	map.on('mousemove', 'income-layer', handlePopup);
-	map.on('touchstart', 'income-layer', handlePopup);
-	map.on('mouseleave', 'income-layer', (e) => {
-		// close any open popup on leaving the parent layer
-		const features = map.queryRenderedFeatures(e.point, {
-			layers: ['income-layer'],
-		});
-		if (!features.length) {
-			map.fire('close-income-popup');
-		}
+	popupHandler({
+		centroids,
+		onCloseEventLabel: 'close-income-popup',
+		popupCheckboxId: 'show-income-popup',
+		popupHtml,
+		targetFeatureIdKey: 'spatial_id',
+		targetLayerLabel: 'income-layer',
 	});
 };
