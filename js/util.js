@@ -47,7 +47,7 @@ export const createRangeColorExpression = (
 		'#00ff00', // Green
 	]
 ) => {
-	if (!data?.features?.[0]?.properties?.[value_id]) {
+	if (!data?.features?.[0]?.properties?.hasOwnProperty(value_id)) {
 		throw ReferenceError("Feature data doesn't contain the expected value_id");
 	}
 	const incomeValues = data.features.map(
@@ -82,7 +82,7 @@ export const createRangeColorExpression = (
  */
 export const createRandomColorExpression = (data, data_id) => {
 	const colorExpression = ['match', ['to-number', ['get', data_id]]];
-	if (!data?.features?.[0]?.properties?.[data_id]) {
+	if (!data?.features?.[0]?.properties?.hasOwnProperty(data_id)) {
 		throw ReferenceError("feature data doesn't contain the expected data_id");
 	}
 	data.features.forEach((feature) => {
@@ -106,7 +106,7 @@ export const createRandomColorExpression = (data, data_id) => {
  * @returns {FeatureData}
  */
 export const generateCentroids = (data, data_id, label_ref) => {
-	if (!data?.features?.[0]?.properties?.[data_id]) {
+	if (!data?.features?.[0]?.properties?.hasOwnProperty(data_id)) {
 		throw ReferenceError("feature data doesn't contain the expected data_id");
 	}
 	return data.features.map((feature) => {
