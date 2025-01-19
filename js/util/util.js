@@ -33,8 +33,9 @@ const getIntervals = (
  * @param {GeoJSON} data
  * @param {string} value_id
  * @param {Object} param2
- * @param {string} [param2.undefColor] - default gray #80
  * @param {string[]} [param2.colorSteps] - colorSteps, defaults red -> green in 5 steps
+ * @param {boolean} [param2.invert] - if true, inverts the colorSteps array
+ * @param {string} [param2.undefColor] - default gray #80
  */
 export const createRangeColorExpression = (
 	data,
@@ -48,6 +49,7 @@ export const createRangeColorExpression = (
 			'#80ff00', // Light green
 			'#00ff00', // Green
 		],
+		invert = false,
 	}
 ) => {
 	if (!data?.features?.[0]?.properties?.hasOwnProperty(value_id)) {
@@ -61,8 +63,9 @@ export const createRangeColorExpression = (
 		Math.max(...incomeValues),
 		colorSteps.length
 	);
+	const useColorSteps = invert ? colorSteps.reverse() : colorSteps;
 	const steps = intervals.reduce(
-		(acc, [_, intervalMax], i) => acc.concat(intervalMax, colorSteps[i]),
+		(acc, [_, intervalMax], i) => acc.concat(intervalMax, useColorSteps[i]),
 		[]
 	);
 
