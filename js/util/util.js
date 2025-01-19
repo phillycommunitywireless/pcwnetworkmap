@@ -27,6 +27,17 @@ const getIntervals = (
 	return [[min, end], ...getIntervals(end + 1, max, count - 1)];
 };
 
+const defaultColor = {
+	undefColor: '#808080',
+	colorSteps: [
+		'#ff0000', // Red
+		'#ff8000', // Orange
+		'#ffff00', // Yellow
+		'#80ff00', // Light green
+		'#00ff00', // Green
+	],
+	invert: false,
+}
 /**
  * Generates a linear, interpolated gradient from geojson data for `paint.fill-color`
  *
@@ -40,18 +51,17 @@ const getIntervals = (
 export const createRangeColorExpression = (
 	data,
 	value_id,
-	{
-		undefColor = '#808080',
-		colorSteps = [
-			'#ff0000', // Red
-			'#ff8000', // Orange
-			'#ffff00', // Yellow
-			'#80ff00', // Light green
-			'#00ff00', // Green
-		],
-		invert = false,
-	}
+	coloring
 ) => {
+	const {
+		undefColor,
+		colorSteps,
+		invert,
+	} = {
+		...defaultColor,
+		...coloring
+	};
+	
 	if (!data?.features?.[0]?.properties?.hasOwnProperty(value_id)) {
 		throw ReferenceError("Feature data doesn't contain the expected value_id");
 	}
