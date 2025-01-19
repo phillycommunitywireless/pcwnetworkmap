@@ -1,4 +1,5 @@
 import {
+	setBroadbandLayer,
 	setIncomeLayer,
 	setNeighborhoodLayer,
 	setNeighborhoodOutline,
@@ -86,6 +87,20 @@ export default () => {
 		.addEventListener('change', function () {
 			if (!this.checked) {
 				map.fire('close-income-popup');
+			}
+		});
+
+	document
+		.getElementById('broadband-blocks')
+		.addEventListener('change', function () {
+			setBroadbandLayer(this.checked);
+		});
+
+	document
+		.getElementById('show-broadband-popup')
+		.addEventListener('change', function () {
+			if (!this.checked) {
+				map.fire('close-broadband-popup');
 			}
 		});
 
