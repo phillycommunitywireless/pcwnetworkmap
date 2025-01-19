@@ -1,40 +1,11 @@
 import {
 	createRangeColorExpression,
+	currencyFormatter,
 	fetchJSON,
 	generateCentroids,
+	generateLabelFromNeighborhood,
+	getZoneId
 } from '../util.js';
-
-const getZoneId = (feature) =>
-	feature.properties.name.match(/^([A-Z0-9]+),\s/)?.[1];
-const currencyFormatter = Intl.NumberFormat('en-US', {
-	style: 'currency',
-	currency: 'USD',
-	trailingZeroDisplay: 'stripIfInteger',
-});
-
-/**
- * Generates a label for the income block (feature). Leverages (event) to get
- * cursor LatLng to cross-reference against the neighborhood-source
- *
- * Falls-back to income-source geojson census ID if a neighborhood label can't be found
- *
- * @param {FeatureData} feature
- * @param {MapMouseEvent} event
- * @returns {string}
- */
-const generateIncomeLabel = (feature, event) => {
-	const zoneId = feature.properties.name.match(/^([A-Z0-9]+),\s/)?.[1];
-	if (!zoneId) {
-		console.warn("couldn't match expression for zoneId");
-	}
-	const point = turf.point(event.lngLat.toArray());
-	const neighborhood = map
-		.getSource('neighborhood-source')
-		._data.features.find((feature) =>
-			turf.booleanPointInPolygon(point, feature)
-		);
-	return neighborhood?.properties.name || zoneId;
-};
 
 export default async () => {
 	const data_url = '/data/income-inequality.geojson';
@@ -105,7 +76,7 @@ export default async () => {
 					currentPopup.addTo(map);
 				}
 
-				const useLabel = generateIncomeLabel(feature, e);
+				const useLabel = generateLabelFromNeighborhood(feature, e);
 				const formattedIncome = incomeValue
 					? currencyFormatter.format(incomeValue)
 					: 'Unknown';

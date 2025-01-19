@@ -125,3 +125,68 @@ export const generateCentroids = (data, data_id, label_ref) => {
 		};
 	});
 };
+
+/**
+ * Extract a census zone ID from a feature
+ *
+ * e.g.
+ * ```
+ * feature = {"name": "BG0004013, Philadelphia County, PA"} => "BG0004013"
+ * ```
+ *
+ * @param {FeatureData} feature
+ * @returns {string}
+ */
+export const getZoneId = (feature) =>
+	feature.properties.name.match(/^([A-Z0-9]+),\s/)?.[1];
+
+/**
+ * Normalized currency formatter for en-US.
+ * Strips trailing zeros if value is a whole number
+ *
+ * e.g.
+ * ```
+ * currencyFormatter.format(VALUE) => $123
+ * ```
+ *
+ * @returns {Intl.NumberFormat}
+ */
+export const currencyFormatter = Intl.NumberFormat('en-US', {
+	style: 'currency',
+	currency: 'USD',
+	trailingZeroDisplay: 'stripIfInteger',
+});
+
+/**
+ * Generates a label for the income block (feature). Leverages (event) to get
+ * cursor LatLng to cross-reference against the neighborhood-source
+ *
+ * Falls-back to income-source geojson census ID if a neighborhood label can't be found
+ *
+ * @param {FeatureData} feature
+ * @param {MapMouseEvent} event
+ * @returns {string}
+ */
+export const generateLabelFromNeighborhood = (feature, event) => {
+	if (!map) {
+		throw ReferenceError(
+			'generateIncomeLabel must be called after map has been loaded'
+		);
+	}
+	if (!turf) {
+		throw ReferenceError(
+			'generateIncomeLabel must be called after turfJS has been loaded'
+		);
+	}
+	const zoneId = feature.properties.name.match(/^([A-Z0-9]+),\s/)?.[1];
+	if (!zoneId) {
+		console.warn("couldn't match expression for zoneId");
+	}
+	const point = turf.point(event.lngLat.toArray());
+	const neighborhood = map
+		.getSource('neighborhood-source')
+		._data.features.find((feature) =>
+			turf.booleanPointInPolygon(point, feature)
+		);
+	return neighborhood?.properties.name || zoneId;
+};
