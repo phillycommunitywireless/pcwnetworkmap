@@ -17,7 +17,6 @@ export default () => {
 				filter: ['==', 'extrude', 'true'],
 				type: 'fill-extrusion',
 				minzoom: 15,
-				visibility: 'none',
 				paint: {
 					'fill-extrusion-color': '#aaa',
 

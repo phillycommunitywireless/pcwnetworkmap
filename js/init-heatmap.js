@@ -56,9 +56,10 @@ export default (network_points_data) => {
 				],
 			},
 		},
-		visibility: 'none',
+		layout: {
+			visibility: 'none',
+		},
 	};
 
 	map.addLayer(heatmapLayer);
-	map.setLayoutProperty(heatmapLayer.id, 'visibility', 'none');
 };

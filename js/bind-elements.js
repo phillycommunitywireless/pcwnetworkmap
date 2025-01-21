@@ -1,4 +1,4 @@
-import { NavBookmarks } from "./const.js";
+import { NavBookmarks } from './const.js';
 
 export const toggleSidebar = () => {
 	const sidebar = document.getElementById('right-sidebar');
@@ -27,33 +27,63 @@ export default () => {
 	const rightSidebar = document.getElementById('right-sidebar');
 	rightSidebar.addEventListener('click', toggleSidebar);
 
-	const toggleCheckbox = document.getElementById('toggleNetworkLinks');
-	toggleCheckbox.addEventListener('change', () => {
-		map.setLayoutProperty(
-			'line-dashed',
-			'visibility',
-			toggleCheckbox.checked ? 'visible' : 'none'
-		);
-	});
+	// visibility bindings
+	document
+		.getElementById('toggleNetworkLinks')
+		.addEventListener('change', function () {
+			map.setLayoutProperty(
+				'line-dashed',
+				'visibility',
+				this.checked ? 'visible' : 'none'
+			);
+		});
 
-	const newLayerCheckbox = document.getElementById('toggleNetworkLinks2');
-	newLayerCheckbox.addEventListener('change', () => {
-		map.setLayoutProperty(
-			'new-line-dashed',
-			'visibility',
-			newLayerCheckbox.checked ? 'visible' : 'none'
-		);
-	});
+	document
+		.getElementById('toggleNetworkLinks2')
+		.addEventListener('change', function () {
+			map.setLayoutProperty(
+				'new-line-dashed',
+				'visibility',
+				this.checked ? 'visible' : 'none'
+			);
+		});
 
-	const newLayerCheckbox2 = document.getElementById('toggleNetworkLinks3');
-	newLayerCheckbox2.addEventListener('change', () => {
-		map.setLayoutProperty(
-			'new-line-dashed2',
-			'visibility',
-			newLayerCheckbox2.checked ? 'visible' : 'none'
-		);
-	});
+	document
+		.getElementById('toggleNetworkLinks3')
+		.addEventListener('change', function () {
+			map.setLayoutProperty(
+				'new-line-dashed2',
+				'visibility',
+				this.checked ? 'visible' : 'none'
+			);
+		});
 
+	document
+		.getElementById('neighborhood-boundaries')
+		.addEventListener('click', function () {
+			map.setLayoutProperty(
+				'neighborhood-layer',
+				'visibility',
+				this.checked ? 'visible' : 'none'
+			);
+			map.setLayoutProperty(
+				'neighborhood-labels',
+				'visibility',
+				this.checked ? 'visible' : 'none'
+			);
+			// trade places with map-generated neighborhood labels as they conflict visually
+			map.getStyle().layers.forEach((layer) => {
+				if (layer.id.includes('settlement')) {
+					map.setLayoutProperty(
+						layer.id,
+						'visibility',
+						this.checked ? 'none' : 'visible'
+					);
+				}
+			});
+		});
+
+	// navigation bindings
 	const norrisSq = 'norris_square';
 	const norrisSqBtn = document.getElementById(norrisSq);
 	norrisSqBtn.addEventListener('click', () => {

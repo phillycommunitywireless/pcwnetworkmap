@@ -22,7 +22,7 @@
       <div class="sidebar-content rounded-rect flex-center">
         <div class="bookmarks">
           <div style="font-weight: bold">Select layers</div>
-          <div class='relative bg-gray-lighter mx6 my6 w180 round'>
+          <div class='relative bg-gray-lighter mx6 my6 w180 round flex flex--column'>
             <label class='checkbox-container'>
               <input type='checkbox' id="layer1" checked />
               <div class='checkbox mr6 checkbox--s-label'>
@@ -76,6 +76,15 @@
               </div>
               Heatmap
             </label>
+            <label class='checkbox-container'>
+              <input type='checkbox' id="neighborhood-boundaries" />
+              <div class='checkbox mr6 checkbox--s-label'>
+                <svg class='icon'>
+                  <use xlink:href='#icon-check' />
+                </svg>
+              </div>
+              Neighborhoods
+            </label>
           </div>
           <div style="font-weight: bold">Navigate to</div>
           <div class="inline-flex flex--column">
@@ -109,6 +118,7 @@
   </div>
 
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+  <script type="module" src="https://unpkg.com/@turf/turf@7.2.0/turf.min.js"></script>
   <script src="js/main.js" type="module"></script>
 </body>
 

@@ -55,7 +55,9 @@ export const loadNetworkLayers = () => {
 			type: 'line',
 			source: 'line',
 			id: animationLineId,
-			visibility: 'none',
+			layout: {
+				visibility: 'none',
+			},
 			minzoom: 13,
 			paint: {
 				'line-color': 'lime',
@@ -64,7 +66,6 @@ export const loadNetworkLayers = () => {
 			},
 		});
 		initAnimateNetworkLine(animationLineId);
-		map.setLayoutProperty(animationLineId, 'visibility', 'none');
 
 		const checkbox = document.getElementById('toggleNetworkLinks');
 		checkbox.disabled = false;
@@ -77,7 +78,9 @@ export const loadNetworkLayers = () => {
 			type: 'line',
 			source: 'new-line',
 			id: animationLineId,
-			visibility: 'none',
+			layout: {
+				visibility: 'none',
+			},
 			minzoom: 13,
 			paint: {
 				'line-color': 'magenta',
@@ -86,7 +89,6 @@ export const loadNetworkLayers = () => {
 			},
 		});
 		initAnimateNetworkLine(animationLineId);
-		map.setLayoutProperty(animationLineId, 'visibility', 'none');
 
 		const checkbox = document.getElementById('toggleNetworkLinks2');
 		checkbox.disabled = false;
@@ -99,7 +101,9 @@ export const loadNetworkLayers = () => {
 			type: 'line',
 			source: 'new-line2',
 			id: animationLineId,
-			visibility: 'none',
+			layout: {
+				visibility: 'none',
+			},
 			minzoom: 13,
 			paint: {
 				'line-color': 'yellow',
@@ -108,7 +112,6 @@ export const loadNetworkLayers = () => {
 			},
 		});
 		initAnimateNetworkLine(animationLineId);
-		map.setLayoutProperty('new-line-dashed2', 'visibility', 'none');
 
 		const checkbox = document.getElementById('toggleNetworkLinks3');
 		checkbox.disabled = false;
