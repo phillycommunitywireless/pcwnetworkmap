@@ -37,7 +37,7 @@ const generateIncomeLabel = (feature, event) => {
 };
 
 export default async () => {
-	const data_url = '/data/income-inequality.geojson';
+	const data_url = 'data/income-inequality.geojson';
 	const data = await fetchJSON(data_url);
 	const centroids = generateCentroids(data, 'spatial_id', getZoneId);
 	const centroidDict = centroids.reduce((acc, c) => {
