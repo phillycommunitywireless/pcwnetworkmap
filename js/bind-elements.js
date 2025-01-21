@@ -1,3 +1,8 @@
+import {
+	setIncomeLayer,
+	setNeighborhoodLayer,
+	setNeighborhoodOutline,
+} from './bind-elements.util.js';
 import { NavBookmarks } from './const.js';
 
 export const toggleSidebar = () => {
@@ -61,26 +66,27 @@ export default () => {
 	document
 		.getElementById('neighborhood-boundaries')
 		.addEventListener('click', function () {
-			map.setLayoutProperty(
-				'neighborhood-layer',
-				'visibility',
-				this.checked ? 'visible' : 'none'
-			);
-			map.setLayoutProperty(
-				'neighborhood-labels',
-				'visibility',
-				this.checked ? 'visible' : 'none'
-			);
-			// trade places with map-generated neighborhood labels as they conflict visually
-			map.getStyle().layers.forEach((layer) => {
-				if (layer.id.includes('settlement')) {
-					map.setLayoutProperty(
-						layer.id,
-						'visibility',
-						this.checked ? 'none' : 'visible'
-					);
-				}
-			});
+			setNeighborhoodLayer(this.checked);
+		});
+
+	document
+		.getElementById('neighborhood-outline-only')
+		.addEventListener('change', function () {
+			setNeighborhoodOutline(this.checked);
+		});
+
+	document
+		.getElementById('income-blocks')
+		.addEventListener('change', function () {
+			setIncomeLayer(this.checked);
+		});
+
+	document
+		.getElementById('show-income-popup')
+		.addEventListener('change', function () {
+			if (!this.checked) {
+				map.fire('close-income-popup');
+			}
 		});
 
 	// navigation bindings
