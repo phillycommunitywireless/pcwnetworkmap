@@ -12,7 +12,7 @@ const LayerId = 'no-broadband-layer';
 
 /** NB "no_broad" refers to the percent of households, per block, without access */
 export default async () => {
-	const data_url = '/data/no-broadband-percent.geojson';
+	const data_url = 'data/no-broadband-percent.geojson';
 	const data = await fetchJSON(data_url);
 
 	const centroids = generateCentroids(data, FeatureIdKey, 'name');
