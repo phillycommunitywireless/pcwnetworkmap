@@ -1,5 +1,6 @@
 import { toggleSidebar } from './bind-elements.js';
 import initHeatmap from './init-heatmap.js';
+import loadBroadbandAccessLayer from './layers/broadband-access-layer.js';
 import loadIncomeLayer from './layers/income-layer.js';
 import loadNeighborhoodsLayer from './layers/neighborhoods-layer.js';
 import { loadNetworkLayers, loadNetworkPoints } from './layers/network-layers.js';
@@ -18,6 +19,7 @@ export default () => {
 		loadNetworkLayers();
 		loadNeighborhoodsLayer();
 		loadIncomeLayer();
+		loadBroadbandAccessLayer();
 		// end async layers
 
 		// Create heatmap based on features' "type" property

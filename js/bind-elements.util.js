@@ -47,6 +47,13 @@ const setIncomeVisibility = (visible) => {
 		visible ? 'visible' : 'none'
 	);
 };
+const setBroadbandVisibility = (visible) => {
+	map.setLayoutProperty(
+		'no-broadband-layer',
+		'visibility',
+		visible ? 'visible' : 'none'
+	);
+};
 
 /**
  * internally checks 'outline' checked state. could be passed, but eh.
@@ -105,5 +112,25 @@ export const setIncomeLayer = (showLayer) => {
 
 	if (!showLayer) {
 		map.fire('close-income-popup');
+	}
+};
+
+/**
+ * @param {boolean} showLayer
+ */
+export const setBroadbandLayer = (showLayer) => {
+	setBroadbandVisibility(showLayer);
+
+	const showNeighborhoods = document.getElementById(
+		'neighborhood-boundaries'
+	).checked;
+
+	if (showLayer && showNeighborhoods) {
+		document.getElementById('neighborhood-outline-only').checked = true;
+		setNeighborhoodOutline();
+	}
+
+	if (!showLayer) {
+		map.fire('close-broadband-popup');
 	}
 };
