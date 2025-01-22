@@ -27,11 +27,11 @@ function updatePointsVisibility() {
 	map.setFilter('network-points-layer', filters);
 }
 
-function toggleHeatmapLayer() {
+function toggleHeatmapLayer(state) {
 	map.setLayoutProperty(
 		'heatmap-layer',
 		'visibility',
-		this.checked ? 'visible' : 'none'
+		state ?? this.checked ? 'visible' : 'none'
 	);
 }
 
@@ -61,6 +61,11 @@ export default () => {
 		updatePointsVisibility();
 	});
 
-	const layer5Checkbox = document.getElementById('layer5');
-	layer5Checkbox.addEventListener('change', toggleHeatmapLayer);
+	const heatmapCheckbox = document.getElementById('heatmap-layer');
+	heatmapCheckbox.addEventListener('change', toggleHeatmapLayer);
+
+	map.on('layer-style-reset', () => {
+		toggleHeatmapLayer(false);
+		heatmapCheckbox.checked = false;
+	});
 };
