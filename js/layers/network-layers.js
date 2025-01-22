@@ -1,6 +1,6 @@
 import loadIcons from '../load-icons.js';
 import {
-	initAnimateNetworkLine,
+	bindCheckboxAnimation,
 	loadNetworkLayer,
 } from './network-layers.util.js';
 
@@ -75,13 +75,8 @@ export const loadNetworkLayers = () => {
 				'line-opacity': 0.65,
 			},
 		});
-		const {start, stop} = initAnimateNetworkLine(animationLineId);
-
-		const checkbox = document.getElementById('toggleNetworkLinks');
-		checkbox.addEventListener('change', function () {
-			this.checked ? start() : stop();
-		});
-		checkbox.disabled = false;
+		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks');
+		cb.disabled = false;
 	});
 
 	// Level 2
@@ -101,13 +96,8 @@ export const loadNetworkLayers = () => {
 				'line-opacity': 0.65,
 			},
 		});
-		const {start, stop} = initAnimateNetworkLine(animationLineId);
-
-		const checkbox = document.getElementById('toggleNetworkLinks2');
-		checkbox.addEventListener('change', function () {
-			this.checked ? start() : stop();
-		});
-		checkbox.disabled = false;
+		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks2');
+		cb.disabled = false;
 	});
 
 	// Level 3
@@ -127,12 +117,7 @@ export const loadNetworkLayers = () => {
 				'line-opacity': 0.65,
 			},
 		});
-		const {start, stop} = initAnimateNetworkLine(animationLineId);
-
-		const checkbox = document.getElementById('toggleNetworkLinks3');
-		checkbox.addEventListener('change', function () {
-			this.checked ? start() : stop();
-		});
-		checkbox.disabled = false;
+		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks3');
+		cb.disabled = false;
 	});
 };

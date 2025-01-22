@@ -50,9 +50,31 @@ export const initAnimateNetworkLine = (id) => {
 	const stopAnimation = () => {
 		cancelAnimationFrame(animateNetworkLine);
 		step = 0;
-	}
+	};
 	return {
 		start: animateNetworkLine,
 		stop: stopAnimation,
 	};
+};
+
+/**
+ * @param {string} animationId 
+ * @param {string} checkboxId 
+ * @returns {HTMLInputElement} 
+ */
+export const bindCheckboxAnimation = (animationId, checkboxId) => {
+	const {start, stop} = initAnimateNetworkLine(animationId);
+	const checkbox = document.getElementById(checkboxId);
+
+	const listener = function () {
+		this.checked ? start() : stop();
+	};
+	checkbox.addEventListener('change', listener);
+	map.on('layer-style-reset', () => {
+		checkbox.removeEventListener('change', listener);
+		checkbox.checked = false;
+		stop();
+	});
+
+	return checkbox;
 };
