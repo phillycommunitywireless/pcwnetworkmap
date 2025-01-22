@@ -13,7 +13,6 @@
  * }} GeocodingResponse
  */
 
-
 export default {
 	baseUrl: 'https://geocoding.geo.census.gov/geocoder',
 	defaultBenchmark: 'Public_AR_Current',
@@ -86,14 +85,10 @@ export default {
 		console.debug('Geocoding Request URL:', url);
 
 		try {
-			// const {result} = await fetchJSON(url);
-			if (true) {
-			// if (result.addressMatches.length) {
-				const {x: longitude, y: latitude} = {
-					x: -75.592073606609,
-					y: 40.183709814469,
-				};
-				// result.addressMatches[0].coordinates;
+			const {result} = await fetchJSON(url);
+			if (result.addressMatches.length) {
+				const {x: longitude, y: latitude} =
+					result.addressMatches[0].coordinates;
 				return {latitude, longitude};
 			} else {
 				return null;
