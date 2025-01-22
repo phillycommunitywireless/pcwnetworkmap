@@ -4,14 +4,12 @@ import loadHeatmap from './layers/load-heatmap.js';
 import loadNeighborhoodsLayer from './layers/neighborhoods-layer.js';
 import { loadNetworkLayers, loadNetworkPoints } from './layers/network-layers.js';
 import load3dBuildings from './layers/three-d-buildings.layer.js';
-import loadIcons from './load-icons.js';
 
 export default () => {
 	map.on('style.load', async () => {
 		// load required data
 		const network_points_data = await loadNetworkPoints();
 		load3dBuildings();
-		loadIcons();
 
 		const loadingMessage = document.querySelector('#loading');
 		if (loadingMessage) {
@@ -26,6 +24,8 @@ export default () => {
 		// end async layers
 
 		// Create heatmap based on features' "type" property
-		loadHeatmap(network_points_data);
+		if (network_points_data) {
+			loadHeatmap(network_points_data);
+		}
 	});
 };
