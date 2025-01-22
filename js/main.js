@@ -1,6 +1,6 @@
 import bindElements from './bind-elements.js';
 import bindPointsVisibility from './bind-points-visibility.js';
-import loadIcons from './load-icons.js';
+import TileStyleControl from './controls/tile-style.control.js';
 import initMap from './map-init.js';
 import mapOnLoad from './map-on-load.js';
 import mapOnMouse from './map-on-mouse.js';
@@ -18,3 +18,5 @@ const nav = new mapboxgl.NavigationControl({
 	visualizePitch: true,
 });
 map.addControl(nav, 'bottom-right');
+
+map.addControl(new TileStyleControl(), 'bottom-left')
