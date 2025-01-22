@@ -9,10 +9,12 @@
   <!-- mapbox css -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css" rel="stylesheet">
   <link href='https://api.mapbox.com/mapbox-assembly/v1.5.1/assembly.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" type="text/css">
   <!-- custom css -->
   <link rel="stylesheet" href="style.css">
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
   <script src='https://api.mapbox.com/mapbox-assembly/v1.5.1/assembly.js'></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js"></script>
 </head>
 
 <body>
@@ -168,15 +170,6 @@
 
       </div>
     </div>
-  </div>
-  <div id="search-bar-container" aria-label="Deep Thought">
-    <input type="search" aria-label="location search field"/>
-    <button id="locate-user" type="button">
-      <svg class='icon'>
-        <use xlink:href='#icon-crosshair' />
-      </svg>
-    </button>
-    <div id="search-bar-error">Couldn't retrieve provided address.</div>
   </div>
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
   <script type="module" src="https://unpkg.com/@turf/turf@7.2.0/turf.min.js"></script>
