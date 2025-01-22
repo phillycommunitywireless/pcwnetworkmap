@@ -68,6 +68,7 @@ const handleUserSearch = async ({target: {value}}) => {
 
 const DEBOUNCE_MS = 500;
 export default () => {
+	const containerEl = document.getElementById('search-bar-container');
 	const inputEl = containerEl.querySelector('input');
 	const locateBtn = containerEl.querySelector('button');
 
