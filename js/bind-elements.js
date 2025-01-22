@@ -4,7 +4,7 @@ import {
 	setNeighborhoodLayer,
 	setNeighborhoodOutline,
 } from './bind-elements.util.js';
-import { NavBookmarks } from './const.js';
+import { FlyToDefaults, NavBookmarks } from './const.js';
 
 export const toggleSidebar = () => {
 	const sidebar = document.getElementById('right-sidebar');
@@ -23,9 +23,8 @@ const navigateToBookmark = (bookmarkId) => {
 		return;
 	}
 	map.flyTo({
-		...NavBookmarks[bookmarkId],
-		speed: 0.8,
-		curve: 1.2,
+		...FlyToDefaults,
+		...NavBookmarks[bookmarkId]
 	});
 };
 
