@@ -21,7 +21,7 @@ const navigateTo = ({latitude, longitude}) => {
 	});
 	const marker = new mapboxgl.Marker();
 	marker.setLngLat(center).addTo(map);
-	setTimeout(marker.remove, 5000);
+	setTimeout(() => marker.remove(), 5000);
 };
 
 const tryToFindUser = () => {
@@ -46,7 +46,9 @@ const tryToFindUser = () => {
 /**
  * @param {Event} param0
  */
-const handleUserSearch = async ({target: {value}}) => {
+const handleUserSearch = async (e) => {
+	e.preventDefault();
+	const {target: {value}} = e;
 	const errorEl = document.getElementById('search-bar-error');
 	errorEl.style.opacity = '0';
 
