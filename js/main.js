@@ -7,7 +7,6 @@ import mapOnMouse from './map-on-mouse.js';
 import mapOnStyleLoad from './map-on-style-load.js';
 
 initMap();
-loadIcons();
 mapOnLoad();
 mapOnMouse();
 mapOnStyleLoad();
