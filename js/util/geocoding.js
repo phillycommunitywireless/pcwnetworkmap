@@ -13,6 +13,8 @@
  * }} GeocodingResponse
  */
 
+import { fetchJSON } from "./util.js";
+
 export default {
 	baseUrl: 'https://geocoding.geo.census.gov/geocoder',
 	defaultBenchmark: 'Public_AR_Current',
