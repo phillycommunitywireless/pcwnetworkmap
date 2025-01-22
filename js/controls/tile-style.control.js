@@ -50,6 +50,7 @@ export default class TileStyleControl {
 				document.getElementById('active-label').innerText =
 					layerId.match(/\w*/)[0]; // strip version
 				map.setStyle('mapbox://styles/mapbox/' + layerId);
+				document.getElementById('tile-style-menu').classList.remove('visible');
 			};
 		}
 
