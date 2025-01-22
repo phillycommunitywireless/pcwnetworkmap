@@ -30,7 +30,6 @@ const navigateToBookmark = (bookmarkId) => {
 
 export default () => {
 	const rightSidebar = document.getElementById('right-sidebar');
-	rightSidebar.addEventListener('click', toggleSidebar);
 
 	// visibility bindings
 	document
