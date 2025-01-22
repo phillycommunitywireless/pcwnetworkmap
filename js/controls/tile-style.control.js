@@ -29,6 +29,7 @@ const innerHTML = `
 </div>
 `;
 
+// mapbox is a hot mess https://github.com/mapbox/mapbox-gl-js/issues/4006
 export default class TileStyleControl {
 	onAdd(map) {
 		const div = document.createElement('div');
@@ -44,6 +45,7 @@ export default class TileStyleControl {
 		const inputs = div.getElementsByTagName('input');
 		for (const input of inputs) {
 			input.onclick = (layer) => {
+				map.fire('layer-style-reset');
 				const layerId = layer.target.id;
 				document.getElementById('active-label').innerText =
 					layerId.match(/\w*/)[0]; // strip version
