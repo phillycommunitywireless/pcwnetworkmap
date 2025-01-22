@@ -134,3 +134,39 @@ button.mapboxgl-popup-close-button {
   padding: 4px 8px;
   font-size: 24px;
 }
+
+/* SEARCH BAR */
+#search-bar-container {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  padding: 8px 16px;
+  background-color: white;
+  border-radius: 16px;
+}
+#search-bar-container input {
+  border: none;
+  border-bottom: 2px solid gray;
+  z-index: 3;
+}
+#search-bar-container button {
+  padding: 4px 8px;
+  margin-right: -8px;
+}
+#search-bar-container button svg {
+  height: 24px;
+  width: 24px;
+}
+#search-bar-container #search-bar-error {
+  position: absolute;
+  top: 32px;
+  padding: 16px;
+  left: 0;
+  background-color: white;
+  width: 100%;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity ease-in-out 500ms;
+}
+/* END SEARCH BAR */
