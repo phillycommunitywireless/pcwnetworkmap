@@ -2,6 +2,7 @@ import {
 	createRandomColorExpression,
 	fetchJSON,
 	generateCentroids,
+	isDarkMode,
 } from '../util/util.js';
 
 export default async () => {
@@ -10,6 +11,7 @@ export default async () => {
 	const data = await fetchJSON(data_url);
 	const centroids = generateCentroids(data, 'cartodb_id', 'name');
 	const colorExpression = createRandomColorExpression(data, 'cartodb_id');
+	const darkMode = isDarkMode();
 
 	map.addSource('neighborhood-source', {
 		type: 'geojson',
@@ -33,7 +35,7 @@ export default async () => {
 		},
 		paint: {
 			'fill-color': colorExpression,
-			'fill-opacity': 0.25,
+			'fill-opacity': darkMode ? 0.25 : 0.5,
 		},
 		filter: ['==', '$type', 'Polygon'],
 	});
@@ -46,8 +48,9 @@ export default async () => {
 			visibility: 'none',
 		},
 		paint: {
-			'line-color': 'lightblue',
-			'line-width': 1,
+			'line-color': darkMode ? 'lightblue' : 'black',
+			'line-width': darkMode ? 1 : 2,
+			'line-offset': darkMode ? 0 : 2
 		},
 		filter: ['==', '$type', 'Polygon'],
 	});
@@ -65,7 +68,7 @@ export default async () => {
 		paint: {
 			'text-color': '#ffffff',
 			'text-halo-color': '#000000',
-			'text-halo-width': 1.5,
+			'text-halo-width': 2,
 			'text-halo-blur': 0.5,
 		},
 	});

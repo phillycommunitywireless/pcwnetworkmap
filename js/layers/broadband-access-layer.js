@@ -4,6 +4,7 @@ import {
 	fetchJSON,
 	generateCentroids,
 	generateLabelFromNeighborhood,
+	isDarkMode,
 } from '../util/util.js';
 
 const FeatureIdKey = 'spatial_id';
@@ -14,11 +15,12 @@ const LayerId = 'no-broadband-layer';
 export default async () => {
 	const data_url = 'data/no-broadband-percent.geojson';
 	const data = await fetchJSON(data_url);
-
 	const centroids = generateCentroids(data, FeatureIdKey, 'name');
 	const colorExpression = createRangeColorExpression(data, 'no_broad', {
 		invert: true,
 	});
+	const darkMode = isDarkMode();
+
 	map.addSource(LayerSource, {
 		type: 'geojson',
 		data,
@@ -33,7 +35,7 @@ export default async () => {
 		},
 		paint: {
 			'fill-color': colorExpression,
-			'fill-opacity': 0.25,
+			'fill-opacity': darkMode ? 0.25 : 0.5,
 		},
 		filter: ['==', '$type', 'Polygon'],
 	});

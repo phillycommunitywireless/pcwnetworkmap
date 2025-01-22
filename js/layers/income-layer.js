@@ -6,6 +6,7 @@ import {
 	generateCentroids,
 	generateLabelFromNeighborhood,
 	getZoneId,
+	isDarkMode,
 } from '../util/util.js';
 
 export default async () => {
@@ -20,6 +21,7 @@ export default async () => {
 		data,
 		'median_household_income'
 	);
+	const darkMode = isDarkMode();
 
 	map.addSource('income-source', {
 		type: 'geojson',
@@ -35,7 +37,7 @@ export default async () => {
 		},
 		paint: {
 			'fill-color': colorExpression,
-			'fill-opacity': 0.25,
+			'fill-opacity': darkMode ? 0.25 : 0.5,
 		},
 		filter: ['==', '$type', 'Polygon'],
 	});

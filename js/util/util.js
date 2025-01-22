@@ -37,7 +37,7 @@ const defaultColor = {
 		'#00ff00', // Green
 	],
 	invert: false,
-}
+};
 /**
  * Generates a linear, interpolated gradient from geojson data for `paint.fill-color`
  *
@@ -48,20 +48,12 @@ const defaultColor = {
  * @param {boolean} [param2.invert] - if true, inverts the colorSteps array
  * @param {string} [param2.undefColor] - default gray #80
  */
-export const createRangeColorExpression = (
-	data,
-	value_id,
-	coloring
-) => {
-	const {
-		undefColor,
-		colorSteps,
-		invert,
-	} = {
+export const createRangeColorExpression = (data, value_id, coloring) => {
+	const {undefColor, colorSteps, invert} = {
 		...defaultColor,
-		...coloring
+		...coloring,
 	};
-	
+
 	if (!data?.features?.[0]?.properties?.hasOwnProperty(value_id)) {
 		throw ReferenceError("Feature data doesn't contain the expected value_id");
 	}
@@ -205,4 +197,14 @@ export const generateLabelFromNeighborhood = (feature, event) => {
 			turf.booleanPointInPolygon(point, feature)
 		);
 	return neighborhood?.properties.name || zoneId;
+};
+
+const darkLabels = ['dark'];
+export const isDarkMode = (useMap) => {
+	const activeSprite = (useMap || map).getStyle()?.sprite;
+	if (!activeSprite) {
+		console.warn('no active background layer');
+		return false;
+	}
+	return darkLabels.some((label) => activeSprite?.includes(label));
 };
