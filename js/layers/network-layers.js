@@ -45,7 +45,7 @@ export const loadNetworkPoints = async () => {
 	});
 
 	return network_points_data;
-}
+};
 
 export const loadNetworkLayers = () => {
 	// Level 1
@@ -65,9 +65,12 @@ export const loadNetworkLayers = () => {
 				'line-opacity': 0.65,
 			},
 		});
-		initAnimateNetworkLine(animationLineId);
+		const {start, stop} = initAnimateNetworkLine(animationLineId);
 
 		const checkbox = document.getElementById('toggleNetworkLinks');
+		checkbox.addEventListener('change', function () {
+			this.checked ? start() : stop();
+		});
 		checkbox.disabled = false;
 	});
 
@@ -88,9 +91,12 @@ export const loadNetworkLayers = () => {
 				'line-opacity': 0.65,
 			},
 		});
-		initAnimateNetworkLine(animationLineId);
+		const {start, stop} = initAnimateNetworkLine(animationLineId);
 
 		const checkbox = document.getElementById('toggleNetworkLinks2');
+		checkbox.addEventListener('change', function () {
+			this.checked ? start() : stop();
+		});
 		checkbox.disabled = false;
 	});
 
@@ -111,9 +117,12 @@ export const loadNetworkLayers = () => {
 				'line-opacity': 0.65,
 			},
 		});
-		initAnimateNetworkLine(animationLineId);
+		const {start, stop} = initAnimateNetworkLine(animationLineId);
 
 		const checkbox = document.getElementById('toggleNetworkLinks3');
+		checkbox.addEventListener('change', function () {
+			this.checked ? start() : stop();
+		});
 		checkbox.disabled = false;
 	});
 };
