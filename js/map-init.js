@@ -28,7 +28,7 @@ if (urlParams.has('zoom')) {
 export default () => {
 	window.map = new mapboxgl.Map({
 		container: 'map',
-		style: 'mapbox://styles/mapbox/dark-v11',
+		style: 'mapbox://styles/mapbox/streets-v12',
 		zoom: map_zoom,
 		center: map_center,
 		pitch: 0,

@@ -15,11 +15,11 @@ const innerHTML = `
 		<label for="light-v11">light</label>
 	</div>
 		<div>
-		<input id="dark-v11" type="radio" name="rtoggle" value="dark" checked="checked">
+		<input id="dark-v11" type="radio" name="rtoggle" value="dark">
 		<label for="dark-v11">dark</label>
 	</div>
 		<div>
-		<input id="streets-v12" type="radio" name="rtoggle" value="streets">
+		<input id="streets-v12" type="radio" name="rtoggle" value="streets" checked="checked">
 		<label for="streets-v12">streets</label>
 	</div>
 		<div>
