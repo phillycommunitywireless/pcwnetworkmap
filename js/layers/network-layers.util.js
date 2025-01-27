@@ -1,4 +1,4 @@
-import { fetchJSON } from "../util/util.js";
+import { fetchJSON } from '../util/util.js';
 
 export const loadNetworkLayer = async (endpoint, name) => {
 	const api_endpoint =
@@ -40,10 +40,41 @@ export const initAnimateNetworkLine = (id) => {
 		// divisor in the expression `timestamp / 100` controls the animation speed.
 		const nextStep = parseInt((timestamp / 100) % dashSequence.length);
 		if (nextStep !== step) {
-			map.setPaintProperty(id, 'line-dasharray', dashSequence[step]);
+			if (map.isStyleLoaded()) {
+				map.setPaintProperty(id, 'line-dasharray', dashSequence[step]);
+			}
 			step = nextStep;
 		}
 		requestAnimationFrame(animateNetworkLine);
 	};
-	animateNetworkLine();
+	const stopAnimation = () => {
+		cancelAnimationFrame(animateNetworkLine);
+		step = 0;
+	};
+	return {
+		start: animateNetworkLine,
+		stop: stopAnimation,
+	};
+};
+
+/**
+ * @param {string} animationId 
+ * @param {string} checkboxId 
+ * @returns {HTMLInputElement} 
+ */
+export const bindCheckboxAnimation = (animationId, checkboxId) => {
+	const {start, stop} = initAnimateNetworkLine(animationId);
+	const checkbox = document.getElementById(checkboxId);
+
+	const listener = function () {
+		this.checked ? start() : stop();
+	};
+	checkbox.addEventListener('change', listener);
+	map.on('layer-style-reset', () => {
+		checkbox.removeEventListener('change', listener);
+		checkbox.checked = false;
+		stop();
+	});
+
+	return checkbox;
 };

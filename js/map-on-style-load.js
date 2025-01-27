@@ -1,50 +1,31 @@
+import loadBroadbandAccessLayer from './layers/broadband-access-layer.js';
+import loadIncomeLayer from './layers/income-layer.js';
+import loadHeatmap from './layers/load-heatmap.js';
+import loadNeighborhoodsLayer from './layers/neighborhoods-layer.js';
+import { loadNetworkLayers, loadNetworkPoints } from './layers/network-layers.js';
+import load3dBuildings from './layers/three-d-buildings.layer.js';
+
 export default () => {
-	map.on('style.load', () => {
-		// Insert the layer beneath any symbol layer.
-		const layers = map.getStyle().layers;
-		const labelLayerId = layers.find(
-			(layer) => layer.type === 'symbol' && layer.layout['text-field']
-		).id;
+	map.on('style.load', async () => {
+		// load required data
+		const network_points_data = await loadNetworkPoints();
+		load3dBuildings();
 
-		// The 'building' layer in the Mapbox Streets
-		// vector tileset contains building height data
-		// from OpenStreetMap.
-		map.addLayer(
-			{
-				id: 'add-3d-buildings',
-				source: 'composite',
-				'source-layer': 'building',
-				filter: ['==', 'extrude', 'true'],
-				type: 'fill-extrusion',
-				minzoom: 15,
-				paint: {
-					'fill-extrusion-color': '#aaa',
+		const loadingMessage = document.querySelector('#loading');
+		if (loadingMessage) {
+			loadingMessage.style.display = 'none';
+		}
 
-					// Use an 'interpolate' expression to
-					// add a smooth transition effect to
-					// the buildings as the user zooms in.
-					'fill-extrusion-height': [
-						'interpolate',
-						['linear'],
-						['zoom'],
-						15,
-						0,
-						15.05,
-						['get', 'height'],
-					],
-					'fill-extrusion-base': [
-						'interpolate',
-						['linear'],
-						['zoom'],
-						15,
-						0,
-						15.05,
-						['get', 'min_height'],
-					],
-					'fill-extrusion-opacity': 0.6,
-				},
-			},
-			labelLayerId
-		);
+		// load async layers
+		loadNetworkLayers();
+		loadNeighborhoodsLayer();
+		loadIncomeLayer();
+		loadBroadbandAccessLayer();
+		// end async layers
+
+		// Create heatmap based on features' "type" property
+		if (network_points_data) {
+			loadHeatmap(network_points_data);
+		}
 	});
 };

@@ -135,6 +135,66 @@ button.mapboxgl-popup-close-button {
   font-size: 24px;
 }
 
+#tile-style-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  width: 64px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  cursor: pointer;
+}
+
+#tile-style-control::after {
+  content: "^";
+  position: absolute;
+  top: -16px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 16px;
+  width: 100%;
+  padding: 8px;
+  background-color: lightgray;
+  font-weight: 700;
+}
+
+#tile-style-control button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+}
+
+#tile-style-menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  opacity: 0;
+  transition: all ease-in-out 500ms;
+  z-index: 2;
+}
+#tile-style-menu.visible {
+  opacity: 1;
+  transform: translateY(-100%);
+}
+
+#tile-style-menu div {
+  display: flex;
+}
+#active-label::first-letter {
+  text-transform: uppercase;
+}
+
 /* SEARCH BAR */
 #search-bar-container {
   position: absolute;
