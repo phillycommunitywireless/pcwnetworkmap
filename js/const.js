@@ -11,7 +11,7 @@ export const NavBookmarks = {
 	},
 	fairhill_square: {
 		bearing: -168.84,
-		center: [-75.14355, 39.99292],
+		center: [-75.138980, 39.991109],
 		pitch: 64,
 		zoom: 15.2,
 	},
