@@ -100,19 +100,11 @@ export default () => {
 		});
 
 	// navigation bindings
-	const norrisSq = 'norris_square';
-	const norrisSqBtn = document.getElementById(norrisSq);
-	norrisSqBtn.addEventListener('click', () => {
-		navigateToBookmark(norrisSq);
-	});
-	const fairhillSq = 'fairhill_square';
-	const fairhillSqBtn = document.getElementById(fairhillSq);
-	fairhillSqBtn.addEventListener('click', () => {
-		navigateToBookmark(fairhillSq);
-	});
-	const mcphersonSq = 'mcpherson_square';
-	const mcphersonSqBtn = document.getElementById(mcphersonSq);
-	mcphersonSqBtn.addEventListener('click', () => {
-		navigateToBookmark(mcphersonSq);
+	document.getElementById('poi-select').addEventListener('change', (e) => {
+		const poi = e.target.value;
+		if (!poi || poi === 'null') {
+			return;
+		}
+		navigateToBookmark(poi);
 	});
 };
