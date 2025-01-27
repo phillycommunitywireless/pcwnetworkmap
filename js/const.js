@@ -1,3 +1,7 @@
+export const FlyToDefaults = {
+	speed: 0.8,
+	curve: 1.2,
+}
 export const NavBookmarks = {
 	norris_square: {
 		bearing: -120.83,
