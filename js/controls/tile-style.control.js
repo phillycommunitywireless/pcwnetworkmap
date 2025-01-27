@@ -3,7 +3,7 @@
 const innerHTML = `
 <button>
 	<span>Layer</span>
-	<label id="active-label">dark</label>
+	<label id="active-label">streets</label>
 </button>
 <div id="tile-style-menu">
 	<div>
