@@ -7,775 +7,173 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <!-- mapbox css -->
-  <link href="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css" rel="stylesheet">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.3/mapbox-gl.css" rel="stylesheet">
   <link href='https://api.mapbox.com/mapbox-assembly/v1.5.1/assembly.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" type="text/css">
   <!-- custom css -->
   <link rel="stylesheet" href="style.css">
-  <script src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.3/mapbox-gl.js"></script>
   <script src='https://api.mapbox.com/mapbox-assembly/v1.5.1/assembly.js'></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js"></script>
 </head>
 
 <body>
-  <div id="map">
-    <div id="right" class="sidebar flex-center right collapsed">
-      <div class="sidebar-content rounded-rect flex-center">
-        <div class="bookmarks">
-          <div style="font-weight: bold">Select layers:</div>
-          <div class='relative bg-gray-lighter mx6 my6 w180 round'>
+  <div id="loading">Loading...</div>
+  <div id="map"></div>
+  <div id="right-sidebar" class="sidebar flex-center right collapsed">
+    <div class="sidebar-content rounded-rect flex-center">
+      <div class="bookmarks">
+        <div style="font-weight: bold">Select layers</div>
+        <div class='relative bg-gray-lighter mx6 my6 w180 round flex flex--column'>
+          <label class='checkbox-container'>
+            <input type='checkbox' id="layer1" checked />
+            <div class='checkbox mr6 checkbox--s-label'>
+              <svg class='icon'>
+                <use xlink:href='#icon-check' />
+              </svg>
+            </div>
+            <img class="layer-icon"
+              src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png">
+            High Sites
+          </label>
+          <label class='checkbox-container'>
+            <input type='checkbox' id="layer4" checked />
+            <div class='checkbox mr6 checkbox--s-label'>
+              <svg class='icon'>
+                <use xlink:href='#icon-check' />
+              </svg>
+            </div>
+            <img class="layer-icon"
+              src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png">
+            Main Router
+          </label>
+          <label class='checkbox-container'>
+            <input type='checkbox' id="layer2" checked />
+            <div class='checkbox mr6 checkbox--s-label'>
+              <svg class='icon'>
+                <use xlink:href='#icon-check' />
+              </svg>
+            </div>
+            <img class="layer-icon"
+              src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png">
+            Access Points
+          </label>
+          <label class='checkbox-container'>
+            <input type='checkbox' id="layer3" checked />
+            <div class='checkbox mr6 checkbox--s-label'>
+              <svg class='icon'>
+                <use xlink:href='#icon-check' />
+              </svg>
+            </div>
+            <img class="layer-icon"
+              src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png"> Mesh
+            Nodes
+          </label>
+          <label class='checkbox-container'>
+            <input type='checkbox' id="layer5" />
+            <div class='checkbox mr6 checkbox--s-label'>
+              <svg class='icon'>
+                <use xlink:href='#icon-check' />
+              </svg>
+            </div>
+            Heatmap
+          </label>
+          <div>
             <label class='checkbox-container'>
-              <input type='checkbox' id="layer1" checked />
+              <input type='checkbox' id="neighborhood-boundaries" />
               <div class='checkbox mr6 checkbox--s-label'>
                 <svg class='icon'>
                   <use xlink:href='#icon-check' />
                 </svg>
               </div>
-              <img class="layer-icon"
-                src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png">
-              High Sites
+              Neighborhoods
             </label>
-            <label class='checkbox-container'>
-              <input type='checkbox' id="layer4" checked />
+            <label class='checkbox-container ml24'>
+              <input type='checkbox' id="neighborhood-outline-only" />
               <div class='checkbox mr6 checkbox--s-label'>
                 <svg class='icon'>
                   <use xlink:href='#icon-check' />
                 </svg>
               </div>
-              <img class="layer-icon"
-                src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png">
-              Main Router
-            </label>
-            <label class='checkbox-container'>
-              <input type='checkbox' id="layer2" checked />
-              <div class='checkbox mr6 checkbox--s-label'>
-                <svg class='icon'>
-                  <use xlink:href='#icon-check' />
-                </svg>
-              </div>
-              <img class="layer-icon"
-                src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png">
-              Access Points
-            </label>
-            <label class='checkbox-container'>
-              <input type='checkbox' id="layer3" checked />
-              <div class='checkbox mr6 checkbox--s-label'>
-                <svg class='icon'>
-                  <use xlink:href='#icon-check' />
-                </svg>
-              </div>
-              <img class="layer-icon"
-                src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png"> Mesh
-              Nodes
-            </label>
-            <label class='checkbox-container'>
-              <input type='checkbox' id="layer5" />
-              <div class='checkbox mr6 checkbox--s-label'>
-                <svg class='icon'>
-                  <use xlink:href='#icon-check' />
-                </svg>
-              </div>
-              Heatmap
+              Outline
             </label>
           </div>
-          <div style="font-weight: bold">Navigate to:</div>
-          <div class="inline-flex flex--column">
-            <button class="btn btn--gray btn--pill-vt" onclick="navigateToBookmark(1, 67, -120.83)">Norris Square
-              Park</button>
-            <button class="btn btn--gray btn--pill-vc" onclick="navigateToBookmark(2, 64, -168.84)">Fairhill Square
-              Park</button>
-            <button class="btn btn--gray btn--pill-vb" onclick="navigateToBookmark(3, 69, -124.80)">McPherson Square
-              Park</button>
-          </div>
-          <div style="font-weight: bold">Animate Network:</div>
-          <label class="switch-container">
-            <input type="checkbox" id="toggleNetworkLinks" />
-            <div class="switch"></div>
-            <div>Level 1</div>
-          </label>
-          <label class="switch-container">
-            <input type="checkbox" id="toggleNetworkLinks2" />
-            <div class="switch"></div>
-            <div>Level 2</div>
-          </label>
-          <label class="switch-container">
-            <input type="checkbox" id="toggleNetworkLinks3" />
-            <div class="switch"></div>
-            <div>Level 3</div>
-          </label>
-        </div>
-        <div class="sidebar-toggle rounded-rect right" onclick="toggleSidebar('right')">
-          &larr;
-        </div>
+          <div>
+            <label class='checkbox-container'>
+              <input type='checkbox' id="income-blocks" />
+              <div class='checkbox mr6 checkbox--s-label'>
+                <svg class='icon'>
+                  <use xlink:href='#icon-check' />
+                </svg>
+              </div>
+              Income
+            </label>
 
+            <label class='checkbox-container ml24'>
+              <input type='checkbox' id="show-income-popup" checked />
+              <div class='checkbox mr6 checkbox--s-label'>
+                <svg class='icon'>
+                  <use xlink:href='#icon-check' />
+                </svg>
+              </div>
+              Show Popup
+            </label>
+          </div>
+          <div>
+            <label class='checkbox-container'>
+              <input type='checkbox' id="heatmap-layer" />
+              <input type='checkbox' id="broadband-blocks" />
+              <div class='checkbox mr6 checkbox--s-label'>
+                <svg class='icon'>
+                  <use xlink:href='#icon-check' />
+                </svg>
+              </div>
+              Broadband Percentage
+            </label>
+
+            <label class='checkbox-container ml24'>
+              <input type='checkbox' id="show-broadband-popup" checked />
+              <div class='checkbox mr6 checkbox--s-label'>
+                <svg class='icon'>
+                  <use xlink:href='#icon-check' />
+                </svg>
+              </div>
+              Show Popup
+            </label>
+          </div>
+        </div>
+        <div style="font-weight: bold">Navigate to</div>
+        <div class="inline-flex flex--column">
+          <button class="btn btn--gray btn--pill-vt" id="norris_square">Norris Sq. Park</button>
+          <button class="btn btn--gray btn--pill-vc" id="fairhill_square">Fairhill Sq. Park</button>
+          <button class="btn btn--gray btn--pill-vb" id="mcpherson_square">McPherson Sq. Park</button>
+        </div>
+        <div style="font-weight: bold">Show Connections</div>
+        <label class="switch-container">
+          <input type="checkbox" id="toggleNetworkLinks" disabled />
+          <div class="switch"></div>
+          <div class="ms-small">High Sites to Routers</div>
+        </label>
+        <label class="switch-container">
+          <input type="checkbox" id="toggleNetworkLinks2" disabled />
+          <div class="switch"></div>
+          <div class="ms-small">Routers to Wired APs</div>
+        </label>
+        <label class="switch-container">
+          <input type="checkbox" id="toggleNetworkLinks3" disabled />
+          <div class="switch"></div>
+          <div class="ms-small">Wired APs to Mesh Nodes</div>
+        </label>
       </div>
+      <div class="sidebar-toggle rounded-rect right">
+        &larr;
+      </div>
+
     </div>
   </div>
-
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
-  <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZm12YWxkZXpnODQiLCJhIjoiY2xqajJzZXZ2MDU3ZTNybHBrdHo4OWo4aSJ9.ENnejUYGtJT-74gG0opSQA';
-
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v11',
-      zoom: 13.39,
-      center: [-75.14034, 39.98718],
-      pitch: 0,
-      bearing: 0,
-    });
-
-    const images = [
-      { imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png', id: 'HS_icon' },
-      { imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png', id: 'RH_icon' },
-      { imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png', id: 'MN_icon' },
-      { imageUrl: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png', id: 'LB_icon' },
-    ]
-
-    Promise.all(
-      images.map(img => new Promise((resolve, reject) => {
-        map.loadImage(img.imageUrl, function (error, res) {
-          if (error) throw error;
-          map.addImage(img.id, res);
-          resolve();
-        });
-      }))
-    ).then(() => {
-      console.log("Images Loaded");
-    });
-
-    // Add the GeoJSON layers to the map
-
-    map.on('load', async () => {
-      // fetch datasources
-      // networkpoints 
-      const networkpoints_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_geojson'
-      // layer1 
-      const level1_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level1'
-      // layer2 
-      const level2_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level2'
-      // layer3 
-      const level3_url = 'https://script.google.com/macros/s/AKfycbwfmdSpYrkW_z3DFMO87yPzaplL5T6t8CuEeFXRKA6JRn4OGSzvFo-ynRPAGQ_aBMlu_Q/exec?get_level3'
-
-      // define promises for data to fetch
-      fetch_promises = [
-        fetch(networkpoints_url).then(
-          response => response.json()
-        ).then(
-          data => {
-            return data
-          }
-        ),
-
-        fetch(level1_url).then(
-          response => response.json()
-        ).then(
-          data => {
-            return data
-          }
-        ),
-
-        fetch(level2_url).then(
-          response => response.json()
-        ).then(
-          data => {
-            return data
-          }
-        ),
-
-        fetch(level3_url).then(
-          response => response.json()
-        ).then(
-          data => {
-            return data
-          }
-        )
-      ]
-
-      // wait for all promises to resolve before adding data to Sources
-      const [networkpoints_data, level1_data, level2_data, level3_data] = await Promise.all(fetch_promises)
-
-      map.addSource('network-points', {
-        type: 'geojson',
-        // data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/networkpoints.geojson'
-        data: networkpoints_data
-      });
-
-      map.addSource('line', {
-        type: 'geojson',
-        // data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/level1.geojson'
-        data: level1_data
-      });
-
-      map.addSource('new-line', {
-        type: 'geojson',
-        // data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/level2.geojson'
-        data: level2_data
-      });
-
-      map.addSource('new-line2', {
-        type: 'geojson',
-        // data: 'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/data/level3.geojson'
-        data: level3_data
-      });
-
-
-      // add a line layer without line-dasharray defined to fill the gaps in the dashed line
-      //map.addLayer({
-      //type: 'line',
-      //source: 'line',
-      //id: 'line-background',
-      //visibility: 'none',
-      //minzoom: 13,
-      //paint: {
-      //'line-color': 'lime',
-      //'line-width': 4,
-      //'line-opacity': 0.4
-      //}
-      //});
-
-      // Add Network Points Layer
-      map.addLayer({
-        'id': 'network-points-layer',
-        'type': 'symbol',
-        'source': 'network-points',
-        'layout': {
-          'icon-image': [
-            'match',
-            ['get', 'type'],
-            'HS', 'HS_icon',
-            'RH', 'RH_icon',
-            'MN', 'MN_icon',
-            'LB', 'LB_icon',
-            'default-icon'
-          ],
-          'icon-size': ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.45],
-          'icon-allow-overlap': false,
-          'icon-ignore-placement': true,
-        },
-        'paint': {
-          'icon-opacity': 0.85,
-          'text-halo-color': 'rgb(255, 255, 255)',
-          'text-halo-width': 2,
-          'text-halo-blur': 0.5,
-        },
-      });
-
-      // Level 1
-      // add a line layer with line-dasharray set to the first value in dashArraySequence
-      map.addLayer({
-        type: 'line',
-        source: 'line',
-        id: 'line-dashed',
-        visibility: 'none',
-        minzoom: 13,
-        paint: {
-          'line-color': 'lime',
-          'line-width': 2,
-          'line-dasharray': [0, 4, 3],
-          'line-opacity': 0.65,
-        }
-      });
-
-      //map.addLayer({
-      //type: 'line',
-      //source: 'new-line',
-      //id: 'new-line-background',
-      //visibility: 'none',
-      //minzoom: 13,
-      //paint: {
-      //'line-color': 'magenta',
-      //'line-width': 4,
-      //'line-opacity': 0.4
-      //}
-      //});
-
-      // Level 2
-      // Add a line layer with line-dasharray set to the first value in dashArraySequence for the new layer
-      map.addLayer({
-        type: 'line',
-        source: 'new-line',
-        id: 'new-line-dashed',
-        visibility: 'none',
-        minzoom: 13,
-        paint: {
-          'line-color': 'magenta',
-          'line-width': 4,
-          'line-opacity': 0.65,
-        }
-      });
-
-      // Level 3
-      map.addLayer({
-        type: 'line',
-        source: 'new-line2',
-        id: 'new-line-dashed2',
-        visibility: 'none',
-        minzoom: 13,
-        paint: {
-          'line-color': 'yellow',
-          'line-width': 3,
-          'line-dasharray': [0, 4, 3],
-          'line-opacity': 0.65,
-        }
-      });
-
-      // Don't add heatmap source/layer until data is loaded and source created
-
-      // Filter features by the "type" property
-      const filteredData = networkpoints_data.features.filter(feature => feature.properties.type === 'RH' || feature.properties.type === 'MN' || feature.properties.type === 'LB');
-
-      // Create a new GeoJSON object with the filtered features
-      const filteredGeoJSON = {
-        type: 'FeatureCollection',
-        features: filteredData
-      };
-
-      map.addSource('heatmap-source', {
-        type: 'geojson',
-        data: filteredGeoJSON // Use the filtered GeoJSON data
-      });
-
-      const heatmapLayer = {
-        id: 'heatmap-layer',
-        type: 'heatmap',
-        source: 'heatmap-source',
-        minzoom: 12,
-        maxzoom: 20,
-        paint: {
-
-          'heatmap-weight': 5,
-          // Heatmap intensity range
-          'heatmap-intensity': 1,
-          // Heatmap color gradient
-          'heatmap-color': [
-            'interpolate',
-            ['linear'],
-            ['heatmap-density'],
-            0, 'rgba(0, 0, 255, 0)', // adjust the color gradient as needed
-            0.2, 'rgba(255, 0, 0, 1)',
-            0.4, 'rgba(255, 165, 0, 1)',
-            0.6, 'rgba(255, 255, 0, 1)',
-            0.8, 'rgba(0, 255, 0, 1)'
-          ],
-          // Heatmap radius
-          'heatmap-radius': {
-            stops: [
-              [9, 2],
-              [11, 10],
-              [13, 20],
-              [15, 100],
-              [17, 200],
-              [19, 500],
-              [23, 1000]
-            ]
-          },
-          // Heatmap opacity
-          'heatmap-opacity': {
-            default: 1,
-            stops: [
-              [14, 0.5],
-              [20, 0.2]
-            ]
-          }
-        },
-        visibility: 'none'
-      };
-
-      map.addLayer(heatmapLayer);
-
-      // Start the animations
-      animateDashArray(0);
-      animateNewLine(0);
-      animateNewLine2(0);
-
-      map.setLayoutProperty(heatmapLayer.id, 'visibility', 'none');
-      map.setLayoutProperty('line-background', 'visibility', 'none');
-      map.setLayoutProperty('line-dashed', 'visibility', 'none');
-      map.setLayoutProperty('new-line-background', 'visibility', 'none');
-      map.setLayoutProperty('new-line-dashed', 'visibility', 'none');
-      map.setLayoutProperty('new-line-background', 'visibility', 'none');
-      map.setLayoutProperty('new-line-dashed2', 'visibility', 'none');
-
-
-      map.on('mouseenter', 'network-points-layer', (e) => {
-        map.getCanvas().style.cursor = 'pointer';
-        const coordinates = e.features[0].geometry.coordinates.slice();
-        const nameProperty = e.features[0].properties.name; // Make sure this property exists in your data
-        const imageLink = e.features[0].properties.image; // Make sure this property exists in your data
-        const popupContent = `
-            <div class="popup-image-container">
-                <h3>${nameProperty}</h3>
-                <!--<img src="${imageLink}" alt="Image" class="popup-image"> uncomment once images exist in img folder-->
-            </div>`;
-        popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
-      });
-
-      map.on('mouseleave', 'network-points-layer', () => {
-        map.getCanvas().style.cursor = '';
-        popup.remove();
-      });
-
-    }); //end map.on('load')
-
-
-    // technique based on https://jsfiddle.net/2mws8y3q/
-    // an array of valid line-dasharray values, specifying the lengths of the alternating dashes and gaps that form the dash pattern
-    const dashArraySequence = [
-      [0, 4, 3],
-      [0.5, 4, 2.5],
-      [1, 4, 2],
-      [1.5, 4, 1.5],
-      [2, 4, 1],
-      [2.5, 4, 0.5],
-      [3, 4, 0],
-      [0, 0.5, 3, 3.5],
-      [0, 1, 3, 3],
-      [0, 1.5, 3, 2.5],
-      [0, 2, 3, 2],
-      [0, 2.5, 3, 1.5],
-      [0, 3, 3, 1],
-      [0, 3.5, 3, 0.5]
-    ];
-
-    let step = 0;
-
-    function animateDashArray(timestamp) {
-      // Update line-dasharray using the next value in dashArraySequence. The
-      // divisor in the expression `timestamp / 100` controls the animation speed.
-      const newStep = parseInt((timestamp / 100) % dashArraySequence.length);
-
-      if (newStep !== step) {
-        map.setPaintProperty('line-dashed', 'line-dasharray', dashArraySequence[step]);
-        step = newStep;
-      }
-
-      // Request the next frame of the animation.
-      requestAnimationFrame(animateDashArray);
-    }
-
-    const dashArraySequence2 = [
-      [0, 4, 3],
-    ];
-
-    let step2 = 0;
-
-    function animateNewLine(timestamp) {
-      //Update line-dasharray using the next value in dashArraySequence for the new layer.
-      const newStep2 = parseInt((timestamp / 200) % dashArraySequence2.length);
-
-      if (newStep2 !== step2) {
-        map.setPaintProperty('new-line-dashed', 'line-dasharray', dashArraySequence2[step2]);
-        step2 = newStep2;
-      }
-
-      // Request the next frame of the animation.
-      requestAnimationFrame(animateNewLine);
-    }
-
-    const dashArraySequence3 = [
-      [0, 4, 3],
-      [0.5, 4, 2.5],
-      [1, 4, 2],
-      [1.5, 4, 1.5],
-      [2, 4, 1],
-      [2.5, 4, 0.5],
-      [3, 4, 0],
-      [0, 0.5, 3, 3.5],
-      [0, 1, 3, 3],
-      [0, 1.5, 3, 2.5],
-      [0, 2, 3, 2],
-      [0, 2.5, 3, 1.5],
-      [0, 3, 3, 1],
-      [0, 3.5, 3, 0.5]
-    ];
-
-    let step3 = 0;
-
-    function animateNewLine2(timestamp) {
-      // Update line-dasharray using the next value in dashArraySequence for the new layer.
-      const newStep3 = parseInt((timestamp / 200) % dashArraySequence3.length);
-
-      if (newStep3 !== step3) {
-        map.setPaintProperty('new-line-dashed2', 'line-dasharray', dashArraySequence3[step3]);
-        step3 = newStep3;
-      }
-
-      // Request the next frame of the animation.
-      requestAnimationFrame(animateNewLine2);
-    }
-
-    // Add event listener to the checkbox input
-    const toggleCheckbox = document.getElementById('toggleNetworkLinks');
-    toggleCheckbox.addEventListener('change', () => {
-      toggleAnimateNetworkLinks();
-    });
-
-    function toggleAnimateNetworkLinks() {
-      const lineBackgroundLayer = map.getLayer('line-background');
-      const lineDashedLayer = map.getLayer('line-dashed');
-
-      // If the checkbox is checked, make both layers visible
-      if (toggleCheckbox.checked) {
-        map.setLayoutProperty('line-background', 'visibility', 'visible');
-        map.setLayoutProperty('line-dashed', 'visibility', 'visible');
-      } else {
-        // Otherwise, make both layers invisible
-        map.setLayoutProperty('line-background', 'visibility', 'none');
-        map.setLayoutProperty('line-dashed', 'visibility', 'none');
-      }
-    }
-
-    // Add event listener to the checkbox input for the new layer
-    const newLayerCheckbox = document.getElementById('toggleNetworkLinks2');
-    newLayerCheckbox.addEventListener('change', () => {
-      toggleNewLine();
-    });
-
-    // Add event listener to the checkbox input for level 3 layer
-    const newLayerCheckbox2 = document.getElementById('toggleNetworkLinks3');
-    newLayerCheckbox2.addEventListener('change', () => {
-      toggleNewLine2();
-    });
-
-
-    function toggleNewLine() {
-      const newLineBackgroundLayer = map.getLayer('new-line-background');
-      const newLineDashedLayer = map.getLayer('new-line-dashed');
-
-      // If the checkbox is checked, make both layers visible and start the animation
-      if (newLayerCheckbox.checked) {
-        map.setLayoutProperty('new-line-background', 'visibility', 'visible');
-        map.setLayoutProperty('new-line-dashed', 'visibility', 'visible');
-        step2 = 0;
-        animateNewLine(0); // Start the animation
-      } else {
-        // Otherwise, make both layers invisible
-        map.setLayoutProperty('new-line-background', 'visibility', 'none');
-        map.setLayoutProperty('new-line-dashed', 'visibility', 'none');
-        cancelAnimationFrame(animateNewLine);
-      }
-    }
-
-    function toggleNewLine2() {
-      const newLineBackgroundLayer2 = map.getLayer('new-line-background2');
-      const newLineDashedLayer2 = map.getLayer('new-line-dashed2');
-
-      // If the checkbox is checked, make both layers visible and start the animation
-      if (newLayerCheckbox2.checked) {
-        map.setLayoutProperty('new-line-background2', 'visibility', 'visible');
-        map.setLayoutProperty('new-line-dashed2', 'visibility', 'visible');
-        step2 = 0;
-        animateNewLine2(0); // Start the animation
-      } else {
-        // Otherwise, make both layers invisible
-        map.setLayoutProperty('new-line-background2', 'visibility', 'none');
-        map.setLayoutProperty('new-line-dashed2', 'visibility', 'none');
-        cancelAnimationFrame(animateNewLine2);
-      }
-    }
-
-
-    const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
-
-
-    // Function to navigate to a bookmark
-    function navigateToBookmark(bookmarkId, pitch, bearing) {
-      switch (bookmarkId) {
-        case 1:
-          map.flyTo({
-            center: [-75.13430, 39.98393],
-            zoom: 16.50,
-            pitch: pitch,
-            bearing: bearing,
-            speed: 0.8,
-            curve: 1.2,
-          });
-          break;
-        case 2:
-          map.flyTo({
-            center: [-75.14355, 39.99292],
-            zoom: 15.20,
-            pitch: pitch,
-            bearing: bearing,
-            speed: 0.8,
-            curve: 1.2,
-          });
-          break;
-        case 3:
-          map.flyTo({
-            center: [-75.11241, 39.99722],
-            zoom: 15.94,
-            pitch: pitch,
-            bearing: bearing,
-            speed: 0.8,
-            curve: 1.2,
-          });
-          break;
-        default:
-          break;
-      }
-
-    }
-
-
-    map.on('style.load', () => {
-      // Insert the layer beneath any symbol layer.
-      const layers = map.getStyle().layers;
-      const labelLayerId = layers.find(
-        (layer) => layer.type === 'symbol' && layer.layout['text-field']
-      ).id;
-
-      // The 'building' layer in the Mapbox Streets
-      // vector tileset contains building height data
-      // from OpenStreetMap.
-      map.addLayer(
-        {
-          'id': 'add-3d-buildings',
-          'source': 'composite',
-          'source-layer': 'building',
-          'filter': ['==', 'extrude', 'true'],
-          'type': 'fill-extrusion',
-          'minzoom': 15,
-          'visibility': 'none',
-          'paint': {
-            'fill-extrusion-color': '#aaa',
-
-            // Use an 'interpolate' expression to
-            // add a smooth transition effect to
-            // the buildings as the user zooms in.
-            'fill-extrusion-height': [
-              'interpolate',
-              ['linear'],
-              ['zoom'],
-              15,
-              0,
-              15.05,
-              ['get', 'height']
-            ],
-            'fill-extrusion-base': [
-              'interpolate',
-              ['linear'],
-              ['zoom'],
-              15,
-              0,
-              15.05,
-              ['get', 'min_height']
-            ],
-            'fill-extrusion-opacity': 0.6
-          }
-        },
-        labelLayerId
-      );
-    });
-
-
-
-
-    // Create an object to track the visibility status of each layer
-    const visibilityStatus = {
-      HS: true,
-      RH: true,
-      MN: true,
-      LB: true
-    };
-
-    // Create an object to store the filter expressions for each layer
-    const layerFilters = {
-      HS: ['==', ['get', 'type'], 'HS'],
-      RH: ['==', ['get', 'type'], 'RH'],
-      MN: ['==', ['get', 'type'], 'MN'],
-      LB: ['==', ['get', 'type'], 'LB']
-    };
-
-    // Function to update the visibility of points based on filters
-    function updatePointsVisibility() {
-      const filters = ['any'];
-
-      for (const type in layerFilters) {
-        if (visibilityStatus[type]) {
-          filters.push(layerFilters[type]);
-        }
-      }
-
-      map.setFilter('network-points-layer', filters);
-    }
-
-
-    // Function to update the visibility of points based on filters
-    function updatePointsVisibility() {
-      const filters = ['any'];
-
-      for (const type in layerFilters) {
-        if (visibilityStatus[type]) {
-          filters.push(layerFilters[type]);
-        }
-      }
-
-      map.setFilter('network-points-layer', filters);
-    }
-
-    // Add event listeners to the checkbox inputs for each layer
-    const layer1Checkbox = document.getElementById('layer1');
-    layer1Checkbox.addEventListener('change', () => {
-      visibilityStatus.HS = layer1Checkbox.checked;
-      updatePointsVisibility();
-    });
-
-    const layer2Checkbox = document.getElementById('layer2');
-    layer2Checkbox.addEventListener('change', () => {
-      visibilityStatus.RH = layer2Checkbox.checked;
-      updatePointsVisibility();
-    });
-
-    const layer3Checkbox = document.getElementById('layer3');
-    layer3Checkbox.addEventListener('change', () => {
-      visibilityStatus.MN = layer3Checkbox.checked;
-      updatePointsVisibility();
-    });
-
-    const layer4Checkbox = document.getElementById('layer4');
-    layer4Checkbox.addEventListener('change', () => {
-      visibilityStatus.LB = layer4Checkbox.checked;
-      updatePointsVisibility();
-    });
-
-    // Add event listener to the checkbox input for heatmap layer
-    const layer5Checkbox = document.getElementById('layer5');
-    layer5Checkbox.addEventListener('change', () => {
-      toggleHeatmapLayer();
-    });
-
-    function toggleHeatmapLayer() {
-      if (layer5Checkbox.checked) {
-        map.setLayoutProperty('heatmap-layer', 'visibility', 'visible');
-      } else {
-        map.setLayoutProperty('heatmap-layer', 'visibility', 'none');
-      }
-    }
-
-    const nav = new mapboxgl.NavigationControl({
-      visualizePitch: true
-    });
-    map.addControl(nav, 'bottom-right');
-
-    function toggleSidebar(id) {
-      const elem = document.getElementById(id);
-      // Add or remove the 'collapsed' CSS class from the sidebar element.
-      // Returns boolean "true" or "false" whether 'collapsed' is in the class list.
-      const collapsed = elem.classList.toggle('collapsed');
-      const padding = {};
-      // 'id' is 'right' or 'left'. When run at start, this object looks like: '{left: 300}';
-      padding[id] = collapsed ? 0 : 300; // 0 if collapsed, 300 px if not. This matches the width of the sidebars in the .sidebar CSS class.
-      // Use `map.easeTo()` with a padding option to adjust the map's center accounting for the position of sidebars.
-      map.easeTo({
-        padding: padding,
-        duration: 1000 // In ms. This matches the CSS transition duration property.
-      });
-    }
-
-    map.on('load', () => {
-      toggleSidebar('right');
-    });
-  </script>
+  <script type="module" src="https://unpkg.com/@turf/turf@7.2.0/turf.min.js"></script>
+  <script src="js/main.js" type="module"></script>
 </body>
 
 </html>
