@@ -14,7 +14,15 @@ mapOnStyleLoad();
 bindElements();
 bindPointsVisibility();
 
-const nav = new mapboxgl.NavigationControl({
-	visualizePitch: true,
-});
-map.addControl(nav, 'bottom-right');
+// add basic controls
+map.addControl(
+	new mapboxgl.NavigationControl({
+		visualizePitch: true,
+	}),
+	'bottom-right'
+);
+// add fullscreen control
+map.addControl(
+	new mapboxgl.FullscreenControl({container: document.querySelector('body')}),
+	'bottom-right'
+);
