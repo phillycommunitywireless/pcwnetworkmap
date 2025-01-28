@@ -1,3 +1,5 @@
+@import "./sidebar.css";
+
 html { height: 100%; }
 
 body {
@@ -13,23 +15,10 @@ body {
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 
 .layer-icon {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    margin-right: 5px;
-  }
-
-.bookmarks {
-  position:relative;
-  right: 10px;
-  background-color: rgb(227,229,230);
-  padding: 10px;
-  border-radius: 4px;
-  font-family: Arial, sans-serif;
-  z-index: 1;
-  width:100%;
-  height:100%;
-  font-size: 14px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 6px;
 }
 
 .switch-container {
@@ -43,10 +32,6 @@ body {
   top: unset
 }
 
-.ms-small { 
-  margin-left: 0.25rem;
-}
-
 .popup-image-container {
   margin-top: 10px;
   text-align: center;
@@ -55,13 +40,6 @@ body {
 .popup-image {
   max-width: 100%;
   height: auto;
-}
-
-.rounded-rect {
-    background: rgb(227,229,230);
-    border-radius: 10px;
-    box-shadow: 0 0 50px -25px black;
-    top:1px;
 }
 
 .flex-center {
@@ -73,46 +51,6 @@ body {
 
 .flex-center.right {
     right: 0px;
-}
-
-.sidebar-content {
-    position: absolute;
-    width: 90%;
-    font-family: Arial, Helvetica, sans-serif;
-    color: gray;
-}
-
-.sidebar-toggle {
-    position: absolute;
-    width: 2em; /* Increased width */
-    height: 2.5em; /* Increased height */
-    font-size: 1.5em; /* Increased font size */
-    overflow: visible;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top:auto;
-    left:auto;
-}
-
-.sidebar-toggle.right {
-    left: -1.8em;
-}
-
-.sidebar-toggle:hover {
-    color: #0aa1cf;
-    cursor: pointer;
-}
-
-.sidebar {
-    transition: transform 1s;
-    z-index: 1;
-    width: 215px;
-    height: 300px;
-}
-
-.right.collapsed {
-    transform: translateX(215px);
 }
 
 .bookmarks div[style*="font-weight: bold"] {
@@ -194,6 +132,16 @@ button.mapboxgl-popup-close-button {
 }
 #active-label::first-letter {
   text-transform: uppercase;
+}
+
+.section-label {
+  font-weight: bold;
+  text-align: center;
+	color: gray;
+}
+
+.gap-6 {
+  gap: 6px;
 }
 
 /* SEARCH BAR */
