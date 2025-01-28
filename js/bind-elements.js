@@ -8,6 +8,13 @@ import { FlyToDefaults, NavBookmarks } from './const.js';
 
 export const toggleSidebar = () => {
 	const sidebar = document.getElementById('right-sidebar');
+	const isCollapsed = sidebar.classList.toggle('collapsed');
+	if (isCollapsed) {
+		document.getElementById('sidebar-advanced-ui').classList.add('collapsed');
+	}
+};
+export const toggleAdvancedSidebar = () => {
+	const sidebar = document.getElementById('sidebar-advanced-ui');
 	sidebar.classList.toggle('collapsed');
 };
 
@@ -27,6 +34,9 @@ export default () => {
 	document
 		.getElementById('sidebar-toggle')
 		.addEventListener('click', toggleSidebar);
+	document
+		.getElementById('sidebar-advanced-options')
+		.addEventListener('click', toggleAdvancedSidebar);
 
 	// visibility bindings
 	document

@@ -19,11 +19,16 @@
 	align-items: center;
 }
 
+
 #sidebar-advanced-ui {
 	top: 100%;
 	width: 100%;
 	padding-top: 0;
 	background-color: white;
+	transition: transform 1s;
+}
+#sidebar-advanced-ui.collapsed {
+	transform: translateX(var(--sidebar-width));
 }
 
 .sidebar {
