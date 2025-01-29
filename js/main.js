@@ -9,6 +9,10 @@ import testMobile from './util/test-mobile.util.js';
 
 const isMobile = testMobile();
 
+if (isMobile.phone) {
+	document.body.classList.add("mobile");
+}
+
 initMap();
 mapOnLoad();
 mapOnMouse();
