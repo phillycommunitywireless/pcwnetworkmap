@@ -5,6 +5,9 @@ import initMap from './map-init.js';
 import mapOnLoad from './map-on-load.js';
 import mapOnMouse from './map-on-mouse.js';
 import mapOnStyleLoad from './map-on-style-load.js';
+import testMobile from './util/test-mobile.util.js';
+
+const isMobile = testMobile();
 
 initMap();
 mapOnLoad();
@@ -38,4 +41,4 @@ const geocoder = new MapboxGeocoder({
 	placeholder: 'Search an address',
 	enableGeolocation: true,
 });
-map.addControl(geocoder, 'top-left');
+map.addControl(geocoder, isMobile.phone ? 'bottom' : 'top-left');
