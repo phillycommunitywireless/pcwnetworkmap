@@ -142,10 +142,14 @@
           </div>
         </div>
         <div style="font-weight: bold">Navigate to</div>
-        <div class="inline-flex flex--column">
-          <button class="btn btn--gray btn--pill-vt" id="norris_square">Norris Sq. Park</button>
-          <button class="btn btn--gray btn--pill-vc" id="fairhill_square">Fairhill Sq. Park</button>
-          <button class="btn btn--gray btn--pill-vb" id="mcpherson_square">McPherson Sq. Park</button>
+        <div class="select-container" id="poi-select">
+          <select class='select'>
+            <option value="null">Select a POI</option>
+            <option value="norris_square">Norris Sq. Park</option>
+            <option value="fairhill_square">Fairhill Sq. Park</option>
+            <option value="mcpherson_square">McPherson Sq. Park</option>
+          </select>
+          <div class='select-arrow'></div>
         </div>
         <div style="font-weight: bold">Show Connections</div>
         <label class="switch-container">
@@ -164,7 +168,7 @@
           <div class="ms-small">Wired APs to Mesh Nodes</div>
         </label>
       </div>
-      <div class="sidebar-toggle rounded-rect right">
+      <div class="sidebar-toggle rounded-rect right" id="sidebar-toggle">
         &larr;
       </div>
 

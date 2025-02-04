@@ -4,9 +4,10 @@ body {
   margin: 0;
   padding: 0;
 
-  /* Needed to easily vertically center the loading message */
   display: flex;
   height: 100%;
+
+  overflow: hidden;
 }
 
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
