@@ -131,6 +131,11 @@ body {
 
 
 /* mapbox overrides */
+body.mobile .mapboxgl-ctrl-bottom {
+  /* override bottom due to 'mapbox' watermark collision on mobile */
+  bottom: 30px;
+}
+
 button.mapboxgl-popup-close-button {
   padding: 4px 8px;
   font-size: 24px;
