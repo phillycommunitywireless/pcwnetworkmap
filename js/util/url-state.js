@@ -18,6 +18,14 @@
  * }} MapManagerOptions
  */
 
+/*
+IN DEVELOPMENT
+Notes:
+- Layers only get added on map-move; layers need to update url when they're toggled
+- _Every layer_ gets added, e.g. 'settlement-minor-label', not just custom layers, e.g. 'heatmap-layer'
+-- this is redundant and needs to be cleaned up
+*/
+
 export default class MapboxURLManager {
 	/**
 	 * @constructor
