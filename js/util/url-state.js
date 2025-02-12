@@ -1,5 +1,30 @@
+/**
+ * @typedef {{
+ * 	container: string;
+ * 	style: string;
+ * 	zoom: number;
+ * 	center: number[];
+ * 	pitch?: number;
+ * 	bearing?: number;
+ * }} MapOptions
+ */
+/**
+ * @typedef {{
+ * 	mapboxAccessToken: string;
+ * 	centerKey: 'center';
+ * 	zoomKey: 'zoom';
+ * 	layersKey: 'layers';
+ * 	delimiter: ',';
+ * }} MapManagerOptions
+ */
+
 export default class MapboxURLManager {
-	constructor(mapOptions, options = {}) {
+	/**
+	 * @constructor
+	 * @param {MapOptions} mapOptions
+	 * @param {MapManagerOptions} options
+	 */
+	constructor(mapOptions, options) {
 		this.options = {
 			centerKey: 'center',
 			zoomKey: 'zoom',
