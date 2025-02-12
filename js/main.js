@@ -1,5 +1,6 @@
 import bindElements from './bind-elements.js';
 import bindPointsVisibility from './bind-points-visibility.js';
+import HelpDialogControl from './controls/help-dialog.control.js';
 import TileStyleControl from './controls/tile-style.control.js';
 import initMap from './map-init.js';
 import mapOnLoad from './map-on-load.js';
@@ -46,3 +47,5 @@ const geocoder = new MapboxGeocoder({
 	enableGeolocation: true,
 });
 map.addControl(geocoder, isMobile.phone ? 'bottom' : 'top-left');
+
+map.addControl(new HelpDialogControl(), 'bottom-right')
