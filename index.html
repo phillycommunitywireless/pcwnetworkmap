@@ -6,12 +6,11 @@
   <title>Network Map | Philly Community Wireless</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <!-- mapbox css -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.3/mapbox-gl.css" rel="stylesheet">
   <link href='https://api.mapbox.com/mapbox-assembly/v1.5.1/assembly.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" type="text/css">
-  <!-- custom css -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/css/style.css">
+
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.3/mapbox-gl.js"></script>
   <script src='https://api.mapbox.com/mapbox-assembly/v1.5.1/assembly.js'></script>
   <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js"></script>
@@ -20,159 +19,118 @@
 <body>
   <div id="loading">Loading...</div>
   <div id="map"></div>
-  <div id="right-sidebar" class="sidebar flex-center right collapsed">
-    <div class="sidebar-content rounded-rect flex-center">
-      <div class="bookmarks">
-        <div style="font-weight: bold">Select layers</div>
-        <div class='relative bg-gray-lighter mx6 my6 w180 round flex flex--column'>
-          <label class='checkbox-container'>
-            <input type='checkbox' id="layer1" checked />
-            <div class='checkbox mr6 checkbox--s-label'>
-              <svg class='icon'>
-                <use xlink:href='#icon-check' />
-              </svg>
-            </div>
-            <img class="layer-icon"
-              src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png">
-            High Sites
-          </label>
-          <label class='checkbox-container'>
-            <input type='checkbox' id="layer4" checked />
-            <div class='checkbox mr6 checkbox--s-label'>
-              <svg class='icon'>
-                <use xlink:href='#icon-check' />
-              </svg>
-            </div>
-            <img class="layer-icon"
-              src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png">
-            Main Router
-          </label>
-          <label class='checkbox-container'>
-            <input type='checkbox' id="layer2" checked />
-            <div class='checkbox mr6 checkbox--s-label'>
-              <svg class='icon'>
-                <use xlink:href='#icon-check' />
-              </svg>
-            </div>
-            <img class="layer-icon"
-              src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png">
-            Access Points
-          </label>
-          <label class='checkbox-container'>
-            <input type='checkbox' id="layer3" checked />
-            <div class='checkbox mr6 checkbox--s-label'>
-              <svg class='icon'>
-                <use xlink:href='#icon-check' />
-              </svg>
-            </div>
-            <img class="layer-icon"
-              src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png"> Mesh
-            Nodes
-          </label>
-          <label class='checkbox-container'>
-            <input type='checkbox' id="heatmap-layer" />
-            <div class='checkbox mr6 checkbox--s-label'>
-              <svg class='icon'>
-                <use xlink:href='#icon-check' />
-              </svg>
-            </div>
-            Heatmap
-          </label>
-          <div>
-            <label class='checkbox-container'>
-              <input type='checkbox' id="neighborhood-boundaries" />
-              <div class='checkbox mr6 checkbox--s-label'>
-                <svg class='icon'>
-                  <use xlink:href='#icon-check' />
-                </svg>
-              </div>
-              Neighborhoods
-            </label>
-            <label class='checkbox-container ml24'>
-              <input type='checkbox' id="neighborhood-outline-only" />
-              <div class='checkbox mr6 checkbox--s-label'>
-                <svg class='icon'>
-                  <use xlink:href='#icon-check' />
-                </svg>
-              </div>
-              Outline
-            </label>
-          </div>
-          <div>
-            <label class='checkbox-container'>
-              <input type='checkbox' id="income-blocks" />
-              <div class='checkbox mr6 checkbox--s-label'>
-                <svg class='icon'>
-                  <use xlink:href='#icon-check' />
-                </svg>
-              </div>
-              Income
-            </label>
-
-            <label class='checkbox-container ml24'>
-              <input type='checkbox' id="show-income-popup" checked />
-              <div class='checkbox mr6 checkbox--s-label'>
-                <svg class='icon'>
-                  <use xlink:href='#icon-check' />
-                </svg>
-              </div>
-              Show Popup
-            </label>
-          </div>
-          <div>
-            <label class='checkbox-container'>
-              <input type='checkbox' id="broadband-blocks" />
-              <div class='checkbox mr6 checkbox--s-label'>
-                <svg class='icon'>
-                  <use xlink:href='#icon-check' />
-                </svg>
-              </div>
-              Broadband Percentage
-            </label>
-
-            <label class='checkbox-container ml24'>
-              <input type='checkbox' id="show-broadband-popup" checked />
-              <div class='checkbox mr6 checkbox--s-label'>
-                <svg class='icon'>
-                  <use xlink:href='#icon-check' />
-                </svg>
-              </div>
-              Show Popup
-            </label>
-          </div>
-        </div>
-        <div style="font-weight: bold">Navigate to</div>
-        <div class="select-container" id="poi-select">
-          <select class='select'>
-            <option value="null">Select a POI</option>
-            <option value="norris_square">Norris Sq. Park</option>
-            <option value="fairhill_square">Fairhill Sq. Park</option>
-            <option value="mcpherson_square">McPherson Sq. Park</option>
-          </select>
-          <div class='select-arrow'></div>
-        </div>
-        <div style="font-weight: bold">Show Connections</div>
+  <div id="right-sidebar" class="sidebar right collapsed">
+    <div class="sidebar-content gap-6">
+      <div class="section-label">Navigate to</div>
+      <div class="select-container" id="poi-select">
+        <select class='select'>
+          <option value="null">Select a POI</option>
+          <option value="norris_square">Norris Sq. Park</option>
+          <option value="fairhill_square">Fairhill Sq. Park</option>
+          <option value="mcpherson_square">McPherson Sq. Park</option>
+        </select>
+        <div class='select-arrow'></div>
+      </div>
+      <div class="section-label">Show Connections</div>
+      <div class="switch-super-container">
         <label class="switch-container">
           <input type="checkbox" id="toggleNetworkLinks" disabled />
           <div class="switch"></div>
-          <div class="ms-small">High Sites to Routers</div>
+          <div class="ml6 txt-ms">High Sites to Routers</div>
         </label>
         <label class="switch-container">
           <input type="checkbox" id="toggleNetworkLinks2" disabled />
           <div class="switch"></div>
-          <div class="ms-small">Routers to Wired APs</div>
+          <div class="ml6 txt-ms">Routers to Wired APs</div>
         </label>
         <label class="switch-container">
           <input type="checkbox" id="toggleNetworkLinks3" disabled />
           <div class="switch"></div>
-          <div class="ms-small">Wired APs to Mesh Nodes</div>
+          <div class="ml6 txt-ms">Wired APs to Mesh Nodes</div>
         </label>
       </div>
-      <div class="sidebar-toggle rounded-rect right" id="sidebar-toggle">
-        &larr;
-      </div>
-
+      <button type="button" id="sidebar-advanced-options" class="btn round">
+        Advanced Options
+      </button>
     </div>
+    <div id="sidebar-advanced-ui" class="collapsed">
+      <div class="section-label">Select layers</div>
+      <div class="switch-super-container">
+        <label class='switch-container txt-ms'>
+          <input type='checkbox' id="layer1" checked />
+          <div class="switch mr6"></div>
+          <img class="layer-icon"
+            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png">
+          High Sites
+        </label>
+        <label class='switch-container txt-ms'>
+          <input type='checkbox' id="layer4" checked />
+          <div class="switch mr6"></div>
+          <img class="layer-icon"
+            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png">
+          Main Router
+        </label>
+        <label class='switch-container txt-ms'>
+          <input type='checkbox' id="layer2" checked />
+          <div class="switch mr6"></div>
+          <img class="layer-icon"
+            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png">
+          Access Points
+        </label>
+        <label class='switch-container txt-ms'>
+          <input type='checkbox' id="layer3" checked />
+          <div class="switch mr6"></div>
+          <img class="layer-icon"
+            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png"> Mesh
+          Nodes
+        </label>
+        <label class='switch-container txt-ms'>
+          <input type='checkbox' id="heatmap-layer" />
+          <div class="switch mr6"></div>
+          Heatmap
+        </label>
+        <div class="section-label">Census Data</div>
+        <div>
+          <label class='switch-container txt-ms'>
+            <input type='checkbox' id="neighborhood-boundaries" />
+            <div class="switch mr6"></div>
+            Neighborhoods
+          </label>
+          <label class='switch-container ml30'>
+            <input type='checkbox' id="neighborhood-outline-only" />
+            <div class="switch mr6"></div>
+            Outline
+          </label>
+        </div>
+        <div>
+          <label class='switch-container txt-ms'>
+            <input type='checkbox' id="income-blocks" />
+            <div class="switch mr6"></div>
+            Income
+          </label>
+
+          <label class='switch-container ml30'>
+            <input type='checkbox' id="show-income-popup" checked />
+            <div class="switch mr6"></div>
+            Show Popup
+          </label>
+        </div>
+        <div>
+          <label class='switch-container txt-ms'>
+            <input type='checkbox' id="broadband-blocks" />
+            <div class="switch mr6"></div>
+            Internet Access
+          </label>
+
+          <label class='switch-container ml24'>
+            <input type='checkbox' id="show-broadband-popup" checked />
+            <div class="switch mr6"></div>
+            Show Popup
+          </label>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="sidebar-toggle right" id="sidebar-toggle"></button>
   </div>
   <script type="module" src="https://unpkg.com/@turf/turf@7.2.0/turf.min.js"></script>
   <script src="js/main.js" type="module"></script>
