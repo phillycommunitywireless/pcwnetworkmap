@@ -1,6 +1,6 @@
 import {
-	setBroadbandLayer,
-	setIncomeLayer,
+	// setBroadbandLayer,
+	// setIncomeLayer,
 	setNeighborhoodLayer,
 	setNeighborhoodOutline,
 } from './bind-elements.util.js';
@@ -81,6 +81,7 @@ export default () => {
 			setNeighborhoodOutline(this.checked);
 		});
 
+	/*
 	document
 		.getElementById('income-blocks')
 		.addEventListener('change', function () {
@@ -94,7 +95,8 @@ export default () => {
 				map.fire('close-income-popup');
 			}
 		});
-
+	*/
+	/*
 	document
 		.getElementById('broadband-blocks')
 		.addEventListener('change', function () {
@@ -108,6 +110,7 @@ export default () => {
 				map.fire('close-broadband-popup');
 			}
 		});
+	*/
 
 	// navigation bindings
 	document.getElementById('poi-select').addEventListener('change', (e) => {
