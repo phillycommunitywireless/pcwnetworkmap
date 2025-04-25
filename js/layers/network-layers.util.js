@@ -2,7 +2,7 @@ import { fetchJSON } from '../util/util.js';
 
 export const loadNetworkLayer = async (endpoint, name) => {
 	const api_endpoint =
-		'https://pcwnetworkmap-internal-api-170f675937bb.herokuapp.com';
+		'https://pcwnetworkmap-api.onrender.com';
 	let layer_data;
 	try {
 		layer_data = await fetchJSON(api_endpoint + endpoint);
