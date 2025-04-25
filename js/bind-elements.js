@@ -1,6 +1,6 @@
 import {
-	setBroadbandLayer,
-	setIncomeLayer,
+	// setBroadbandLayer,
+	// setIncomeLayer,
 	setNeighborhoodLayer,
 	setNeighborhoodOutline,
 } from './bind-elements.util.js';
@@ -9,12 +9,13 @@ import { FlyToDefaults, NavBookmarks } from './const.js';
 export const toggleSidebar = () => {
 	const sidebar = document.getElementById('right-sidebar');
 	const isCollapsed = sidebar.classList.toggle('collapsed');
-	const padding = isCollapsed ? 0 : 300;
-	// Use `map.easeTo()` with a padding option to adjust the map's center accounting for the position of sidebars.
-	map.easeTo({
-		padding: {right: padding},
-		duration: 1000, // In ms. This matches the CSS transition duration property.
-	});
+	if (isCollapsed) {
+		document.getElementById('sidebar-advanced-ui').classList.add('collapsed');
+	}
+};
+export const toggleAdvancedSidebar = () => {
+	const sidebar = document.getElementById('sidebar-advanced-ui');
+	sidebar.classList.toggle('collapsed');
 };
 
 const navigateToBookmark = (bookmarkId) => {
@@ -24,13 +25,18 @@ const navigateToBookmark = (bookmarkId) => {
 	}
 	map.flyTo({
 		...FlyToDefaults,
-		...NavBookmarks[bookmarkId]
+		...NavBookmarks[bookmarkId],
 	});
+	toggleSidebar();
 };
 
 export default () => {
-	const rightSidebar = document.getElementById('right-sidebar');
-	rightSidebar.addEventListener('click', toggleSidebar);
+	document
+		.getElementById('sidebar-toggle')
+		.addEventListener('click', toggleSidebar);
+	document
+		.getElementById('sidebar-advanced-options')
+		.addEventListener('click', toggleAdvancedSidebar);
 
 	// visibility bindings
 	document
@@ -75,6 +81,7 @@ export default () => {
 			setNeighborhoodOutline(this.checked);
 		});
 
+	/*
 	document
 		.getElementById('income-blocks')
 		.addEventListener('change', function () {
@@ -88,7 +95,8 @@ export default () => {
 				map.fire('close-income-popup');
 			}
 		});
-
+	*/
+	/*
 	document
 		.getElementById('broadband-blocks')
 		.addEventListener('change', function () {
@@ -102,21 +110,14 @@ export default () => {
 				map.fire('close-broadband-popup');
 			}
 		});
+	*/
 
 	// navigation bindings
-	const norrisSq = 'norris_square';
-	const norrisSqBtn = document.getElementById(norrisSq);
-	norrisSqBtn.addEventListener('click', () => {
-		navigateToBookmark(norrisSq);
-	});
-	const fairhillSq = 'fairhill_square';
-	const fairhillSqBtn = document.getElementById(fairhillSq);
-	fairhillSqBtn.addEventListener('click', () => {
-		navigateToBookmark(fairhillSq);
-	});
-	const mcphersonSq = 'mcpherson_square';
-	const mcphersonSqBtn = document.getElementById(mcphersonSq);
-	mcphersonSqBtn.addEventListener('click', () => {
-		navigateToBookmark(mcphersonSq);
+	document.getElementById('poi-select').addEventListener('change', (e) => {
+		const poi = e.target.value;
+		if (!poi || poi === 'null') {
+			return;
+		}
+		navigateToBookmark(poi);
 	});
 };

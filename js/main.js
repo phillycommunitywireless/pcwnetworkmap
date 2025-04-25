@@ -1,10 +1,18 @@
 import bindElements from './bind-elements.js';
 import bindPointsVisibility from './bind-points-visibility.js';
+import HelpDialogControl from './controls/help-dialog.control.js';
 import TileStyleControl from './controls/tile-style.control.js';
 import initMap from './map-init.js';
 import mapOnLoad from './map-on-load.js';
 import mapOnMouse from './map-on-mouse.js';
 import mapOnStyleLoad from './map-on-style-load.js';
+import testMobile from './util/test-mobile.util.js';
+
+const isMobile = testMobile();
+
+if (isMobile.phone) {
+	document.body.classList.add("mobile");
+}
 
 initMap();
 mapOnLoad();
@@ -12,25 +20,6 @@ mapOnMouse();
 mapOnStyleLoad();
 bindElements();
 bindPointsVisibility();
-
-// nav
-const nav = new mapboxgl.NavigationControl({
-	visualizePitch: true,
-});
-map.addControl(nav, 'bottom-right');
-
-// tile style
-map.addControl(new TileStyleControl(), 'bottom-left')
-
-// geocoder 
-const geocoder = new MapboxGeocoder({
-	accessToken: mapboxgl.accessToken,
-	mapboxgl,
-	marker: {color: 'blue'},
-	placeholder: "Search an address",
-	enableGeolocation: true,
-});
-map.addControl(geocoder, 'top-left');
 
 // add basic controls
 map.addControl(
@@ -45,3 +34,18 @@ map.addControl(
 	new mapboxgl.FullscreenControl({container: document.querySelector('body')}),
 	'bottom-right'
 );
+
+// tile style
+map.addControl(new TileStyleControl(), 'bottom-left');
+
+// geocoder
+const geocoder = new MapboxGeocoder({
+	accessToken: mapboxgl.accessToken,
+	mapboxgl,
+	marker: {color: 'blue'},
+	placeholder: 'Search an address',
+	enableGeolocation: true,
+});
+map.addControl(geocoder, isMobile.phone ? 'bottom' : 'top-left');
+
+map.addControl(new HelpDialogControl(), 'bottom-right')

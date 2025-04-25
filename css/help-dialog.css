@@ -1,0 +1,63 @@
+#help-dialog-super svg.icon,
+#help-dialog-control svg.icon {
+	font-size: 24px;
+	margin: 0 auto;
+}
+
+#help-dialog-super {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+#help-dialog-super.visible {
+	display: flex;
+}
+
+#help-dialog-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	cursor: pointer;
+	background-color: rgba(0,0,0,0.5);
+}
+
+#help-dialog-container {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	width: 80%;
+	max-height: 90%;
+	background-color: white;
+	z-index: 1;
+}
+
+#help-dialog-header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	background-color: white;
+	padding: 12px 18px;
+}
+
+#help-dialog-body {
+	margin-top: calc(69px - 24px); /* header height - container padding */
+	overflow-y: auto;
+}
+
+@media screen and (max-width: 500px) {
+	#help-dialog-container {
+		width: 100%;
+	}	
+}
