@@ -42,6 +42,12 @@ export const loadNetworkPoints = async () => {
 				'icon-size': ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.45],
 				'icon-allow-overlap': false,
 				'icon-ignore-placement': true,
+
+				// Display network points on top of 3d buildings 
+				'symbol-z-order': 'auto',
+				'symbol-placement': 'point',
+				'symbol-z-elevate': true
+
 			},
 			paint: {
 				'icon-opacity': 0.85,
