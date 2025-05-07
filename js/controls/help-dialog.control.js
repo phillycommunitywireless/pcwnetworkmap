@@ -33,6 +33,20 @@ const popupHTML = `
 		Your view will 'fly to' the designated location and shift to a 3D rendering.</p>
 		<p>To reset this view to the normal 2D orientation, click the compass button
 		in the lower-right of the map, below the zoom icons ( +, - )</p>
+		
+		<h2 class="txt-xl">Pre-centering the map via link</h2>
+		<p>
+			It may be useful in some instances to have the map pre-zoomed on a given location of interest
+			instead of having to fly there manually. To do so, find the latitude, longitude, and desired zoom 
+			level using <a class="help-dialog-link" href="https://labs.mapbox.com/location-helper">MapBox's geolocation helper</a>, and then add 
+			the values to the URL like so: 
+		</p>
+		<a class="help-dialog-link" href="/?latitude=39.95239&longitude=-75.16364&zoom=16">
+			https://phillycommunitywireless.github.io/pcwnetworkmap/?latitude=39.95239&longitude=-75.16364&zoom=16
+		</a>
+		<p>
+			For example, the above URL is centered/zoomed on City Hall.
+		</p>
 	</div>
 </div>
 `;
