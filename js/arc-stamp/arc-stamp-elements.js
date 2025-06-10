@@ -109,16 +109,16 @@
 
 		const toggleBtn = document.createElement('button');
 		toggleBtn.className = 'arc-stamp-toggle';
-		toggleBtn.innerHTML = '🎯';
-		toggleBtn.title = 'Arc Stamp Tool';
+		toggleBtn.innerHTML = '<span>Arc</span><span>Stamp</span><span>Tool</span>';
 		toggleBtn.style.cssText = `
 					background: none;
 					border: none;
 					width: 100%;
 					height: 100%;
 					cursor: pointer;
-					font-size: 32px;
+					font-size: 12px;
 					display: flex;
+					flex-direction: column;
 					align-items: center;
 					justify-content: center;
 					transition: background-color 0.2s;
@@ -194,7 +194,8 @@
 	export function createPanelHTML() {
 		return `
 					<div style="margin-bottom: 8px;">
-							<strong style="font-size: 12px; color: #333;">Arc Stamp Tool</strong>
+								<span><strong style="font-size: 12px; color: #333;">Arc Stamp Tool</strong>
+								for estimating new node placement</span>
 							<div id="edit-mode-indicator" style="display: none; font-size: 10px; color: #f59e0b; margin-top: 2px;">
 									✏️ Editing Arc
 							</div>
