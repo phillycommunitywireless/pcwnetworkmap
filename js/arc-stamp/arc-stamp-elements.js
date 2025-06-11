@@ -14,6 +14,7 @@
 			this.map.on('preclick', 'arc-stamps-fill', this.onArcClick.bind(this));
 			this.map.on('click', this.onMapClick);
 			this.map.on('mousemove', this.onMapMouseMove);
+			this.map.on('wheel', this.scrollListener);
 			// Add click handler for existing arcs
 			// this.map.on('click', 'arc-stamps-fill', this.onArcClick.bind(this));
 			// Change cursor when hovering over existing arcs
@@ -33,6 +34,7 @@
 			this.map.off('click', 'arc-stamps-fill', this.onArcClick);
 			this.map.off('mouseenter', 'arc-stamps-fill');
 			this.map.off('mouseleave', 'arc-stamps-fill');
+			this.map.off('wheel', this.scrollListener);
 			this.clearPreview();
 			this.cancelEdit();
 		}
@@ -179,11 +181,12 @@
 			editIndicator.style.display = 'block';
 			cancelBtn.style.display = 'inline-block';
 			instructionText.textContent =
-				'Adjust settings and click to apply changes';
+				'Adjust settings and click outside to apply changes.';
 		} else {
 			editIndicator.style.display = 'none';
 			cancelBtn.style.display = 'none';
-			instructionText.textContent = 'Click on map to place arc stamps';
+			instructionText.textContent = 
+				'Click on map to place arc stamps.';
 		}
 	}
 
@@ -271,7 +274,9 @@
 					</div>
 					
 					<div style="margin-top: 8px; font-size: 10px; color: #888;">
-							<span id="instruction-text">Click on map to place arc stamps</span>
+							<span id="instruction-text">Click on map to place arc stamps.</span>
+							<br/>
+							<span> Scroll to spin. Shift + Scroll for angle, Alt + Scroll for radius.</span>
 					</div>
 			`;
 	}

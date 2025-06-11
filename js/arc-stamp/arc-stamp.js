@@ -10,6 +10,7 @@ import {
 	toggleStampMode,
 	updateEditModeUI,
 } from './arc-stamp-elements.js';
+import { scrollListener } from './arc-stamp-scroller.js';
 import { createArcFeature } from './arc-stamp.util.js';
 
 /**
@@ -53,8 +54,16 @@ class ArcStampControl {
 		this.isEditMode = false;
 		this.eventCoords = null;
 
+		this.arcAngleSlider = null;
+		this.arcAngleValue = null;
+		this.arcAngleStartSlider = null;
+		this.arcAngleStartValue = null;
+		this.radiusSlider = null;
+		this.radiusValue = null;
+
 		this.onMapClick = this.onMapClick.bind(this);
 		this.onMapMouseMove = this.onMapMouseMove.bind(this);
+
 		this.createArcFeature = createArcFeature.bind(this);
 
 		this.toggleStampMode = toggleStampMode.bind(this);
@@ -62,6 +71,8 @@ class ArcStampControl {
 		this.createControlContainer = createControlContainer.bind(this);
 		this.updateEditModeUI = updateEditModeUI.bind(this);
 		this.createPanelHTML = createPanelHTML.bind(this);
+
+		this.scrollListener = scrollListener.bind(this);
 	}
 
 	/**
@@ -75,7 +86,17 @@ class ArcStampControl {
 
 		this.map.on('style.load', () => {
 			this.initializeMapSource();
-			console.log('Arc Stamp Control: Initialized source');
+
+			this.arcAngleSlider = document.querySelector('#arc-angle-slider');
+			this.arcAngleValue = document.querySelector('#arc-angle-value');
+			this.radiusSlider = document.querySelector('#radius-slider');
+			this.radiusValue = document.querySelector('#radius-value');
+			this.arcAngleStartSlider = document.querySelector(
+				'#arc-angle-start-slider'
+			);
+			this.arcAngleStartValue = document.querySelector(
+				'#arc-angle-start-value'
+			);
 		});
 
 		return this.container;
@@ -298,7 +319,7 @@ class ArcStampControl {
 		return source ? source._data.features : [];
 	}
 
-	updatePreviewOrEdit() {
+	getSelectedArcToEdit() {
 		if (this.isEditMode && this.selectedArcId) {
 			const source = this.map.getSource('arc-stamps');
 			if (!source) {
@@ -311,15 +332,24 @@ class ArcStampControl {
 				(f) => f.properties.id === this.selectedArcId
 			);
 			if (selectedFeature) {
-				const center = selectedFeature.properties.center;
-				this.showPreview(
-					center[0],
-					center[1],
-					this.currentRadius,
-					this.currentArcAngle,
-					this.currentStartAngle
-				);
+				return selectedFeature;
+			} else {
+				console.warn('expected to have selected feature but found none');
 			}
+		}
+	}
+
+	updatePreviewOrEdit() {
+		const selectedFeature = getSelectedArcToEdit();
+		if (selectedFeature) {
+			const center = selectedFeature.properties.center;
+			this.showPreview(
+				center[0],
+				center[1],
+				this.currentRadius,
+				this.currentArcAngle,
+				this.currentStartAngle
+			);
 		}
 	}
 
@@ -470,7 +500,6 @@ class ArcStampControl {
 		data.features.forEach((feature) => {
 			feature.properties.selected = feature.properties.id === arcId;
 		});
-		console.log(data.features)
 		source.setData(data);
 	}
 
@@ -498,10 +527,8 @@ class ArcStampControl {
 				this.currentStartAngle
 			);
 			newFeature.properties.selected = false;
-			console.log(newFeature)
 			data.features.splice(featureIndex, 1);
 			data.features.push(newFeature);
-			console.log(data)
 			source.setData(data);
 		}
 
