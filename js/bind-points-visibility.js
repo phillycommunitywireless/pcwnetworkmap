@@ -6,12 +6,17 @@ const visibilityStatus = {
 	LB: true,
 };
 
+// the network state year to show on the map (only show nodes installed before the specified year)
+let year_to_show = 2025
+
 // Create an object to store the filter expressions for each layer
-const layerFilters = {
-	HS: ['==', ['get', 'type'], 'HS'],
-	RH: ['==', ['get', 'type'], 'RH'],
-	MN: ['==', ['get', 'type'], 'MN'],
-	LB: ['==', ['get', 'type'], 'LB'],
+// "all" requires all filter expressions to be met 
+// "to-number" included because we have to cast both the property and the year_to_show var to integers 
+let layerFilters = {
+	HS: ['all', ['==', ['get', 'type'], 'HS'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	RH: ['all', ['==', ['get', 'type'], 'RH'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	MN: ['all', ['==', ['get', 'type'], 'MN'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	LB: ['all', ['==', ['get', 'type'], 'LB'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 };
 
 // Function to update the visibility of points based on filters
@@ -60,6 +65,22 @@ export default () => {
 		visibilityStatus.LB = layer4Checkbox.checked;
 		updatePointsVisibility();
 	});
+
+	const year_selector = document.getElementById('select-year');
+	year_selector.addEventListener('change', ()=>{
+		year_to_show = Number(year_selector.value)
+		// regenerate layerfilters for the new year 
+		layerFilters = {
+			HS: ['all', ['==', ['get', 'type'], 'HS'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			RH: ['all', ['==', ['get', 'type'], 'RH'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			MN: ['all', ['==', ['get', 'type'], 'MN'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			LB: ['all', ['==', ['get', 'type'], 'LB'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+		};
+		updatePointsVisibility();
+		
+		let year_display = document.getElementById('year-display')
+		year_display.innerHTML = year_to_show
+	})
 
 	const heatmapCheckbox = document.getElementById('heatmap-layer');
 	heatmapCheckbox.addEventListener('change', () => {
