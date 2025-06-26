@@ -19,6 +19,20 @@ let layerFilters = {
 	LB: ['all', ['==', ['get', 'type'], 'LB'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 };
 
+// Object storing filter expressions for line layers 
+let lineFilters = {
+	Layer1: ['all', ['==', ['get', 'line_type'], 'Level1'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	Layer2: ['all', ['==', ['get', 'line_type'], 'Level2'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	Layer3: ['all', ['==', ['get', 'line_type'], 'Level3'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+}
+
+// Object storing filter expressions for heatmap 
+let heatmapFilters = {
+	RH: ['all', ['==', ['get', 'type'], 'RH'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	MN: ['all', ['==', ['get', 'type'], 'MN'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	LB: ['all', ['==', ['get', 'type'], 'LB'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+}
+
 // Function to update the visibility of points based on filters
 function updatePointsVisibility() {
 	const filters = ['any'];
@@ -30,6 +44,35 @@ function updatePointsVisibility() {
 	}
 
 	map.setFilter('network-points-layer', filters);
+}
+
+// Function to update the visibility of lines (eg - HS to LB) based on filters 
+function updateLineVisibility() {
+	const filters = ['any'];
+
+	for (const type in lineFilters) {
+		filters.push(lineFilters[type]);
+	}
+	
+	/* 
+		now set the filters for each line layer
+		this could be optimized to only set the lineFilter for
+		a given layer to a layer instead of applying all of them
+	*/
+	map.setFilter('line-dashed', filters)
+	map.setFilter('new-line-dashed', filters)
+	map.setFilter('new-line-dashed2', filters)
+}
+
+// Function to update the visbility of heatmap based on filters 
+function updateHeatmapVisibility() {
+	const filters = ['any'];
+
+	for (const type in heatmapFilters) {
+		filters.push(heatmapFilters[type]);
+	}
+
+	map.setFilter("heatmap-layer", filters)
 }
 
 const setHeatmapLayer = (state) => {
@@ -77,7 +120,21 @@ export default () => {
 			LB: ['all', ['==', ['get', 'type'], 'LB'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 		};
 		updatePointsVisibility();
-		
+		// also regenerate linefilters for the new year 
+		lineFilters = {
+			Layer1: ['all', ['==', ['get', 'line_type'], 'Level1'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			Layer2: ['all', ['==', ['get', 'line_type'], 'Level2'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			Layer3: ['all', ['==', ['get', 'line_type'], 'Level3'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+		}
+		updateLineVisibility()
+		// also also regenerate heatmap for the new year 
+		heatmapFilters = {
+			RH: ['all', ['==', ['get', 'type'], 'RH'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			MN: ['all', ['==', ['get', 'type'], 'MN'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			LB: ['all', ['==', ['get', 'type'], 'LB'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+		}
+		updateHeatmapVisibility()
+
 		let year_display = document.getElementById('year-display')
 		year_display.innerHTML = year_to_show
 	})
