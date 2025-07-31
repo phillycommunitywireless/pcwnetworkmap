@@ -38,6 +38,7 @@
 	max-height: 90%;
 	background-color: white;
 	z-index: 1;
+	word-wrap: break-word;
 }
 
 #help-dialog-header {
@@ -48,7 +49,7 @@
 	display: flex;
 	justify-content: space-between;
 	background-color: white;
-	padding: 12px 18px;
+	padding: 12px 18px 0px 18px;
 }
 
 #help-dialog-body {
@@ -60,4 +61,30 @@
 	#help-dialog-container {
 		width: 100%;
 	}	
+}
+
+/* 
+	Styling links on the help dialog box - default 
+	just inerhits default text color. 
+*/
+.help-dialog-link {
+	color: blue;
+	text-decoration: underline;
+}
+
+/* 
+	Add padding to help dialog text for readability 
+*/
+.txt-xl {
+	padding: 1rem 0rem 0rem;
+}
+
+/* 
+	Ensure the help dialog box doesn't stretch 
+	too far horizontally on extra large screens
+*/
+@media screen and (min-width: 1600px) {
+	#help-dialog-container {
+		max-width: 50%;
+	}
 }

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Network Map | Philly Community Wireless - editg test</title>
+  <title>Network Map | Philly Community Wireless</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.3/mapbox-gl.css" rel="stylesheet">
@@ -37,6 +37,11 @@
           <input type="checkbox" id="toggleNetworkLinks" disabled />
           <div class="switch"></div>
           <div class="ml6 txt-ms">High Sites to Routers</div>
+        </label>
+        <label class="switch-container">
+          <input type="checkbox" id="toggleNetworkLinks4" disabled />
+          <div class="switch"></div>
+          <div class="ml6 txt-ms">Point-to-Point Bridge</div>
         </label>
         <label class="switch-container">
           <input type="checkbox" id="toggleNetworkLinks2" disabled />
@@ -89,6 +94,19 @@
           <div class="switch mr6"></div>
           Heatmap
         </label>
+
+        <div class="section-label">Year: <span id="year-display">2025</span></div>
+        <div>
+          <input
+            type="range"
+            id="select-year"
+            name="select-year"
+            min="2021"
+            max="2025"
+            value="2025"
+            step="1"/>
+        </div>
+
         <div class="section-label">Census Data</div>
         <div>
           <label class='switch-container txt-ms'>
