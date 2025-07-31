@@ -60,7 +60,7 @@ export const loadNetworkPoints = async () => {
 export const loadNetworkLayers = () => {
 	// Level 1
 	loadNetworkLayer('/get_level1', 'line').then(() => {
-		const animationLineId = 'line-dashed';
+		const animationLineId = 'highsite-line';
 		map.addLayer({
 			type: 'line',
 			source: 'line',
@@ -81,7 +81,7 @@ export const loadNetworkLayers = () => {
 
 	// Level 2
 	loadNetworkLayer('/get_level2', 'new-line').then(() => {
-		const animationLineId = 'new-line-dashed';
+		const animationLineId = 'wiredap-line';
 		map.addLayer({
 			type: 'line',
 			source: 'new-line',
@@ -102,7 +102,7 @@ export const loadNetworkLayers = () => {
 
 	// Level 3
 	loadNetworkLayer('/get_level3', 'new-line2').then(() => {
-		const animationLineId = 'new-line-dashed2';
+		const animationLineId = 'meshnode-line';
 		map.addLayer({
 			type: 'line',
 			source: 'new-line2',
@@ -118,6 +118,27 @@ export const loadNetworkLayers = () => {
 			},
 		});
 		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks3');
+		cb.disabled = false;
+	});
+
+	// Level 4
+	loadNetworkLayer('/get_level4', 'new-line3').then(() => {
+		const animationLineId = 'ptp-line';
+		map.addLayer({
+			type: 'line',
+			source: 'new-line3',
+			id: animationLineId,
+			layout: {
+				visibility: 'none',
+			},
+			minzoom: 13,
+			paint: {
+				'line-color': 'red',
+				'line-width': 4,
+				'line-opacity': 0.65,
+			},
+		});
+		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks4');
 		cb.disabled = false;
 	});
 };
