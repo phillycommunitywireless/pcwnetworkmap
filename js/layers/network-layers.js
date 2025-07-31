@@ -133,7 +133,7 @@ export const loadNetworkLayers = () => {
 			},
 			minzoom: 13,
 			paint: {
-				'line-color': 'red',
+				'line-color': '#0800ff',
 				'line-width': 4,
 				'line-opacity': 0.65,
 			},
