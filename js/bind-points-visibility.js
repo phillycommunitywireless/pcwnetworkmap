@@ -24,6 +24,7 @@ let lineFilters = {
 	Layer1: ['all', ['==', ['get', 'line_type'], 'Level1'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 	Layer2: ['all', ['==', ['get', 'line_type'], 'Level2'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 	Layer3: ['all', ['==', ['get', 'line_type'], 'Level3'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	Layer4: ['all', ['==', ['get', 'line_type'], 'Level4'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 }
 
 // Object storing filter expressions for heatmap 
@@ -59,9 +60,11 @@ function updateLineVisibility() {
 		this could be optimized to only set the lineFilter for
 		a given layer to a layer instead of applying all of them
 	*/
-	map.setFilter('line-dashed', filters)
-	map.setFilter('new-line-dashed', filters)
-	map.setFilter('new-line-dashed2', filters)
+	map.setFilter('highsite-line', filters)
+	map.setFilter('wiredap-line', filters)
+	map.setFilter('meshnode-line', filters)
+	map.setFilter('ptp-line', filters)
+
 }
 
 // Function to update the visbility of heatmap based on filters 
@@ -125,6 +128,7 @@ export default () => {
 			Layer1: ['all', ['==', ['get', 'line_type'], 'Level1'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 			Layer2: ['all', ['==', ['get', 'line_type'], 'Level2'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 			Layer3: ['all', ['==', ['get', 'line_type'], 'Level3'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			Layer4: ['all', ['==', ['get', 'line_type'], 'Level4'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 		}
 		updateLineVisibility()
 		// also also regenerate heatmap for the new year 

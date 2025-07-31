@@ -43,7 +43,7 @@ export default () => {
 		.getElementById('toggleNetworkLinks')
 		.addEventListener('change', function () {
 			map.setLayoutProperty(
-				'line-dashed',
+				'highsite-line',
 				'visibility',
 				this.checked ? 'visible' : 'none'
 			);
@@ -53,7 +53,7 @@ export default () => {
 		.getElementById('toggleNetworkLinks2')
 		.addEventListener('change', function () {
 			map.setLayoutProperty(
-				'new-line-dashed',
+				'wiredap-line',
 				'visibility',
 				this.checked ? 'visible' : 'none'
 			);
@@ -63,7 +63,17 @@ export default () => {
 		.getElementById('toggleNetworkLinks3')
 		.addEventListener('change', function () {
 			map.setLayoutProperty(
-				'new-line-dashed2',
+				'meshnode-line',
+				'visibility',
+				this.checked ? 'visible' : 'none'
+			);
+		});
+
+	document
+		.getElementById('toggleNetworkLinks4')
+		.addEventListener('change', function () {
+			map.setLayoutProperty(
+				'ptp-line',
 				'visibility',
 				this.checked ? 'visible' : 'none'
 			);
