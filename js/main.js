@@ -1,3 +1,4 @@
+import { addArcStampControl } from './arc-stamp/arc-stamp.js';
 import bindElements from './bind-elements.js';
 import bindPointsVisibility from './bind-points-visibility.js';
 import HelpDialogControl from './controls/help-dialog.control.js';
@@ -37,6 +38,9 @@ map.addControl(
 
 // tile style
 map.addControl(new TileStyleControl(), 'bottom-left');
+
+// arc stamp
+addArcStampControl(map);
 
 // geocoder
 const geocoder = new MapboxGeocoder({
