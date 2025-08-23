@@ -17,13 +17,13 @@ export default (network_points_data) => {
 		let pixelLegnth;
 		switch (zoomLevel) {
 			case 12:
-				pixelLegnth = distanceInFeet * 0.01; // @1px for 100ft
+				pixelLegnth = distanceInFeet * 0.03; // @3px for 100ft
 				break;
 			case 13:
-				pixelLegnth = distanceInFeet * 0.04 // @4px for 100ft
+				pixelLegnth = distanceInFeet * 0.07 // @7px for 100ft
 				break;
 			case 14:
-				pixelLegnth = distanceInFeet * 0.07; // @7px for 100ft
+				pixelLegnth = distanceInFeet * 0.11; // 11px for 100ft
 				break;
 			case 15:
 				pixelLegnth = distanceInFeet * 0.24; // @24px for 100ft
@@ -32,16 +32,16 @@ export default (network_points_data) => {
 				pixelLegnth = distanceInFeet * 0.4; // @40px for 100ft
 				break;
 			case 17:
-				pixelLegnth = distanceInFeet * 1.4; // @140px for 100ft
+				pixelLegnth = distanceInFeet * 0.9; // @90px for 100ft
 				break;
 			case 18:
-				pixelLegnth = distanceInFeet * 2.4;// @240px for 100ft
+				pixelLegnth = distanceInFeet * 1.4;// @140px for 100ft
 				break;
 			case 19:
-				pixelLegnth = distanceInFeet * 8.4;// @840px for 100ft
+				pixelLegnth = distanceInFeet * 3.1;// @310px for 100ft
 				break;
 			case 20:
-				pixelLegnth = distanceInFeet * 14.4;// @1440px for 100ft
+				pixelLegnth = distanceInFeet * 4.8;// @480px for 100ft
 				break;
 			default:
 				pixelLegnth = 1;
