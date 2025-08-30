@@ -14,40 +14,40 @@ export default (network_points_data) => {
 	});
 
 	function ConvertFeetToPixels(zoomLevel, distanceInFeet) {
-		let pixelLegnth;
+		let pixelLength;
 		switch (zoomLevel) {
 			case 12:
-				pixelLegnth = distanceInFeet * 0.03; // @3px for 100ft
+				pixelLength = distanceInFeet * 0.03; // @3px for 100ft
 				break;
 			case 13:
-				pixelLegnth = distanceInFeet * 0.07 // @7px for 100ft
+				pixelLength = distanceInFeet * 0.07 // @7px for 100ft
 				break;
 			case 14:
-				pixelLegnth = distanceInFeet * 0.11; // 11px for 100ft
+				pixelLength = distanceInFeet * 0.11; // 11px for 100ft
 				break;
 			case 15:
-				pixelLegnth = distanceInFeet * 0.24; // @24px for 100ft
+				pixelLength = distanceInFeet * 0.24; // @24px for 100ft
 				break;
 			case 16:
-				pixelLegnth = distanceInFeet * 0.4; // @40px for 100ft
+				pixelLength = distanceInFeet * 0.4; // @40px for 100ft
 				break;
 			case 17:
-				pixelLegnth = distanceInFeet * 0.9; // @90px for 100ft
+				pixelLength = distanceInFeet * 0.9; // @90px for 100ft
 				break;
 			case 18:
-				pixelLegnth = distanceInFeet * 1.4;// @140px for 100ft
+				pixelLength = distanceInFeet * 1.4;// @140px for 100ft
 				break;
 			case 19:
-				pixelLegnth = distanceInFeet * 3.1;// @310px for 100ft
+				pixelLength = distanceInFeet * 3.1;// @310px for 100ft
 				break;
 			case 20:
-				pixelLegnth = distanceInFeet * 4.8;// @480px for 100ft
+				pixelLength = distanceInFeet * 4.8;// @480px for 100ft
 				break;
 			default:
-				pixelLegnth = 1;
+				pixelLength = 1;
 
 		}
-		return Math.round(pixelLegnth);
+		return Math.round(pixelLength);
 	}
 
 	const heatmapLayer = {
