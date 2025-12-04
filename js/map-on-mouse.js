@@ -9,7 +9,7 @@ export default () => {
 		const popupContent = `
 						<div class="popup-image-container">
 								<h3>${nameProperty}</h3>
-								<!--<img src="${imageLink}" alt="Image" class="popup-image"> uncomment once images exist in img folder-->
+								<img src="${imageLink}" alt="Image" class="popup-image">
 						</div>`;
 		popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
 	});
