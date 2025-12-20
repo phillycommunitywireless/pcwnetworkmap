@@ -185,3 +185,9 @@ button.mapboxgl-popup-close-button {
   transition: opacity ease-in-out 500ms;
 }
 /* END SEARCH BAR */
+
+.mapboxgl-popup {
+  /* transform is not judicious enough - the point is placed on the map using transform */
+  transition: opacity 300ms ease-in-out;
+  opacity: 0; 
+}
