@@ -1,5 +1,5 @@
 // const popup = 
-const nodes_to_display = ["RH"]
+const nodes_to_display = ["RH", "MN"]
 
 export default () => {
 	map.on('click', 'network-points-layer', (e) => {
@@ -8,8 +8,7 @@ export default () => {
 		const nameProperty = e.features[0].properties.name;
 		const imageLink = e.features[0].properties.image;
 
-		// currently using ap_type as demo for displaying a caption w/ the image 
-		// for production deployment, add a new field to API - "image_caption"
+		// text that will display under the node name and image (if present)
 		const descriptionText = e.features[0].properties.ap_type
 
 		let popupContent = ``
