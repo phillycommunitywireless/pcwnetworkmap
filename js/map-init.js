@@ -4,7 +4,7 @@ mapboxgl.accessToken =
 // Default values for map center and zoom
 // Set distinct map center/zoom via query parameter
 // eg - /?latitude=39.999330&longitude=-75.109110&zoom=15
-const DEFAULT_MAP_CENTER = [-75.13196, 39.98580];, 
+const DEFAULT_MAP_CENTER = [-75.124473, 39.984751]; 
 let map_center = [];
 
 const DEFAULT_MAP_ZOOM = 13.70;
