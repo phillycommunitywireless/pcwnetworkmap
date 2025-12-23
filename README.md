@@ -14,7 +14,7 @@ On page load, by defaut the map shows PCW's main three coverage areas - Norris S
 
 For example, this URL sets the default view to a zoomed-in view of City Hall - https://map.phillycommunitywireless.org/?latitude=39.95239&longitude=-75.16364&zoom=16 
 
-![A screenshot of the Philly Community Wireless webmap centered around Philadelphia City Hall](/img/readme_urlparams.png.png)
+![A screenshot of the Philly Community Wireless webmap centered around Philadelphia City Hall](/img/readme_urlparams.png)
 
 # Local Development 
 You can run this site locally in a container using Docker
