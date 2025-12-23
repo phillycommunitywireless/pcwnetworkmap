@@ -7,7 +7,7 @@ mapboxgl.accessToken =
 const DEFAULT_MAP_CENTER = [-75.14034, 39.98718];
 let map_center = [];
 
-const DEFAULT_MAP_ZOOM = 13.39;
+const DEFAULT_MAP_ZOOM = 13.70;
 let map_zoom = 0;
 
 const queryString = window.location.search;
