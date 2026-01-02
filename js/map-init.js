@@ -1,3 +1,5 @@
+import { toggleSidebar } from './bind-elements.js';
+
 mapboxgl.accessToken =
 	'pk.eyJ1IjoiZm12YWxkZXpnODQiLCJhIjoiY2xqajJzZXZ2MDU3ZTNybHBrdHo4OWo4aSJ9.ENnejUYGtJT-74gG0opSQA';
 
@@ -24,6 +26,13 @@ if (urlParams.has('zoom')) {
 } else {	
 	map_zoom = DEFAULT_MAP_ZOOM;
 }
+
+/*
+	load w/ menu closed (default = open, unless on small screens - see map-on-load.js)
+*/
+if (urlParams.has('menu_closed')){
+	toggleSidebar();
+} 
 
 export default () => {
 	window.map = new mapboxgl.Map({

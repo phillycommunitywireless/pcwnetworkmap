@@ -9,12 +9,16 @@ Deploy previews via `Render`
 The live deploy of the map is availabe here - https://map.phillycommunitywireless.org
 
 # Additional functionality
-## Changing the default Zoom level with URL parameters 
-On page load, by defaut the map shows PCW's main three coverage areas - Norris Square, Fairhill, and Kensington. URL parameters can be used to show a specific latitude, longitude, and zoom level at page load. 
+## URL Parameters 
+### Setting default position/zoom level
+On page load, the map shows PCW's main three coverage areas - Norris Square, Fairhill, and Kensington. The `latitude`, `longitude`, and `zoom` URL parameters can be used to show a specific latitude, longitude, and zoom level at page load. 
 
-For example, this URL sets the default view to a zoomed-in view of City Hall - https://map.phillycommunitywireless.org/?latitude=39.95239&longitude=-75.16364&zoom=16 
+e.g - `https://map.phillycommunitywireless.org/?latitude=39.95239&longitude=-75.16364&zoom=16` sets the default view to a zoomed-in view of Philadelphia City Hall 
 
 ![A screenshot of the Philly Community Wireless webmap centered around Philadelphia City Hall](/img/readme_urlparams.png)
+
+## Setting menu visibility at map load 
+Similarly, the `menu_closed` URL parameter sets if the menu is open or closed at map load time - e.g, `https://map.phillycommunitywireless.org/?menu_closed=true` 
 
 # Local Development 
 You can run this site locally in a container using Docker
