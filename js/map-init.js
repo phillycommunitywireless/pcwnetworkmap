@@ -31,7 +31,16 @@ if (urlParams.has('zoom')) {
 /*
 	load w/ menu closed if a small screen that isn't a phone - see map-on-load.js)
 */
-if (urlParams.has('menu_closed') && testMobile() === false){
+console.log(testMobile().phone)
+
+// const isMobile = testMobile();
+
+// if (isMobile.phone) {
+	
+// }
+
+
+if (urlParams.has('menu_closed') && testMobile().phone === false){
 	toggleSidebar();
 } 
 
