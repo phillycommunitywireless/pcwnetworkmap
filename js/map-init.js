@@ -1,4 +1,5 @@
 import { toggleSidebar } from './bind-elements.js';
+import testMobile from './util/test-mobile.util.js';
 
 mapboxgl.accessToken =
 	'pk.eyJ1IjoiZm12YWxkZXpnODQiLCJhIjoiY2xqajJzZXZ2MDU3ZTNybHBrdHo4OWo4aSJ9.ENnejUYGtJT-74gG0opSQA';
@@ -28,9 +29,9 @@ if (urlParams.has('zoom')) {
 }
 
 /*
-	load w/ menu closed (default = open, unless on small screens - see map-on-load.js)
+	load w/ menu closed if a small screen that isn't a phone - see map-on-load.js)
 */
-if (urlParams.has('menu_closed')){
+if (urlParams.has('menu_closed') && testMobile() === false){
 	toggleSidebar();
 } 
 
