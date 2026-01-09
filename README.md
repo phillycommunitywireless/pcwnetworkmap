@@ -22,7 +22,9 @@ Similarly, the `menu_closed` URL parameter sets if the menu is open or closed at
 
 # Local Development 
 You can run this site locally in a container using Docker
-* clone the repo with `git clone`
+* Clone the repo with `git clone`
+* Sign up for a [MapBox developer account and get a MapBox public token]([url](https://docs.mapbox.com/help/dive-deeper/access-tokens/))
+* Set `MAPBOX_API` in `_config.yml` to your MapBox public token.  
 * `docker compose up -d`
 * `jekyll` will serve at `localhost:4000`
 
