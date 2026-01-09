@@ -34,8 +34,12 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3' # Pin to a recent Ruby version compatible with Jekyll
+          ruby-version: '3.3' 
           bundler-cache: true # Installs dependencies using 'bundle install' and caches them
+      
+      - name: Set up jekyll 
+        run: "gem install jekyll --version 3.8.5 && gem install bundler"
+      
       - name: Build site with Jekyll
         # Runs the Jekyll build command in the production environment
         env:
