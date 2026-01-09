@@ -38,7 +38,9 @@ jobs:
           bundler-cache: true # Installs dependencies using 'bundle install' and caches them
       
       - name: Set up jekyll 
-        run: "gem install jekyll --version 3.8.5 && gem install bundler"
+        run: "gem install jekyll && gem install bundler"
+
+        # --version 3.8.5 
       
       - name: Build site with Jekyll
         # Runs the Jekyll build command in the production environment
