@@ -31,7 +31,8 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Build Jekyll site
-        run: bundle exec jekyll build
+        # run: bundle exec jekyll build
+        run: jekyll build
         env:
           MAPBOX_API: ${{ secrets.MAPBOX_API }}
       # replace this 
