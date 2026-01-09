@@ -35,6 +35,8 @@ jobs:
         with:
           source: ./
           destination: ./_site
+        environment:
+          MAPBOX_API: ${{ secrets.MAPBOX_API }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
