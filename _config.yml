@@ -1,1 +1,1 @@
-MAPBOX_API: <%= ENV['MAPBOX_API'] %>
+MAPBOX_API: 
