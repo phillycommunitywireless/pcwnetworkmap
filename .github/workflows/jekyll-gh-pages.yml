@@ -40,7 +40,7 @@ jobs:
         # Runs the Jekyll build command in the production environment
         env:
           MAPBOX_API: ${{ secrets.MAPBOX_API }}
-        run: JEKYLL_ENV=production bundle exec jekyll build --trace
+        run: jekyll build --trace
 
       # replace this 
       # - name: export env 
