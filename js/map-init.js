@@ -1,8 +1,11 @@
+---
+---
 import { toggleSidebar } from './bind-elements.js';
 import testMobile from './util/test-mobile.util.js';
 
-mapboxgl.accessToken =
-	'pk.eyJ1IjoiZm12YWxkZXpnODQiLCJhIjoiY2xqajJzZXZ2MDU3ZTNybHBrdHo4OWo4aSJ9.ENnejUYGtJT-74gG0opSQA';
+// Get current env and load mapbox key 
+const MAPBOX_API = "{{ site.MAPBOX_API }}"
+mapboxgl.accessToken = MAPBOX_API;
 
 // Default values for map center and zoom
 // Set distinct map center/zoom via query parameter

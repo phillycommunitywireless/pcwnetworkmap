@@ -32,6 +32,8 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
+        env:
+          MAPBOX_API: ${{ secrets.MAPBOX_API }}
         with:
           source: ./
           destination: ./_site
