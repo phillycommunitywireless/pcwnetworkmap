@@ -30,11 +30,18 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Build Jekyll site
-        # run: bundle exec jekyll build
-        run: jekyll build
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3' # Pin to a recent Ruby version compatible with Jekyll
+          bundler-cache: true # Installs dependencies using 'bundle install' and caches them
+      - name: Build site with Jekyll
+        # Runs the Jekyll build command in the production environment
         env:
           MAPBOX_API: ${{ secrets.MAPBOX_API }}
+        run: JEKYLL_ENV=production bundle exec jekyll build --trace
+
       # replace this 
       # - name: export env 
       #   run: echo ${{ secrets.MAPBOX_API }}
