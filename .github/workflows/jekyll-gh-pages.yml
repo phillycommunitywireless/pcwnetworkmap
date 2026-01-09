@@ -47,7 +47,9 @@ jobs:
         env:
           MAPBOX_API: ${{ secrets.MAPBOX_API }}
         # run: jekyll build --trace
-        run: MAPBOX_API=${{ secrets.MAPBOX_API }} jekyll build --trace
+        run: echo ${{ secrets.MAPBOX_API}} > config.yml && jekyll build --config _config_yml
+        # run: MAPBOX_API=${{ secrets.MAPBOX_API }} jekyll build --trace
+
 
       # replace this 
       # - name: export env 
