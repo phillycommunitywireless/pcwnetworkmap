@@ -30,37 +30,18 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2.3' 
-          bundler-cache: true # Installs dependencies using 'bundle install' and caches them
-      
       - name: Set up jekyll 
-        run: "gem install jekyll && gem install bundler"
-
+        run: "gem install jekyll"
         # --version 3.8.5 
-      
+      # Runs the Jekyll build command in the production environment
       - name: Build site with Jekyll
-        # Runs the Jekyll build command in the production environment
         env:
           MAPBOX_API: ${{ secrets.MAPBOX_API }}
-        # run: jekyll build --trace
-        run: 'echo MAPBOX_API: ${{ secrets.MAPBOX_API}} > _config.yml && jekyll build --config _config.yml'
-        # run: MAPBOX_API=${{ secrets.MAPBOX_API }} jekyll build --trace
-
-
-      # replace this 
-      # - name: export env 
-      #   run: echo ${{ secrets.MAPBOX_API }}
-      # - name: Build with Jekyll
-      #   uses: actions/jekyll-build-pages@v1
-      #   env:
-      #     MAPBOX_API: ${{ secrets.MAPBOX_API }}
-        # with:
-        #   source: ./
-        #   destination: ./_site       
+        run: 'echo MAPBOX_API: ${{ secrets.MAPBOX_API}} > _config.yml && jekyll build --config _config.yml'   
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
