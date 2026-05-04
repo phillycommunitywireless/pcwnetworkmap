@@ -28,9 +28,9 @@
       <button class="sidebar-tab" data-tab="tab-zones">Services</button>
     </div>
 
-    <!-- Level 1: Basic View — heatmap + neighborhood outline -->
+    <!-- Signal tab — heatmap + neighborhood outline -->
     <div class="sidebar-tab-panel active" id="tab-basic">
-      <div class="section-label">Basic View</div>
+      <div class="section-label">Signal View</div>
       <div class="switch-super-container">
         <label class="switch-container txt-ms">
           <input type="checkbox" id="heatmap-layer" checked />
@@ -47,7 +47,7 @@
       <input type="checkbox" id="neighborhood-boundaries" style="display:none" />
     </div>
 
-    <!-- Level 2: Links & Nodes — nodes, connections, year slider -->
+    <!-- Network tab — nodes, connections -->
     <div class="sidebar-tab-panel" id="tab-links">
       <div class="section-label">Nodes / AP</div>
       <div class="switch-super-container">
@@ -104,7 +104,16 @@
           <div class="ml6 txt-ms">Wired APs to Mesh Nodes</div>
         </label>
       </div>
+    </div>
 
+    <!-- Services tab — placeholder -->
+    <div class="sidebar-tab-panel" id="tab-zones">
+      <div class="section-label">Operations Zones</div>
+      <p class="sidebar-coming-soon">Coming soon</p>
+    </div>
+
+    <!-- Persistent year slider — visible on all tabs -->
+    <div class="sidebar-year-slider">
       <div class="section-label">Year: <span id="year-display">2025</span></div>
       <input
         type="range"
@@ -113,13 +122,22 @@
         min="2021"
         max="2025"
         value="2025"
-        step="1" />
-    </div>
-
-    <!-- Level 3: Operations Zones — placeholder -->
-    <div class="sidebar-tab-panel" id="tab-zones">
-      <div class="section-label">Operations Zones</div>
-      <p class="sidebar-coming-soon">Coming soon</p>
+        step="1"
+        list="year-ticks" />
+      <datalist id="year-ticks">
+        <option value="2021"></option>
+        <option value="2022"></option>
+        <option value="2023"></option>
+        <option value="2024"></option>
+        <option value="2025"></option>
+      </datalist>
+      <div class="year-tick-labels">
+        <span>2021</span>
+        <span>2022</span>
+        <span>2023</span>
+        <span>2024</span>
+        <span>2025</span>
+      </div>
     </div>
 
     <button type="button" class="sidebar-toggle right" id="sidebar-toggle"></button>

@@ -117,6 +117,21 @@
 	width: 100%;
 }
 
+.sidebar-year-slider {
+	width: 100%;
+	padding: 6px 16px 10px;
+	box-sizing: border-box;
+	border-top: 1px solid #e0e0e0;
+}
+
+.year-tick-labels {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 2px;
+	font-size: 0.65rem;
+	color: #999;
+}
+
 .sidebar-coming-soon {
 	color: #999;
 	font-size: 0.8rem;
