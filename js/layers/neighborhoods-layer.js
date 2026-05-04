@@ -50,7 +50,6 @@ export default async () => {
 		paint: {
 			'line-color': darkMode ? 'lightblue' : 'black',
 			'line-width': darkMode ? 1 : 2,
-			'line-offset': darkMode ? 0 : 2
 		},
 		filter: ['==', '$type', 'Polygon'],
 	});
