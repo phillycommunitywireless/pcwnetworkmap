@@ -3,32 +3,23 @@
 	--box-shadow: 0 0 10px 2px rgba(0, 0, 0, .1);
 }
 
-#right-sidebar,
-#sidebar-advanced-ui {
+#right-sidebar {
 	position: absolute;
-	padding: 8px 16px;
+	padding: 0;
 	box-shadow: var(--box-shadow);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-#right-sidebar,
-#sidebar-advanced-ui,
 .sidebar-content {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-}
-
-
-#sidebar-advanced-ui {
-	top: 100%;
 	width: 100%;
-	padding-top: 0;
-	background-color: white;
-	transition: transform 1s;
-}
-#sidebar-advanced-ui.collapsed {
-	transform: translateX(var(--sidebar-width));
+	padding: 0;
+	position: relative;
 }
 
 .sidebar {
@@ -72,16 +63,63 @@
 	cursor: pointer;
 }
 
-.sidebar-content {
-	width: 100%;
-	padding: 0;
-	position: relative;
-}
-
-
 .switch-super-container {
 	display: flex;
 	flex-direction: column;
 	gap: 3px;
 	width: 100%;
+}
+
+/* ── Tab bar ─────────────────────────────────────────── */
+
+.sidebar-tabs {
+	display: flex;
+	width: 100%;
+	border-bottom: 2px solid #e0e0e0;
+}
+
+.sidebar-tab {
+	flex: 1;
+	padding: 8px 4px;
+	font-size: 0.72rem;
+	font-weight: 600;
+	background: none;
+	border: none;
+	border-bottom: 3px solid transparent;
+	margin-bottom: -2px;
+	cursor: pointer;
+	color: #999;
+	text-align: center;
+	transition: color 150ms, border-color 150ms;
+}
+
+.sidebar-tab.active {
+	color: #333;
+	border-bottom-color: #333;
+}
+
+/* ── Tab panels ──────────────────────────────────────── */
+
+.sidebar-tab-panel {
+	display: none;
+	flex-direction: column;
+	width: 100%;
+	padding: 8px 16px 12px;
+	gap: 6px;
+	box-sizing: border-box;
+}
+
+.sidebar-tab-panel.active {
+	display: flex;
+}
+
+#select-year {
+	width: 100%;
+}
+
+.sidebar-coming-soon {
+	color: #999;
+	font-size: 0.8rem;
+	text-align: center;
+	margin: 12px 0 0;
 }

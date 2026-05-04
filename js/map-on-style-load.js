@@ -27,5 +27,9 @@ export default () => {
 		if (network_points_data) {
 			loadHeatmap(network_points_data);
 		}
+
+		// Signal that all synchronous layers are ready so bind-elements.js
+		// can enforce tab-based visibility before the first render.
+		map.fire('layers-ready');
 	});
 };

@@ -1,3 +1,7 @@
-# ignore all reflected build files 
+# ignore all reflected build files
 _site/*
 .jekyll-cache/*
+Gemfile.lock
+
+# local dev config — contains Mapbox token; injected via GitHub Secrets in CI
+_config.yml

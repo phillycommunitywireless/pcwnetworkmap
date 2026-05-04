@@ -1,9 +1,11 @@
 services:
   jekyll:
-    # image: jekyll/jekyll
     build: .
     volumes:
       - .:/srv/jekyll
+      - bundle_cache:/usr/local/bundle  # persist gems across restarts
     ports:
       - "4000:4000"
-    # command: jekyll serve --force_polling --drafts
+
+volumes:
+  bundle_cache:
