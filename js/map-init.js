@@ -42,7 +42,7 @@ if (urlParams.has('menu_closed') && testMobile().phone === false){
 export default () => {
 	window.map = new mapboxgl.Map({
 		container: 'map',
-		style: 'mapbox://styles/mapbox/streets-v12',
+		style: 'mapbox://styles/mapbox/light-v11',
 		zoom: map_zoom,
 		center: map_center,
 		pitch: 0,

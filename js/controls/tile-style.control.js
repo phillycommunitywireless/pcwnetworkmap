@@ -3,7 +3,7 @@
 const innerHTML = `
 <button>
 	<span>Layer</span>
-	<label id="active-label">streets</label>
+	<label id="active-label">light</label>
 </button>
 <div id="tile-style-menu">
 	<div>
@@ -11,7 +11,7 @@ const innerHTML = `
 		<label for="satellite-streets-v12">aerial</label>
 	</div>
 		<div>
-		<input id="light-v11" type="radio" name="rtoggle" value="light">
+		<input id="light-v11" type="radio" name="rtoggle" value="light" checked="checked">
 		<label for="light-v11">light</label>
 	</div>
 		<div>
@@ -19,7 +19,7 @@ const innerHTML = `
 		<label for="dark-v11">dark</label>
 	</div>
 		<div>
-		<input id="streets-v12" type="radio" name="rtoggle" value="streets" checked="checked">
+		<input id="streets-v12" type="radio" name="rtoggle" value="streets">
 		<label for="streets-v12">streets</label>
 	</div>
 		<div>
