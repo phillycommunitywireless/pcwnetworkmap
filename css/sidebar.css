@@ -1,5 +1,5 @@
 :root {
-	--sidebar-width: 215px;
+	--sidebar-width: 255px;
 	--box-shadow: 0 0 10px 2px rgba(0, 0, 0, .1);
 }
 
@@ -73,29 +73,16 @@
 /* ── Tab bar ─────────────────────────────────────────── */
 
 .sidebar-tabs {
-	display: flex;
 	width: 100%;
-	border-bottom: 2px solid #e0e0e0;
 }
 
-.sidebar-tab {
-	flex: 1;
-	padding: 8px 4px;
-	font-size: 0.72rem;
-	font-weight: 600;
-	background: none;
-	border: none;
-	border-bottom: 3px solid transparent;
-	margin-bottom: -2px;
-	cursor: pointer;
-	color: #999;
-	text-align: center;
-	transition: color 150ms, border-color 150ms;
+.sidebar-tabs .toggle-container input:checked ~ .toggle {
+	background-color: #5262ED;
+	color: #fff;
 }
 
-.sidebar-tab.active {
-	color: #333;
-	border-bottom-color: #333;
+.sidebar-tabs .toggle-container .toggle:hover {
+	background-color: #E6E6E6;
 }
 
 /* ── Tab panels ──────────────────────────────────────── */
@@ -113,15 +100,16 @@
 	display: flex;
 }
 
-#select-year {
-	width: 100%;
-}
 
 .sidebar-year-slider {
 	width: 100%;
 	padding: 6px 16px 10px;
 	box-sizing: border-box;
 	border-top: 1px solid #e0e0e0;
+}
+
+.sidebar-year-slider .range > input {
+	color: #5262ED;
 }
 
 .year-tick-labels {

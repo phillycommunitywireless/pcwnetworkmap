@@ -22,10 +22,19 @@
   <div id="right-sidebar" class="sidebar right collapsed">
 
     <!-- Tab bar -->
-    <div class="sidebar-tabs">
-      <button class="sidebar-tab active" data-tab="tab-basic">Signal</button>
-      <button class="sidebar-tab" data-tab="tab-links">Network</button>
-      <button class="sidebar-tab" data-tab="tab-zones">Services</button>
+    <div class="toggle-group sidebar-tabs">
+      <label class="toggle-container">
+        <input type="radio" name="sidebar-tab" value="tab-basic" checked />
+        <div class="toggle">Signal</div>
+      </label>
+      <label class="toggle-container">
+        <input type="radio" name="sidebar-tab" value="tab-links" />
+        <div class="toggle">Network</div>
+      </label>
+      <label class="toggle-container">
+        <input type="radio" name="sidebar-tab" value="tab-zones" />
+        <div class="toggle">Services</div>
+      </label>
     </div>
 
     <!-- Signal tab — heatmap + neighborhood outline -->
@@ -115,15 +124,17 @@
     <!-- Persistent year slider — visible on all tabs -->
     <div class="sidebar-year-slider">
       <div class="section-label">Year: <span id="year-display">2025</span></div>
-      <input
-        type="range"
-        id="select-year"
-        name="select-year"
-        min="2021"
-        max="2025"
-        value="2025"
-        step="1"
-        list="year-ticks" />
+      <div class="range">
+        <input
+          type="range"
+          id="select-year"
+          name="select-year"
+          min="2021"
+          max="2025"
+          value="2025"
+          step="1"
+          list="year-ticks" />
+      </div>
       <datalist id="year-ticks">
         <option value="2021"></option>
         <option value="2022"></option>

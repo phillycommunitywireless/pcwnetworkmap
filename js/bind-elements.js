@@ -8,8 +8,8 @@ export const toggleSidebar = () => {
 };
 
 const getActiveTab = () => {
-	const active = document.querySelector('.sidebar-tab.active');
-	return active ? active.dataset.tab : 'tab-basic';
+	const active = document.querySelector('input[name="sidebar-tab"]:checked');
+	return active ? active.value : 'tab-basic';
 };
 
 // Enforces which layers are visible based on the active tab.
@@ -111,13 +111,11 @@ export default () => {
 		});
 
 	// tab switching
-	document.querySelectorAll('.sidebar-tab').forEach((tab) => {
-		tab.addEventListener('click', () => {
-			document.querySelectorAll('.sidebar-tab').forEach(t => t.classList.remove('active'));
+	document.querySelectorAll('input[name="sidebar-tab"]').forEach((radio) => {
+		radio.addEventListener('change', () => {
 			document.querySelectorAll('.sidebar-tab-panel').forEach(p => p.classList.remove('active'));
-			tab.classList.add('active');
-			document.getElementById(tab.dataset.tab).classList.add('active');
-			syncTabLayers(tab.dataset.tab);
+			document.getElementById(radio.value).classList.add('active');
+			syncTabLayers(radio.value);
 		});
 	});
 
