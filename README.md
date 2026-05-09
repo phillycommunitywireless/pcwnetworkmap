@@ -27,7 +27,7 @@ You can run this site locally in a container using Docker
 * Set `MAPBOX_API` in `_config.yml` to your MapBox public token.  
 * `docker compose up -d`
 * `jekyll` will serve at `localhost:4000`
-
+* 
 # Editing map contents
 As of 8/20/24, the map **no longer uses the geosjon files in `/data`**. It is now linked to an API that generates GeoJSON files dynamically based of the content of a spreadsheet - **please contact a PCW staff member for access.**
 
