@@ -187,26 +187,10 @@ button.mapboxgl-popup-close-button {
 /* END SEARCH BAR */
 
 #network-stats-widget {
-  position: absolute;
-  bottom: 130px;
-  left: 10px;
-  background: white;
-  border-radius: 8px;
-  padding: 10px 14px;
-  box-shadow: 0 0 10px 2px rgba(0, 0, 0, .1);
-  z-index: 1;
   font-size: 0.85rem;
-  min-width: 150px;
-}
-
-#network-stats-widget .stats-title {
-  font-weight: bold;
-  color: gray;
-  text-align: center;
-  margin-bottom: 6px;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  margin-top: 8px;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 8px;
 }
 
 #network-stats-widget .stat-row {
