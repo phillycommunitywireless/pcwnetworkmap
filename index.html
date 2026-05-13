@@ -123,15 +123,15 @@
 
     <!-- Persistent year slider — visible on all tabs -->
     <div class="sidebar-year-slider">
-      <div class="section-label">Year: <span id="year-display">2025</span></div>
+      <div class="section-label">Year: <span id="year-display">2026</span></div>
       <div class="range">
         <input
           type="range"
           id="select-year"
           name="select-year"
           min="2021"
-          max="2025"
-          value="2025"
+          max="2026"
+          value="2026"
           step="1"
           list="year-ticks" />
       </div>
@@ -141,6 +141,7 @@
         <option value="2023"></option>
         <option value="2024"></option>
         <option value="2025"></option>
+        <option value="2026"></option>
       </datalist>
       <div class="year-tick-labels">
         <span>2021</span>
@@ -148,10 +149,22 @@
         <span>2023</span>
         <span>2024</span>
         <span>2025</span>
+        <span>2026</span>
       </div>
     </div>
 
     <button type="button" class="sidebar-toggle right" id="sidebar-toggle"></button>
+  </div>
+  <div id="network-stats-widget">
+    <div class="stats-title">Network</div>
+    <div class="stat-row">
+      <span class="stat-label"><img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png"> Main Routers</span>
+      <span class="stat-value" id="rh-count">—</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label"><img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png"> Access Points</span>
+      <span class="stat-value" id="lb-count">—</span>
+    </div>
   </div>
   <script type="module" src="https://unpkg.com/@turf/turf@7.2.0/turf.min.js"></script>
   <script src="js/main.js" type="module"></script>

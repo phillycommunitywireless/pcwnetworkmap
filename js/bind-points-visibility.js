@@ -7,7 +7,25 @@ const visibilityStatus = {
 };
 
 // the network state year to show on the map (only show nodes installed before the specified year)
-let year_to_show = 2025
+let year_to_show = 2026
+
+let networkPointsData = null;
+
+function updateNetworkStats() {
+	if (!networkPointsData) return;
+	const features = networkPointsData.features;
+	const rhCount = features.filter(f => f.properties.type === 'RH' && Number(f.properties.year) <= year_to_show).length;
+	const lbCount = features.filter(f => f.properties.type === 'LB' && Number(f.properties.year) <= year_to_show).length;
+	const rhEl = document.getElementById('rh-count');
+	const lbEl = document.getElementById('lb-count');
+	if (rhEl) rhEl.textContent = rhCount;
+	if (lbEl) lbEl.textContent = lbCount;
+}
+
+export const setNetworkPointsData = (data) => {
+	networkPointsData = data;
+	updateNetworkStats();
+};
 
 // Create an object to store the filter expressions for each layer
 // "all" requires all filter expressions to be met 
@@ -123,6 +141,7 @@ export default () => {
 			LB: ['all', ['==', ['get', 'type'], 'LB'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 		};
 		updatePointsVisibility();
+		updateNetworkStats();
 		// also regenerate linefilters for the new year 
 		lineFilters = {
 			Layer1: ['all', ['==', ['get', 'line_type'], 'Level1'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
