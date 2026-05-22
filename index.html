@@ -58,7 +58,7 @@
 
     <!-- Network tab — nodes, connections -->
     <div class="sidebar-tab-panel" id="tab-links">
-      <div class="section-label">Nodes / AP</div>
+      <div class="section-label">Nodes</div>
       <div class="switch-super-container">
         <label class='switch-container txt-ms'>
           <input type='checkbox' id="layer1" checked />
@@ -123,8 +123,16 @@
 
     <!-- Persistent year slider — visible on all tabs -->
     <div class="sidebar-year-slider">
-      <div class="section-label">Year: <span id="year-display">2026</span></div>
+      <div class="section-label">Installations by year:</div>
       <div class="range">
+        <input
+          type="range"
+          id="select-year-start"
+          name="select-year-start"
+          min="2021"
+          max="2026"
+          value="2021"
+          step="1" />
         <input
           type="range"
           id="select-year"
@@ -132,17 +140,8 @@
           min="2021"
           max="2026"
           value="2026"
-          step="1"
-          list="year-ticks" />
+          step="1" />
       </div>
-      <datalist id="year-ticks">
-        <option value="2021"></option>
-        <option value="2022"></option>
-        <option value="2023"></option>
-        <option value="2024"></option>
-        <option value="2025"></option>
-        <option value="2026"></option>
-      </datalist>
       <div class="year-tick-labels">
         <span>2021</span>
         <span>2022</span>

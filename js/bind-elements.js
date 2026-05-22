@@ -116,6 +116,13 @@ export default () => {
 			document.querySelectorAll('.sidebar-tab-panel').forEach(p => p.classList.remove('active'));
 			document.getElementById(radio.value).classList.add('active');
 			syncTabLayers(radio.value);
+			document.querySelector('.sidebar-year-slider').style.display =
+				radio.value === 'tab-zones' ? 'none' : '';
+			if (radio.value === 'tab-links') {
+				map.flyTo({ center: [-75.13465, 39.98270], zoom: 16 });
+			} else {
+				map.flyTo({ center: [-75.1255526, 39.9899471], zoom: 13.70 });
+			}
 		});
 	});
 
