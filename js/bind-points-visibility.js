@@ -7,7 +7,7 @@ const visibilityStatus = {
 };
 
 // the network state year to show on the map (only show nodes installed before the specified year)
-let year_to_show = 2025
+let year_to_show = 2026
 
 // Create an object to store the filter expressions for each layer
 // "all" requires all filter expressions to be met 

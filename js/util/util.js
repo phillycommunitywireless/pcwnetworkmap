@@ -1,4 +1,10 @@
-export const fetchJSON = (url) => fetch(url).then((r) => r.json());
+export const fetchJSON = async (url) => {
+	const r = await fetch(url);
+	if (!r.ok) {
+		throw new Error(`HTTP ${r.status} ${r.statusText} fetching ${url}`);
+	}
+	return r.json();
+};
 
 /**
  * Generates randomized hex colors

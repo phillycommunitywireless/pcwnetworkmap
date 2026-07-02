@@ -17,7 +17,6 @@ export const loadNetworkPoints = async () => {
 		);
 
 		if (!network_points_data) {
-			alert('Error loading network points');
 			throw ReferenceError("Didn't load required network points");
 		}
 
