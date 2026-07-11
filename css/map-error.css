@@ -1,13 +1,20 @@
 #map-error {
 	position: fixed;
 	top: 12px;
-	left: 50%;
-	transform: translateX(-50%);
+	/* Center with insets instead of left:50% + translateX(-50%): the old
+	   approach anchors to the layout viewport's midpoint, which drifts
+	   off-screen on mobile when the viewport is wider than the device
+	   (issue #91). Pinning both edges keeps the banner on screen and
+	   margin:auto centers it without transforms. */
+	left: 12px;
+	right: 12px;
+	margin: 0 auto;
+	width: fit-content;
+	max-width: 100%;
 	z-index: 1100; /* above the help dialog (1000) */
 	display: none;
 	align-items: center;
 	gap: 12px;
-	max-width: 90%;
 	padding: 10px 14px;
 	background-color: #b71c1c;
 	color: white;
