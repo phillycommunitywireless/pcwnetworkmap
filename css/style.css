@@ -1,5 +1,6 @@
 @import "./sidebar.css";
 @import "./help-dialog.css";
+@import "./map-error.css";
 
 html { height: 100%; }
 

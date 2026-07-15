@@ -19,7 +19,7 @@ let map_zoom = 0;
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 // long/lat
-if (urlParams.has('latitude') & urlParams.has('longitude')) {
+if (urlParams.has('latitude') && urlParams.has('longitude')) {
 	map_center = [urlParams.get('longitude'), urlParams.get('latitude')];
 } else {
 	map_center = DEFAULT_MAP_CENTER;
