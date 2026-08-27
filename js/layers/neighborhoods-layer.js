@@ -50,7 +50,6 @@ export default async () => {
 		paint: {
 			'line-color': darkMode ? 'lightblue' : 'black',
 			'line-width': darkMode ? 1 : 2,
-			'line-offset': darkMode ? 0 : 2
 		},
 		filter: ['==', '$type', 'Polygon'],
 	});
@@ -61,6 +60,7 @@ export default async () => {
 		source: 'neighborhood-centroids',
 		layout: {
 			'text-field': ['get', 'label'], // Use the 'label' property for text
+			'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
 			'text-size': 14,
 			'text-anchor': 'center',
 			visibility: 'none',

@@ -1,44 +1,64 @@
 import {
-	// setBroadbandLayer,
-	// setIncomeLayer,
 	setNeighborhoodLayer,
 	setNeighborhoodOutline,
 } from './bind-elements.util.js';
-import { FlyToDefaults, NavBookmarks } from './const.js';
 
 export const toggleSidebar = () => {
-	const sidebar = document.getElementById('right-sidebar');
-	const isCollapsed = sidebar.classList.toggle('collapsed');
-	if (isCollapsed) {
-		document.getElementById('sidebar-advanced-ui').classList.add('collapsed');
-	}
-};
-export const toggleAdvancedSidebar = () => {
-	const sidebar = document.getElementById('sidebar-advanced-ui');
-	sidebar.classList.toggle('collapsed');
+	document.getElementById('right-sidebar').classList.toggle('collapsed');
 };
 
-const navigateToBookmark = (bookmarkId) => {
-	if (!NavBookmarks[bookmarkId]) {
-		console.error('No bookmark for', bookmarkId);
-		return;
+const getActiveTab = () => {
+	const active = document.querySelector('input[name="sidebar-tab"]:checked');
+	return active ? active.value : 'tab-basic';
+};
+
+// Enforces which layers are visible based on the active tab.
+// Heatmap belongs to Basic; nodes and connections belong to Links.
+// Called on every tab switch and once after the map reaches idle on load.
+const syncTabLayers = (tabId) => {
+	const onBasic = tabId === 'tab-basic';
+	const onLinks = tabId === 'tab-links';
+
+	if (map.getLayer('heatmap-layer')) {
+		const heatmapChecked = document.getElementById('heatmap-layer').checked;
+		map.setLayoutProperty(
+			'heatmap-layer',
+			'visibility',
+			onBasic && heatmapChecked ? 'visible' : 'none'
+		);
 	}
-	map.flyTo({
-		...FlyToDefaults,
-		...NavBookmarks[bookmarkId],
+
+	if (map.getLayer('network-points-layer')) {
+		map.setLayoutProperty(
+			'network-points-layer',
+			'visibility',
+			onLinks ? 'visible' : 'none'
+		);
+	}
+
+	[
+		['toggleNetworkLinks',  'highsite-line'],
+		['toggleNetworkLinks2', 'wiredap-line'],
+		['toggleNetworkLinks3', 'meshnode-line'],
+		['toggleNetworkLinks4', 'ptp-line'],
+	].forEach(([cbId, layerId]) => {
+		if (map.getLayer(layerId)) {
+			const checked = document.getElementById(cbId).checked;
+			map.setLayoutProperty(
+				layerId,
+				'visibility',
+				onLinks && checked ? 'visible' : 'none'
+			);
+		}
 	});
-	toggleSidebar();
 };
 
 export default () => {
 	document
 		.getElementById('sidebar-toggle')
 		.addEventListener('click', toggleSidebar);
-	document
-		.getElementById('sidebar-advanced-options')
-		.addEventListener('click', toggleAdvancedSidebar);
 
-	// visibility bindings
+	// connection line visibility
 	document
 		.getElementById('toggleNetworkLinks')
 		.addEventListener('change', function () {
@@ -79,55 +99,36 @@ export default () => {
 			);
 		});
 
-	document
-		.getElementById('neighborhood-boundaries')
-		.addEventListener('click', function () {
-			setNeighborhoodLayer(this.checked);
-		});
-
+	// neighborhood outline toggle — resets hidden fill checkbox on toggle-off
+	// so setNeighborhoodOutline doesn't accidentally re-show the fill layer
 	document
 		.getElementById('neighborhood-outline-only')
 		.addEventListener('change', function () {
+			if (!this.checked) {
+				document.getElementById('neighborhood-boundaries').checked = false;
+			}
 			setNeighborhoodOutline(this.checked);
 		});
 
-	/*
-	document
-		.getElementById('income-blocks')
-		.addEventListener('change', function () {
-			setIncomeLayer(this.checked);
-		});
-
-	document
-		.getElementById('show-income-popup')
-		.addEventListener('change', function () {
-			if (!this.checked) {
-				map.fire('close-income-popup');
+	// tab switching
+	document.querySelectorAll('input[name="sidebar-tab"]').forEach((radio) => {
+		radio.addEventListener('change', () => {
+			document.querySelectorAll('.sidebar-tab-panel').forEach(p => p.classList.remove('active'));
+			document.getElementById(radio.value).classList.add('active');
+			syncTabLayers(radio.value);
+			document.querySelector('.sidebar-year-slider').style.display =
+				radio.value === 'tab-zones' ? 'none' : '';
+			if (radio.value === 'tab-links') {
+				map.flyTo({ center: [-75.13465, 39.98270], zoom: 16 });
+			} else {
+				map.flyTo({ center: [-75.1255526, 39.9899471], zoom: 13.70 });
 			}
 		});
-	*/
-	/*
-	document
-		.getElementById('broadband-blocks')
-		.addEventListener('change', function () {
-			setBroadbandLayer(this.checked);
-		});
-
-	document
-		.getElementById('show-broadband-popup')
-		.addEventListener('change', function () {
-			if (!this.checked) {
-				map.fire('close-broadband-popup');
-			}
-		});
-	*/
-
-	// navigation bindings
-	document.getElementById('poi-select').addEventListener('change', (e) => {
-		const poi = e.target.value;
-		if (!poi || poi === 'null') {
-			return;
-		}
-		navigateToBookmark(poi);
 	});
+
+	// Sync on every style load (initial + tile-style changes).
+	// 'layers-ready' is fired by map-on-style-load.js after all synchronous
+	// layers have been added, guaranteeing network-points-layer and
+	// heatmap-layer exist when syncTabLayers runs.
+	map.on('layers-ready', () => syncTabLayers(getActiveTab()));
 };

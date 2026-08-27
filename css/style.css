@@ -187,6 +187,30 @@ button.mapboxgl-popup-close-button {
 }
 /* END SEARCH BAR */
 
+#network-stats-widget {
+  font-size: 0.85rem;
+  margin-top: 8px;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 8px;
+}
+
+#network-stats-widget .stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 2px 0;
+}
+
+#network-stats-widget .stat-label {
+  color: #666;
+}
+
+#network-stats-widget .stat-value {
+  font-weight: bold;
+  color: #5262ED;
+}
+
 .mapboxgl-popup {
   /* transform is not judicious enough - the point is placed on the map using transform */
   transition: opacity 300ms ease-in-out;

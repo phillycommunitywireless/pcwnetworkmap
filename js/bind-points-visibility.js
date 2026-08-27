@@ -8,30 +8,49 @@ const visibilityStatus = {
 
 // the network state year to show on the map (only show nodes installed before the specified year)
 let year_to_show = 2026
+let year_start = 2021
+
+let networkPointsData = null;
+
+function updateNetworkStats() {
+	if (!networkPointsData) return;
+	const features = networkPointsData.features;
+	const rhCount = features.filter(f => f.properties.type === 'RH' && Number(f.properties.year) >= year_start && Number(f.properties.year) <= year_to_show).length;
+	const lbCount = features.filter(f => f.properties.type === 'LB' && Number(f.properties.year) >= year_start && Number(f.properties.year) <= year_to_show).length;
+	const rhEl = document.getElementById('rh-count');
+	const lbEl = document.getElementById('lb-count');
+	if (rhEl) rhEl.textContent = rhCount;
+	if (lbEl) lbEl.textContent = lbCount;
+}
+
+export const setNetworkPointsData = (data) => {
+	networkPointsData = data;
+	updateNetworkStats();
+};
 
 // Create an object to store the filter expressions for each layer
 // "all" requires all filter expressions to be met 
 // "to-number" included because we have to cast both the property and the year_to_show var to integers 
 let layerFilters = {
-	HS: ['all', ['==', ['get', 'type'], 'HS'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	RH: ['all', ['==', ['get', 'type'], 'RH'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	MN: ['all', ['==', ['get', 'type'], 'MN'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	LB: ['all', ['==', ['get', 'type'], 'LB'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	HS: ['all', ['==', ['get', 'type'], 'HS'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	RH: ['all', ['==', ['get', 'type'], 'RH'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	MN: ['all', ['==', ['get', 'type'], 'MN'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	LB: ['all', ['==', ['get', 'type'], 'LB'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 };
 
 // Object storing filter expressions for line layers 
 let lineFilters = {
-	Layer1: ['all', ['==', ['get', 'line_type'], 'Level1'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	Layer2: ['all', ['==', ['get', 'line_type'], 'Level2'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	Layer3: ['all', ['==', ['get', 'line_type'], 'Level3'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	Layer4: ['all', ['==', ['get', 'line_type'], 'Level4'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	Layer1: ['all', ['==', ['get', 'line_type'], 'Level1'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	Layer2: ['all', ['==', ['get', 'line_type'], 'Level2'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	Layer3: ['all', ['==', ['get', 'line_type'], 'Level3'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	Layer4: ['all', ['==', ['get', 'line_type'], 'Level4'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 }
 
 // Object storing filter expressions for heatmap 
 let heatmapFilters = {
-	RH: ['all', ['==', ['get', 'type'], 'RH'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	MN: ['all', ['==', ['get', 'type'], 'MN'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	LB: ['all', ['==', ['get', 'type'], 'LB'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	RH: ['all', ['==', ['get', 'type'], 'RH'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	MN: ['all', ['==', ['get', 'type'], 'MN'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+	LB: ['all', ['==', ['get', 'type'], 'LB'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 }
 
 // Function to update the visibility of points based on filters
@@ -112,36 +131,63 @@ export default () => {
 		updatePointsVisibility();
 	});
 
+	const year_selector_start = document.getElementById('select-year-start');
 	const year_selector = document.getElementById('select-year');
-	year_selector.addEventListener('change', ()=>{
-		year_to_show = Number(year_selector.value)
-		// regenerate layerfilters for the new year 
+
+	const updateSliderFill = () => {
+		const min = Number(year_selector_start.min);
+		const max = Number(year_selector_start.max);
+		const startPct = ((year_selector_start.value - min) / (max - min)) * 100;
+		const endPct = ((year_selector.value - min) / (max - min)) * 100;
+		year_selector_start.style.setProperty('--fill-start', startPct + '%');
+		year_selector_start.style.setProperty('--fill-end', endPct + '%');
+		year_selector_start.style.zIndex = Number(year_selector_start.value) >= Number(year_selector.value) ? 5 : 3;
+	};
+	updateSliderFill();
+	year_selector_start.addEventListener('input', updateSliderFill);
+	year_selector.addEventListener('input', updateSliderFill);
+
+	const rebuildFilters = () => {
 		layerFilters = {
-			HS: ['all', ['==', ['get', 'type'], 'HS'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			RH: ['all', ['==', ['get', 'type'], 'RH'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			MN: ['all', ['==', ['get', 'type'], 'MN'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			LB: ['all', ['==', ['get', 'type'], 'LB'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			HS: ['all', ['==', ['get', 'type'], 'HS'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			RH: ['all', ['==', ['get', 'type'], 'RH'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			MN: ['all', ['==', ['get', 'type'], 'MN'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			LB: ['all', ['==', ['get', 'type'], 'LB'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 		};
 		updatePointsVisibility();
-		// also regenerate linefilters for the new year 
+		updateNetworkStats();
 		lineFilters = {
-			Layer1: ['all', ['==', ['get', 'line_type'], 'Level1'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			Layer2: ['all', ['==', ['get', 'line_type'], 'Level2'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			Layer3: ['all', ['==', ['get', 'line_type'], 'Level3'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			Layer4: ['all', ['==', ['get', 'line_type'], 'Level4'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-		}
-		updateLineVisibility()
-		// also also regenerate heatmap for the new year 
+			Layer1: ['all', ['==', ['get', 'line_type'], 'Level1'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			Layer2: ['all', ['==', ['get', 'line_type'], 'Level2'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			Layer3: ['all', ['==', ['get', 'line_type'], 'Level3'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			Layer4: ['all', ['==', ['get', 'line_type'], 'Level4'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+		};
+		updateLineVisibility();
 		heatmapFilters = {
-			RH: ['all', ['==', ['get', 'type'], 'RH'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			MN: ['all', ['==', ['get', 'type'], 'MN'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			LB: ['all', ['==', ['get', 'type'], 'LB'], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-		}
-		updateHeatmapVisibility()
+			RH: ['all', ['==', ['get', 'type'], 'RH'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			MN: ['all', ['==', ['get', 'type'], 'MN'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+			LB: ['all', ['==', ['get', 'type'], 'LB'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+		};
+		updateHeatmapVisibility();
+	};
 
-		let year_display = document.getElementById('year-display')
-		year_display.innerHTML = year_to_show
-	})
+	year_selector_start.addEventListener('change', () => {
+		if (Number(year_selector_start.value) > Number(year_selector.value)) {
+			year_selector_start.value = year_selector.value;
+		}
+		year_start = Number(year_selector_start.value);
+		rebuildFilters();
+		updateSliderFill();
+	});
+
+	year_selector.addEventListener('change', () => {
+		if (Number(year_selector.value) < Number(year_selector_start.value)) {
+			year_selector.value = year_selector_start.value;
+		}
+		year_to_show = Number(year_selector.value);
+		rebuildFilters();
+		updateSliderFill();
+	});
 
 	const heatmapCheckbox = document.getElementById('heatmap-layer');
 	heatmapCheckbox.addEventListener('change', () => {
