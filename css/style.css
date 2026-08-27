@@ -81,6 +81,13 @@ button.mapboxgl-popup-close-button {
   font-size: 24px;
 }
 
+/* match the sidebar/search-bar font instead of mapbox-gl's default Helvetica */
+#tile-style-control button,
+#tile-style-menu,
+#tile-style-menu button {
+  font-family: "Open Sans", sans-serif;
+}
+
 #tile-style-control {
   display: flex;
   justify-content: center;
