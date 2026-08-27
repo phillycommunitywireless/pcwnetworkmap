@@ -5,6 +5,11 @@
 
 #right-sidebar {
 	position: absolute;
+	/* float with the same 10px margin as the geocoder search bar
+	   (!important because the markup's "right" class is an Assembly utility: right: 0 !important) */
+	top: 10px;
+	right: 10px !important;
+	border-radius: 4px;
 	padding: 0;
 	box-shadow: var(--box-shadow);
 	display: flex;
@@ -31,7 +36,8 @@
 }
 
 .sidebar.right.collapsed {
-	transform: translateX(var(--sidebar-width));
+	/* +10px covers the right margin so the panel fully leaves the viewport */
+	transform: translateX(calc(var(--sidebar-width) + 10px));
 }
 
 .sidebar .sidebar-toggle::after {
@@ -83,6 +89,14 @@
 .sidebar-tabs .toggle {
 	width: 100%;
 	text-align: center;
+}
+
+.sidebar-tabs .toggle-container:first-child .toggle {
+	border-top-left-radius: 4px;
+}
+
+.sidebar-tabs .toggle-container:last-child .toggle {
+	border-top-right-radius: 4px;
 }
 
 .sidebar-tabs .toggle-container input:checked ~ .toggle {

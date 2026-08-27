@@ -15,7 +15,8 @@ let networkPointsData = null;
 function updateNetworkStats() {
 	if (!networkPointsData) return;
 	const features = networkPointsData.features;
-	const rhCount = features.filter(f => f.properties.type === 'RH' && Number(f.properties.year) >= year_start && Number(f.properties.year) <= year_to_show).length;
+	// APs = rooftop hubs + mesh nodes (both broadcast WiFi); LBs are the point-to-point receivers
+	const rhCount = features.filter(f => (f.properties.type === 'RH' || f.properties.type === 'MN') && Number(f.properties.year) >= year_start && Number(f.properties.year) <= year_to_show).length;
 	const lbCount = features.filter(f => f.properties.type === 'LB' && Number(f.properties.year) >= year_start && Number(f.properties.year) <= year_to_show).length;
 	const rhEl = document.getElementById('rh-count');
 	const lbEl = document.getElementById('lb-count');
