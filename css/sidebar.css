@@ -1,34 +1,30 @@
 :root {
-	--sidebar-width: 215px;
+	--sidebar-width: 255px;
 	--box-shadow: 0 0 10px 2px rgba(0, 0, 0, .1);
 }
 
-#right-sidebar,
-#sidebar-advanced-ui {
+#right-sidebar {
 	position: absolute;
-	padding: 8px 16px;
+	/* float with the same 10px margin as the geocoder search bar
+	   (!important because the markup's "right" class is an Assembly utility: right: 0 !important) */
+	top: 10px;
+	right: 10px !important;
+	border-radius: 4px;
+	padding: 0;
 	box-shadow: var(--box-shadow);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-#right-sidebar,
-#sidebar-advanced-ui,
 .sidebar-content {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-}
-
-
-#sidebar-advanced-ui {
-	top: 100%;
 	width: 100%;
-	padding-top: 0;
-	background-color: white;
-	transition: transform 1s;
-}
-#sidebar-advanced-ui.collapsed {
-	transform: translateX(var(--sidebar-width));
+	padding: 0;
+	position: relative;
 }
 
 .sidebar {
@@ -40,7 +36,8 @@
 }
 
 .sidebar.right.collapsed {
-	transform: translateX(var(--sidebar-width));
+	/* +10px covers the right margin so the panel fully leaves the viewport */
+	transform: translateX(calc(var(--sidebar-width) + 10px));
 }
 
 .sidebar .sidebar-toggle::after {
@@ -65,23 +62,165 @@
 }
 
 .sidebar-toggle.right {
-	left: -1.8em;
+	left: -2em;
 }
 
 .sidebar-toggle:hover {
 	cursor: pointer;
 }
 
-.sidebar-content {
-	width: 100%;
-	padding: 0;
-	position: relative;
-}
-
-
 .switch-super-container {
 	display: flex;
 	flex-direction: column;
 	gap: 3px;
 	width: 100%;
+}
+
+/* ── Tab bar ─────────────────────────────────────────── */
+
+.sidebar-tabs {
+	width: 100%;
+}
+
+.sidebar-tabs .toggle-container {
+	flex: 1;
+}
+
+.sidebar-tabs .toggle {
+	width: 100%;
+	text-align: center;
+}
+
+.sidebar-tabs .toggle-container:first-child .toggle {
+	border-top-left-radius: 4px;
+}
+
+.sidebar-tabs .toggle-container:last-child .toggle {
+	border-top-right-radius: 4px;
+}
+
+.sidebar-tabs .toggle-container input:checked ~ .toggle {
+	background-color: #5262ED;
+	color: #fff;
+}
+
+.sidebar-tabs .toggle-container .toggle:hover {
+	background-color: #E6E6E6;
+}
+
+/* ── Tab panels ──────────────────────────────────────── */
+
+.sidebar-tab-panel {
+	display: none;
+	flex-direction: column;
+	width: 100%;
+	padding: 8px 16px 12px;
+	gap: 6px;
+	box-sizing: border-box;
+}
+
+.sidebar-tab-panel.active {
+	display: flex;
+}
+
+
+.sidebar-year-slider {
+	width: 100%;
+	padding: 8px 16px 12px;
+	box-sizing: border-box;
+	border-top: 1px solid #e0e0e0;
+}
+
+.sidebar-year-slider .range {
+	position: relative;
+	height: 24px;
+}
+
+.sidebar-year-slider .range > input[type="range"] {
+	-webkit-appearance: none;
+	appearance: none;
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	background: transparent;
+	pointer-events: none;
+	outline: none;
+	margin: 0;
+}
+
+.sidebar-year-slider .range > input[type="range"]::-webkit-slider-runnable-track {
+	height: 4px;
+	border-radius: 2px;
+	background: transparent;
+}
+
+#select-year-start { z-index: 3; }
+#select-year { z-index: 4; }
+
+#select-year-start::-webkit-slider-runnable-track {
+	background: linear-gradient(
+		to right,
+		#d0d0d0 var(--fill-start, 0%),
+		#5262ED var(--fill-start, 0%),
+		#5262ED var(--fill-end, 100%),
+		#d0d0d0 var(--fill-end, 100%)
+	);
+}
+
+.sidebar-year-slider .range > input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #5262ED;
+	margin-top: -6px;
+	cursor: pointer;
+	pointer-events: all;
+}
+
+#select-year-start::-moz-range-track {
+	background: linear-gradient(
+		to right,
+		#d0d0d0 var(--fill-start, 0%),
+		#5262ED var(--fill-start, 0%),
+		#5262ED var(--fill-end, 100%),
+		#d0d0d0 var(--fill-end, 100%)
+	);
+	height: 4px;
+	border-radius: 2px;
+}
+
+#select-year::-moz-range-track {
+	background: transparent;
+	height: 4px;
+}
+
+.sidebar-year-slider .range > input[type="range"]::-moz-range-thumb {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #5262ED;
+	border: none;
+	cursor: pointer;
+	pointer-events: all;
+}
+
+.year-tick-labels {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 2px;
+	font-size: 0.65rem;
+	color: #999;
+}
+
+.switch-super-container + .section-label {
+	margin-top: 6px;
+}
+
+.sidebar-coming-soon {
+	color: #999;
+	font-size: 0.8rem;
+	text-align: center;
+	margin: 12px 0 0;
 }

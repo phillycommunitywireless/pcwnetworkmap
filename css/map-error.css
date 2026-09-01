@@ -1,0 +1,43 @@
+#map-error {
+	position: fixed;
+	top: 12px;
+	/* Center with insets instead of left:50% + translateX(-50%): the old
+	   approach anchors to the layout viewport's midpoint, which drifts
+	   off-screen on mobile when the viewport is wider than the device
+	   (issue #91). Pinning both edges keeps the banner on screen and
+	   margin:auto centers it without transforms. */
+	left: 12px;
+	right: 12px;
+	margin: 0 auto;
+	width: fit-content;
+	max-width: 100%;
+	z-index: 1100; /* above the help dialog (1000) */
+	display: none;
+	align-items: center;
+	gap: 12px;
+	padding: 10px 14px;
+	background-color: #b71c1c;
+	color: white;
+	border-radius: 6px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	font-size: 14px;
+	line-height: 1.3;
+}
+
+#map-error.visible {
+	display: flex;
+}
+
+#map-error-close {
+	display: flex;
+	align-items: center;
+	padding: 0;
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: white;
+}
+
+#map-error-close svg.icon {
+	font-size: 18px;
+}

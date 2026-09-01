@@ -19,7 +19,7 @@ let map_zoom = 0;
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 // long/lat
-if (urlParams.has('latitude') & urlParams.has('longitude')) {
+if (urlParams.has('latitude') && urlParams.has('longitude')) {
 	map_center = [urlParams.get('longitude'), urlParams.get('latitude')];
 } else {
 	map_center = DEFAULT_MAP_CENTER;
@@ -42,7 +42,7 @@ if (urlParams.has('menu_closed') && testMobile().phone === false){
 export default () => {
 	window.map = new mapboxgl.Map({
 		container: 'map',
-		style: 'mapbox://styles/mapbox/streets-v12',
+		style: 'mapbox://styles/infopcw/cmphejix900bi01sc3hbhb0lx',
 		// Mapbox GL JS v3 defaults to the globe projection, and `line-z-offset`
 		// (used to elevate the connection lines in network-layers.js) is "not
 		// supported for globe projection" — it is silently ignored there. Mercator

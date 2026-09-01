@@ -4,6 +4,7 @@ import loadHeatmap from './layers/load-heatmap.js';
 import loadNeighborhoodsLayer from './layers/neighborhoods-layer.js';
 import { loadNetworkLayers, loadNetworkPoints } from './layers/network-layers.js';
 import load3dBuildings from './layers/three-d-buildings.layer.js';
+import { setNetworkPointsData } from './bind-points-visibility.js';
 
 export default () => {
 	map.on('style.load', async () => {
@@ -25,7 +26,12 @@ export default () => {
 
 		// Create heatmap based on features' "type" property
 		if (network_points_data) {
+			setNetworkPointsData(network_points_data);
 			loadHeatmap(network_points_data);
 		}
+
+		// Signal that all synchronous layers are ready so bind-elements.js
+		// can enforce tab-based visibility before the first render.
+		map.fire('layers-ready');
 	});
 };

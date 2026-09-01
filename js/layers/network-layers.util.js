@@ -1,4 +1,5 @@
 import { fetchJSON } from '../util/util.js';
+import { showMapError } from '../util/map-error.js';
 
 export const loadNetworkLayer = async (endpoint, name) => {
 	const api_endpoint =
@@ -11,7 +12,8 @@ export const loadNetworkLayer = async (endpoint, name) => {
 			data: layer_data,
 		});
 	} catch (e) {
-		'error loading network connection layer', name, e;
+		console.error('error loading network connection layer', name, e);
+		showMapError();
 	}
 	return layer_data;
 };

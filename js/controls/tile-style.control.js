@@ -3,7 +3,7 @@
 const innerHTML = `
 <button>
 	<span>Layer</span>
-	<label id="active-label">streets</label>
+	<label id="active-label">light</label>
 </button>
 <div id="tile-style-menu">
 	<div>
@@ -11,20 +11,12 @@ const innerHTML = `
 		<label for="satellite-streets-v12">aerial</label>
 	</div>
 		<div>
-		<input id="light-v11" type="radio" name="rtoggle" value="light">
+		<input id="light-v11" type="radio" name="rtoggle" value="light" checked="checked" data-style="mapbox://styles/infopcw/cmphejix900bi01sc3hbhb0lx">
 		<label for="light-v11">light</label>
 	</div>
 		<div>
 		<input id="dark-v11" type="radio" name="rtoggle" value="dark">
 		<label for="dark-v11">dark</label>
-	</div>
-		<div>
-		<input id="streets-v12" type="radio" name="rtoggle" value="streets" checked="checked">
-		<label for="streets-v12">streets</label>
-	</div>
-		<div>
-		<input id="outdoors-v12" type="radio" name="rtoggle" value="outdoors">
-		<label for="outdoors-v12">nature</label>
 	</div>
 </div>
 `;
@@ -49,7 +41,8 @@ export default class TileStyleControl {
 				const layerId = layer.target.id;
 				document.getElementById('active-label').innerText =
 					layerId.match(/\w*/)[0]; // strip version
-				map.setStyle('mapbox://styles/mapbox/' + layerId);
+				const styleUrl = layer.target.dataset.style || 'mapbox://styles/mapbox/' + layerId;
+				map.setStyle(styleUrl);
 				document.getElementById('tile-style-menu').classList.remove('visible');
 			};
 		}

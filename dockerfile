@@ -1,4 +1,7 @@
-# from my digging the github action uses jekyll 3.9.5 but that doesn't exist on dhub... 
-# https://github.com/jekyll/jekyll/issues/9066 - issue with webrick gem - downgrade version
-FROM jekyll/jekyll:3.8.5
-CMD jekyll serve --force_polling --drafts --config _config.yml
+# Ruby 3.2 matches the GitHub Actions build environment (ruby/setup-ruby@v1 with ruby-version: '3.2.3')
+# Uses arm64-native image — no emulation needed on Apple Silicon
+FROM ruby:3.2-alpine
+RUN apk add --no-cache build-base gcc cmake git
+RUN gem install bundler
+WORKDIR /srv/jekyll
+CMD sh -c "bundle install && bundle exec jekyll serve --force_polling --drafts --config _config.yml --host 0.0.0.0"

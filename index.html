@@ -20,18 +20,77 @@
   <div id="loading">Loading...</div>
   <div id="map"></div>
   <div id="right-sidebar" class="sidebar right collapsed">
-    <div class="sidebar-content gap-6">
-      <div class="section-label">Navigate to</div>
-      <div class="select-container" id="poi-select">
-        <select class='select'>
-          <option value="null">Select a POI</option>
-          <option value="norris_square">Norris Sq. Park</option>
-          <option value="fairhill_square">Fairhill Sq. Park</option>
-          <option value="mcpherson_square">McPherson Sq. Park</option>
-        </select>
-        <div class='select-arrow'></div>
+
+    <!-- Tab bar -->
+    <div class="toggle-group sidebar-tabs">
+      <label class="toggle-container">
+        <input type="radio" name="sidebar-tab" value="tab-basic" checked />
+        <div class="toggle">Signal</div>
+      </label>
+      <label class="toggle-container">
+        <input type="radio" name="sidebar-tab" value="tab-links" />
+        <div class="toggle">Network</div>
+      </label>
+      <label class="toggle-container">
+        <input type="radio" name="sidebar-tab" value="tab-zones" />
+        <div class="toggle">Services</div>
+      </label>
+    </div>
+
+    <!-- Signal tab — heatmap + neighborhood outline -->
+    <div class="sidebar-tab-panel active" id="tab-basic">
+      <div class="section-label">Signal View</div>
+      <div class="switch-super-container">
+        <label class="switch-container txt-ms">
+          <input type="checkbox" id="heatmap-layer" checked />
+          <div class="switch mr6"></div>
+          Heatmap
+        </label>
+        <label class="switch-container txt-ms">
+          <input type="checkbox" id="neighborhood-outline-only" />
+          <div class="switch mr6"></div>
+          Neighborhoods
+        </label>
       </div>
-      <div class="section-label">Show Connections</div>
+      <!-- Hidden: kept in DOM so bind-elements.util.js can read/set .checked -->
+      <input type="checkbox" id="neighborhood-boundaries" style="display:none" />
+    </div>
+
+    <!-- Network tab — nodes, connections -->
+    <div class="sidebar-tab-panel" id="tab-links">
+      <div class="section-label">Nodes</div>
+      <div class="switch-super-container">
+        <label class='switch-container txt-ms'>
+          <input type='checkbox' id="layer1" checked />
+          <div class="switch mr6"></div>
+          <img class="layer-icon"
+            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png">
+          High Sites
+        </label>
+        <label class='switch-container txt-ms'>
+          <input type='checkbox' id="layer4" checked />
+          <div class="switch mr6"></div>
+          <img class="layer-icon"
+            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png">
+          Main Routers
+        </label>
+        <label class='switch-container txt-ms'>
+          <input type='checkbox' id="layer2" checked />
+          <div class="switch mr6"></div>
+          <img class="layer-icon"
+            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png">
+          Access Points
+        </label>
+        <label class='switch-container txt-ms'>
+          <input type='checkbox' id="layer3" checked />
+          <div class="switch mr6"></div>
+          <img class="layer-icon"
+            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png">
+          Mesh Nodes
+        </label>
+      </div>
+
+      <div class="section-label">Connections</div>
       <div class="switch-super-container">
         <label class="switch-container">
           <input type="checkbox" id="toggleNetworkLinks" disabled />
@@ -54,100 +113,55 @@
           <div class="ml6 txt-ms">Wired APs to Mesh Nodes</div>
         </label>
       </div>
-      <button type="button" id="sidebar-advanced-options" class="btn round">
-        Advanced Options
-      </button>
     </div>
-    <div id="sidebar-advanced-ui" class="collapsed">
-      <div class="section-label">Select layers</div>
-      <div class="switch-super-container">
-        <label class='switch-container txt-ms'>
-          <input type='checkbox' id="layer1" checked />
-          <div class="switch mr6"></div>
-          <img class="layer-icon"
-            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png">
-          High Sites
-        </label>
-        <label class='switch-container txt-ms'>
-          <input type='checkbox' id="layer4" checked />
-          <div class="switch mr6"></div>
-          <img class="layer-icon"
-            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png">
-          Main Router
-        </label>
-        <label class='switch-container txt-ms'>
-          <input type='checkbox' id="layer2" checked />
-          <div class="switch mr6"></div>
-          <img class="layer-icon"
-            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png">
-          Access Points
-        </label>
-        <label class='switch-container txt-ms'>
-          <input type='checkbox' id="layer3" checked />
-          <div class="switch mr6"></div>
-          <img class="layer-icon"
-            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png"> Mesh
-          Nodes
-        </label>
-        <label class='switch-container txt-ms'>
-          <input type='checkbox' id="heatmap-layer" />
-          <div class="switch mr6"></div>
-          Heatmap
-        </label>
 
-        <div class="section-label">Year: <span id="year-display">2025</span></div>
-        <div>
-          <input
-            type="range"
-            id="select-year"
-            name="select-year"
-            min="2021"
-            max="2025"
-            value="2025"
-            step="1"/>
+    <!-- Services tab — placeholder -->
+    <div class="sidebar-tab-panel" id="tab-zones">
+      <div class="section-label">Operations Zones</div>
+      <p class="sidebar-coming-soon">Coming soon</p>
+    </div>
+
+    <!-- Persistent year slider — visible on all tabs -->
+    <div class="sidebar-year-slider">
+      <div class="section-label">Installations by year:</div>
+      <div class="range">
+        <input
+          type="range"
+          id="select-year-start"
+          name="select-year-start"
+          min="2021"
+          max="2026"
+          value="2021"
+          step="1" />
+        <input
+          type="range"
+          id="select-year"
+          name="select-year"
+          min="2021"
+          max="2026"
+          value="2026"
+          step="1" />
+      </div>
+      <div class="year-tick-labels">
+        <span>2021</span>
+        <span>2022</span>
+        <span>2023</span>
+        <span>2024</span>
+        <span>2025</span>
+        <span>2026</span>
+      </div>
+      <div id="network-stats-widget">
+        <div class="stat-row">
+          <span class="stat-label"><img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png"> Access Points</span>
+          <span class="stat-value" id="rh-count">—</span>
         </div>
-
-        <div class="section-label">Census Data</div>
-        <div>
-          <label class='switch-container txt-ms'>
-            <input type='checkbox' id="neighborhood-boundaries" />
-            <div class="switch mr6"></div>
-            Neighborhoods
-          </label>
-          <label class='switch-container ml30'>
-            <input type='checkbox' id="neighborhood-outline-only" />
-            <div class="switch mr6"></div>
-            Outline
-          </label>
+        <div class="stat-row">
+          <span class="stat-label"><img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png"> Main Routers</span>
+          <span class="stat-value" id="lb-count">—</span>
         </div>
-        <!-- <div>
-          <label class='switch-container txt-ms'>
-            <input type='checkbox' id="income-blocks" />
-            <div class="switch mr6"></div>
-            Income
-          </label>
-
-          <label class='switch-container ml30'>
-            <input type='checkbox' id="show-income-popup" checked />
-            <div class="switch mr6"></div>
-            Show Popup
-          </label>
-        </div> -->
-        <!-- <div>
-          <label class='switch-container txt-ms'>
-            <input type='checkbox' id="broadband-blocks" />
-            <div class="switch mr6"></div>
-            Internet Access
-          </label>
-
-          <label class='switch-container ml24'>
-            <input type='checkbox' id="show-broadband-popup" checked />
-            <div class="switch mr6"></div>
-            Show Popup
-          </label>
-        </div> -->
       </div>
     </div>
+
     <button type="button" class="sidebar-toggle right" id="sidebar-toggle"></button>
   </div>
   <script type="module" src="https://unpkg.com/@turf/turf@7.2.0/turf.min.js"></script>
