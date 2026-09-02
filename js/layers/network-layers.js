@@ -63,6 +63,18 @@ export const loadNetworkPoints = async () => {
 };
 
 export const loadNetworkLayers = () => {
+	// Lift the connection lines off the ground so they read as 3D alongside the
+	// building-elevated point icons (which use `symbol-z-elevate`). Mapbox has no
+	// line equivalent that auto-snaps to building height, so this is a single
+	// constant offset (meters) rather than a per-endpoint match — good enough to
+	// stop the lines lying flat on the street. Requires `line-elevation-reference`
+	// to be set; both props need mapbox-gl >= 3.8 (we're on 3.17). Tune per level
+	// if high-site links want more lift than rooftop/mesh links. The paint
+	// blocks below set `line-emissive-strength` so the lifted lines stay bright
+	// above the shaded 3D buildings instead of going dim.
+	// NOTE: requires the mercator projection (set in map-init.js) — `line-z-offset`
+	// is silently ignored under Mapbox's default globe projection.
+	const LINE_Z_OFFSET_M = 35;
 	// Level 1
 	loadNetworkLayer('/get_level1', 'line').then(() => {
 		const animationLineId = 'highsite-line';
@@ -72,12 +84,15 @@ export const loadNetworkLayers = () => {
 			id: animationLineId,
 			layout: {
 				visibility: 'none',
+				'line-elevation-reference': 'ground',
+				'line-z-offset': LINE_Z_OFFSET_M,
 			},
 			minzoom: 13,
 			paint: {
 				'line-color': '#1565C0',
 				'line-width': 2,
 				'line-opacity': 0.65,
+				'line-emissive-strength': 1,
 			},
 		});
 		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks');
@@ -93,12 +108,15 @@ export const loadNetworkLayers = () => {
 			id: animationLineId,
 			layout: {
 				visibility: 'none',
+				'line-elevation-reference': 'ground',
+				'line-z-offset': LINE_Z_OFFSET_M,
 			},
 			minzoom: 13,
 			paint: {
 				'line-color': '#2E7D32',
 				'line-width': 4,
 				'line-opacity': 0.65,
+				'line-emissive-strength': 1,
 			},
 		});
 		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks2');
@@ -114,12 +132,15 @@ export const loadNetworkLayers = () => {
 			id: animationLineId,
 			layout: {
 				visibility: 'none',
+				'line-elevation-reference': 'ground',
+				'line-z-offset': LINE_Z_OFFSET_M,
 			},
 			minzoom: 13,
 			paint: {
 				'line-color': '#E65100',
 				'line-width': 4,
 				'line-opacity': 0.65,
+				'line-emissive-strength': 1,
 			},
 		});
 		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks3');
@@ -135,12 +156,15 @@ export const loadNetworkLayers = () => {
 			id: animationLineId,
 			layout: {
 				visibility: 'none',
+				'line-elevation-reference': 'ground',
+				'line-z-offset': LINE_Z_OFFSET_M,
 			},
 			minzoom: 13,
 			paint: {
 				'line-color': '#AD1457',
 				'line-width': 4,
 				'line-opacity': 0.65,
+				'line-emissive-strength': 1,
 			},
 		});
 		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks4');

@@ -43,6 +43,12 @@ export default () => {
 	window.map = new mapboxgl.Map({
 		container: 'map',
 		style: 'mapbox://styles/infopcw/cmphejix900bi01sc3hbhb0lx',
+		// Mapbox GL JS v3 defaults to the globe projection, and `line-z-offset`
+		// (used to elevate the connection lines in network-layers.js) is "not
+		// supported for globe projection" — it is silently ignored there. Mercator
+		// is required for the elevated lines to render. The map is always viewed at
+		// city zoom levels, where globe and mercator look identical anyway.
+		projection: 'mercator',
 		zoom: map_zoom,
 		center: map_center,
 		pitch: 0,
