@@ -7,6 +7,8 @@ const visibilityStatus = {
 };
 
 // the network state year to show on the map (only show nodes installed before the specified year)
+// these are starting values only - syncYearRangeToData() replaces them with the real range
+// present in the data once it loads, so a new install year doesn't need a code change
 let year_to_show = 2026
 let year_start = 2021
 
@@ -24,8 +26,33 @@ function updateNetworkStats() {
 	if (lbEl) lbEl.textContent = lbCount;
 }
 
+// Read the real span of install years out of the data and move the sliders to match.
+// Without this the range is pinned to the 2021-2026 hardcoded in index.html, so the first
+// node installed in a new year silently falls outside the timeline.
+function syncYearRangeToData() {
+	const years = networkPointsData.features
+		.map(f => Number(f.properties.year))
+		.filter(y => Number.isFinite(y));
+	if (!years.length) return;
+
+	const min = Math.min(...years);
+	const max = Math.max(...years);
+
+	[document.getElementById('select-year-start'), document.getElementById('select-year')]
+		.forEach(el => {
+			el.min = min;
+			el.max = max;
+		});
+
+	document.getElementById('select-year-start').value = min;
+	document.getElementById('select-year').value = max;
+	year_start = min;
+	year_to_show = max;
+}
+
 export const setNetworkPointsData = (data) => {
 	networkPointsData = data;
+	syncYearRangeToData();
 	updateNetworkStats();
 };
 
@@ -172,7 +199,9 @@ export default () => {
 		updateHeatmapVisibility();
 	};
 
-	year_selector_start.addEventListener('change', () => {
+	// 'input' rather than 'change' so the map follows the handle while it is being dragged.
+	// On 'change' nothing moved until the handle was released, which read as a broken timeline.
+	year_selector_start.addEventListener('input', () => {
 		if (Number(year_selector_start.value) > Number(year_selector.value)) {
 			year_selector_start.value = year_selector.value;
 		}
@@ -181,11 +210,19 @@ export default () => {
 		updateSliderFill();
 	});
 
-	year_selector.addEventListener('change', () => {
+	year_selector.addEventListener('input', () => {
 		if (Number(year_selector.value) < Number(year_selector_start.value)) {
 			year_selector.value = year_selector_start.value;
 		}
 		year_to_show = Number(year_selector.value);
+		rebuildFilters();
+		updateSliderFill();
+	});
+
+	// Apply the filters once the layers exist. Until this ran, setFilter had never been
+	// called, so the layers carried no filter at all on first paint and the timeline only
+	// started working after the slider was touched.
+	map.on('layers-ready', () => {
 		rebuildFilters();
 		updateSliderFill();
 	});
