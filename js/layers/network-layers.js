@@ -89,7 +89,7 @@ export const loadNetworkLayers = () => {
 			},
 			minzoom: 13,
 			paint: {
-				'line-color': '#1565C0',
+				'line-color': '#5E35B1',
 				'line-width': 2,
 				'line-opacity': 0.65,
 				'line-emissive-strength': 1,
@@ -114,15 +114,16 @@ export const loadNetworkLayers = () => {
 			},
 			minzoom: 13,
 			paint: {
-				'line-color': '#2E7D32',
+				// cabling: light grey, solid (wireless links are the coloured, animated ones)
+				'line-color': '#BDBDBD',
 				'line-width': 4,
-				'line-opacity': 0.65,
+				'line-opacity': 0.85,
 				'line-emissive-strength': 1,
 			},
 		});
 		map.fire('line-layer-added');
-		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks2');
-		cb.disabled = false;
+		// Wired links stay solid; only the wireless links (levels 1, 3, 4) animate.
+		document.getElementById('toggleNetworkLinks2').disabled = false;
 	});
 
 	// Level 3
@@ -139,7 +140,7 @@ export const loadNetworkLayers = () => {
 			},
 			minzoom: 13,
 			paint: {
-				'line-color': '#E65100',
+				'line-color': '#FF7043',
 				'line-width': 4,
 				'line-opacity': 0.65,
 				'line-emissive-strength': 1,
@@ -164,7 +165,7 @@ export const loadNetworkLayers = () => {
 			},
 			minzoom: 13,
 			paint: {
-				'line-color': '#AD1457',
+				'line-color': '#AB47BC',
 				'line-width': 4,
 				'line-opacity': 0.65,
 				'line-emissive-strength': 1,
