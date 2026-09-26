@@ -37,24 +37,28 @@ export const initAnimateNetworkLine = (id) => {
 		[0, 3.5, 3, 0.5],
 	];
 	let step = 0;
+	let frameId = null;
 	const animateNetworkLine = (timestamp = 0) => {
 		// Update line-dasharray using the next value in dashArraySequence. The
 		// divisor in the expression `timestamp / 100` controls the animation speed.
 		const nextStep = parseInt((timestamp / 100) % dashSequence.length);
 		if (nextStep !== step) {
-			if (map.isStyleLoaded()) {
-				map.setPaintProperty(id, 'line-dasharray', dashSequence[step]);
-			}
+			map.setPaintProperty(id, 'line-dasharray', dashSequence[step]);
 			step = nextStep;
 		}
-		requestAnimationFrame(animateNetworkLine);
+		frameId = requestAnimationFrame(animateNetworkLine);
+	};
+	const startAnimation = () => {
+		if (frameId === null) animateNetworkLine();
 	};
 	const stopAnimation = () => {
-		cancelAnimationFrame(animateNetworkLine);
+		cancelAnimationFrame(frameId);
+		frameId = null;
 		step = 0;
+		map.setPaintProperty(id, 'line-dasharray', [1, 0]);
 	};
 	return {
-		start: animateNetworkLine,
+		start: startAnimation,
 		stop: stopAnimation,
 	};
 };
