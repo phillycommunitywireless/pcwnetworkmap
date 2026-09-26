@@ -89,7 +89,7 @@ export const loadNetworkLayers = () => {
 			},
 			minzoom: 13,
 			paint: {
-				'line-color': '#1565C0',
+				'line-color': '#5E35B1',
 				'line-width': 2,
 				'line-opacity': 0.65,
 				'line-emissive-strength': 1,
@@ -140,7 +140,7 @@ export const loadNetworkLayers = () => {
 			},
 			minzoom: 13,
 			paint: {
-				'line-color': '#E65100',
+				'line-color': '#FF7043',
 				'line-width': 4,
 				'line-opacity': 0.65,
 				'line-emissive-strength': 1,
@@ -165,7 +165,7 @@ export const loadNetworkLayers = () => {
 			},
 			minzoom: 13,
 			paint: {
-				'line-color': '#AD1457',
+				'line-color': '#AB47BC',
 				'line-width': 4,
 				'line-opacity': 0.65,
 				'line-emissive-strength': 1,
