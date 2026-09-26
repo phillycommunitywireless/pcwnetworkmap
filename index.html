@@ -31,13 +31,15 @@
         <input type="radio" name="sidebar-tab" value="tab-links" />
         <div class="toggle">Network</div>
       </label>
+      <!-- Services tab hidden until it has content
       <label class="toggle-container">
         <input type="radio" name="sidebar-tab" value="tab-zones" />
         <div class="toggle">Services</div>
       </label>
+      -->
     </div>
 
-    <!-- Signal tab — heatmap + neighborhood outline -->
+    <!-- Signal tab — heatmap + access points -->
     <div class="sidebar-tab-panel active" id="tab-basic">
       <div class="section-label">Signal View</div>
       <div class="switch-super-container">
@@ -46,14 +48,7 @@
           <div class="switch mr6"></div>
           Heatmap
         </label>
-        <label class="switch-container txt-ms">
-          <input type="checkbox" id="neighborhood-outline-only" />
-          <div class="switch mr6"></div>
-          Neighborhoods
-        </label>
       </div>
-      <!-- Hidden: kept in DOM so bind-elements.util.js can read/set .checked -->
-      <input type="checkbox" id="neighborhood-boundaries" style="display:none" />
     </div>
 
     <!-- Network tab — nodes, connections -->
@@ -115,11 +110,12 @@
       </div>
     </div>
 
-    <!-- Services tab — placeholder -->
+    <!-- Services tab — placeholder, hidden with its tab button above
     <div class="sidebar-tab-panel" id="tab-zones">
       <div class="section-label">Operations Zones</div>
       <p class="sidebar-coming-soon">Coming soon</p>
     </div>
+    -->
 
     <!-- Persistent year slider — visible on all tabs -->
     <div class="sidebar-year-slider">
@@ -129,20 +125,21 @@
           type="range"
           id="select-year-start"
           name="select-year-start"
-          min="2021"
+          min="2020"
           max="2026"
-          value="2021"
+          value="2020"
           step="1" />
         <input
           type="range"
           id="select-year"
           name="select-year"
-          min="2021"
+          min="2020"
           max="2026"
           value="2026"
           step="1" />
       </div>
       <div class="year-tick-labels">
+        <span>2020</span>
         <span>2021</span>
         <span>2022</span>
         <span>2023</span>

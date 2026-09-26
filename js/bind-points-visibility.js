@@ -10,7 +10,7 @@ const visibilityStatus = {
 // these are starting values only - syncYearRangeToData() replaces them with the real range
 // present in the data once it loads, so a new install year doesn't need a code change
 let year_to_show = 2026
-let year_start = 2021
+let year_start = 2020
 
 let networkPointsData = null;
 
@@ -27,15 +27,16 @@ function updateNetworkStats() {
 }
 
 // Read the real span of install years out of the data and move the sliders to match.
-// Without this the range is pinned to the 2021-2026 hardcoded in index.html, so the first
+// Without this the range is pinned to the years hardcoded in index.html, so the first
 // node installed in a new year silently falls outside the timeline.
+// The range starts one year before the first install so the timeline begins from zero.
 function syncYearRangeToData() {
 	const years = networkPointsData.features
 		.map(f => Number(f.properties.year))
 		.filter(y => Number.isFinite(y));
 	if (!years.length) return;
 
-	const min = Math.min(...years);
+	const min = Math.min(...years) - 1;
 	const max = Math.max(...years);
 
 	[document.getElementById('select-year-start'), document.getElementById('select-year')]
@@ -48,6 +49,16 @@ function syncYearRangeToData() {
 	document.getElementById('select-year').value = max;
 	year_start = min;
 	year_to_show = max;
+
+	const ticks = document.querySelector('.year-tick-labels');
+	if (ticks) {
+		ticks.innerHTML = '';
+		for (let y = min; y <= max; y++) {
+			const span = document.createElement('span');
+			span.textContent = y;
+			ticks.appendChild(span);
+		}
+	}
 }
 
 export const setNetworkPointsData = (data) => {
@@ -81,12 +92,19 @@ let heatmapFilters = {
 	LB: ['all', ['==', ['get', 'type'], 'LB'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
 }
 
+// the Signal tab shows access points only (rooftop hubs + mesh nodes, the same set the
+// "Access Points" count covers); high sites and routers stay on the Network tab
+const SIGNAL_TAB_TYPES = ['RH', 'MN'];
+const onSignalTab = () =>
+	document.querySelector('input[name="sidebar-tab"]:checked')?.value === 'tab-basic';
+
 // Function to update the visibility of points based on filters
 function updatePointsVisibility() {
 	const filters = ['any'];
+	const signal = onSignalTab();
 
 	for (const type in layerFilters) {
-		if (visibilityStatus[type]) {
+		if (signal ? SIGNAL_TAB_TYPES.includes(type) : visibilityStatus[type]) {
 			filters.push(layerFilters[type]);
 		}
 	}
@@ -107,10 +125,11 @@ function updateLineVisibility() {
 		this could be optimized to only set the lineFilter for
 		a given layer to a layer instead of applying all of them
 	*/
-	map.setFilter('highsite-line', filters)
-	map.setFilter('wiredap-line', filters)
-	map.setFilter('meshnode-line', filters)
-	map.setFilter('ptp-line', filters)
+	// the line layers load asynchronously, so skip any that aren't on the map yet;
+	// each one picks up the current filter when it arrives (see 'line-layer-added' below)
+	['highsite-line', 'wiredap-line', 'meshnode-line', 'ptp-line'].forEach((id) => {
+		if (map.getLayer(id)) map.setFilter(id, filters);
+	});
 
 }
 
@@ -169,7 +188,12 @@ export default () => {
 		const endPct = ((year_selector.value - min) / (max - min)) * 100;
 		year_selector_start.style.setProperty('--fill-start', startPct + '%');
 		year_selector_start.style.setProperty('--fill-end', endPct + '%');
-		year_selector_start.style.zIndex = Number(year_selector_start.value) >= Number(year_selector.value) ? 5 : 3;
+		// When the two handles overlap, only the top one can be grabbed. Put the start handle on
+		// top in the right half of the range and the end handle on top in the left half, so the
+		// handle a visitor grabs can always move away from the edge instead of getting stuck.
+		const overlapping = Number(year_selector_start.value) >= Number(year_selector.value);
+		const inRightHalf = Number(year_selector.value) > (min + max) / 2;
+		year_selector_start.style.zIndex = overlapping && inRightHalf ? 5 : 3;
 	};
 	updateSliderFill();
 	year_selector_start.addEventListener('input', updateSliderFill);
@@ -225,6 +249,10 @@ export default () => {
 	map.on('layers-ready', () => {
 		rebuildFilters();
 		updateSliderFill();
+	});
+	map.on('line-layer-added', updateLineVisibility);
+	document.querySelectorAll('input[name="sidebar-tab"]').forEach((radio) => {
+		radio.addEventListener('change', updatePointsVisibility);
 	});
 
 	const heatmapCheckbox = document.getElementById('heatmap-layer');

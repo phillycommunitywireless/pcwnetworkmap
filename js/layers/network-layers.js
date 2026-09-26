@@ -95,6 +95,7 @@ export const loadNetworkLayers = () => {
 				'line-emissive-strength': 1,
 			},
 		});
+		map.fire('line-layer-added');
 		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks');
 		cb.disabled = false;
 	});
@@ -119,6 +120,7 @@ export const loadNetworkLayers = () => {
 				'line-emissive-strength': 1,
 			},
 		});
+		map.fire('line-layer-added');
 		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks2');
 		cb.disabled = false;
 	});
@@ -143,6 +145,7 @@ export const loadNetworkLayers = () => {
 				'line-emissive-strength': 1,
 			},
 		});
+		map.fire('line-layer-added');
 		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks3');
 		cb.disabled = false;
 	});
@@ -167,6 +170,7 @@ export const loadNetworkLayers = () => {
 				'line-emissive-strength': 1,
 			},
 		});
+		map.fire('line-layer-added');
 		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks4');
 		cb.disabled = false;
 	});

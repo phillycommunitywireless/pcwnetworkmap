@@ -1,8 +1,3 @@
-import {
-	setNeighborhoodLayer,
-	setNeighborhoodOutline,
-} from './bind-elements.util.js';
-
 export const toggleSidebar = () => {
 	document.getElementById('right-sidebar').classList.toggle('collapsed');
 };
@@ -13,7 +8,8 @@ const getActiveTab = () => {
 };
 
 // Enforces which layers are visible based on the active tab.
-// Heatmap belongs to Basic; nodes and connections belong to Links.
+// Heatmap belongs to Basic; connections belong to Links. Nodes show on both - on Basic
+// they are narrowed to access points only (see updatePointsVisibility).
 // Called on every tab switch and once after the map reaches idle on load.
 const syncTabLayers = (tabId) => {
 	const onBasic = tabId === 'tab-basic';
@@ -32,7 +28,7 @@ const syncTabLayers = (tabId) => {
 		map.setLayoutProperty(
 			'network-points-layer',
 			'visibility',
-			onLinks ? 'visible' : 'none'
+			onBasic || onLinks ? 'visible' : 'none'
 		);
 	}
 
@@ -99,17 +95,6 @@ export default () => {
 			);
 		});
 
-	// neighborhood outline toggle — resets hidden fill checkbox on toggle-off
-	// so setNeighborhoodOutline doesn't accidentally re-show the fill layer
-	document
-		.getElementById('neighborhood-outline-only')
-		.addEventListener('change', function () {
-			if (!this.checked) {
-				document.getElementById('neighborhood-boundaries').checked = false;
-			}
-			setNeighborhoodOutline(this.checked);
-		});
-
 	// tab switching
 	document.querySelectorAll('input[name="sidebar-tab"]').forEach((radio) => {
 		radio.addEventListener('change', () => {
@@ -118,11 +103,7 @@ export default () => {
 			syncTabLayers(radio.value);
 			document.querySelector('.sidebar-year-slider').style.display =
 				radio.value === 'tab-zones' ? 'none' : '';
-			if (radio.value === 'tab-links') {
-				map.flyTo({ center: [-75.13465, 39.98270], zoom: 16 });
-			} else {
-				map.flyTo({ center: [-75.1255526, 39.9899471], zoom: 13.70 });
-			}
+			// the camera stays where the visitor left it when switching tabs
 		});
 	});
 

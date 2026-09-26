@@ -98,5 +98,6 @@ export default (network_points_data) => {
 		},
 	};
 
-	map.addLayer(heatmapLayer);
+	// draw the heatmap underneath the node icons so the access points stay readable on top of it
+	map.addLayer(heatmapLayer, map.getLayer('network-points-layer') ? 'network-points-layer' : undefined);
 };
