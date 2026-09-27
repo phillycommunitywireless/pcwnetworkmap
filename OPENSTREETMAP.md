@@ -1,6 +1,6 @@
 # Adding PCW network points to OpenStreetMap
 
-A quick guide to interacting with OpenStreetMap for the map working group: using OpenStreetMap to add WiFi availability.
+A quick guide to adding PCW WiFi points to OpenStreetMap.
 
 ## Resources
 
