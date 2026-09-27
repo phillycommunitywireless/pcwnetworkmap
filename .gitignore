@@ -1,3 +1,4 @@
-# ignore all reflected build files
-_site/*
-.jekyll-cache/*
+# local Mapbox token, see js/config.example.js
+js/config.js
+# local build output
+_site/
