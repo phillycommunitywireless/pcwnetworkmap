@@ -2,12 +2,10 @@
 
 A quick guide to interacting with OpenStreetMap for the map working group: using OpenStreetMap to add WiFi availability.
 
-<!-- Combined 2026-09 from three Drive docs in Ops Mapping/OpenStreetMap: "OSM Process doc" (2024-07), "Adding PCW points to OSM" (2024-08) and "OSM Project Plan" (2024-06 to 2025-06). Left out: team names, the meeting log, the KoboToolbox form, screenshots, and the Mapbox URL of the PCW background layer (ask the map team). -->
-
 ## Resources
 
 * [OSM wiki: Tags](https://wiki.openstreetmap.org/wiki/Tags)
-* [Wheelmap](https://wheelmap.org/) and Freifunk, the models we looked at
+* [Wheelmap](https://wheelmap.org/) and [Freifunk](https://freifunk.net/), similar mapping projects
 * [MapComplete](https://mapcomplete.org/)
 
 ## Tags
@@ -59,13 +57,8 @@ style:
 out body;
 ```
 
-## Open questions (from the 2024 plan)
+## Mapping the service, not the equipment
 
-**Are we mapping our network infrastructure or the service?** There are two ways to map the network in OSM:
+We tag the buildings and structures where PCW WiFi is available, using the tags above. These points show up on the standard map, and anyone can add or correct one with an ordinary edit.
 
-1. Map the equipment as points (mostly antennas), with tags like `communication:*` and `man_made=antenna` (plus `location=roof` and so on). These points are not visible in the default map style, but they are in the database and can be queried and mapped with a different style. Example: <https://overpass-turbo.eu/s/1O1Q>
-2. Tag the structures the equipment is attached to, with `internet_access=wlan`, `internet_access:fee=no`, the operator tag and the `#wifijawn` hashtag. Mapping the service opens the option for collaboration from users.
-
-**Importing or editing?** If we map infrastructure (1), an import is preferred, which means following OSM's import guidelines, a plan and the community. If we tag existing elements (2), editing is the way to go.
-
-In July 2024 the group decided against requesting a new amenity tag, because the OSM wiki asks people to clean up that type of tag.
+Network equipment (antennas, routers) can also be mapped in OSM with `communication:*` and `man_made=antenna` tags, but those points don't show in the default map style, and adding them in bulk counts as an import under OSM's [import guidelines](https://wiki.openstreetmap.org/wiki/Import/Guidelines). We don't map equipment.
