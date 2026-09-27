@@ -1,11 +1,21 @@
 import { isDarkMode } from '../util/util.js';
 
 export default () => {
+	// The extrusions read from the Mapbox Streets 'composite' source at the style
+	// root. Standard (which scopes it inside an import) and custom styles not built
+	// on Streets don't expose one, so skip the layer instead of letting addLayer
+	// log a 'source not found' map error.
+	if (!map.getSource('composite')) {
+		console.warn('3D buildings skipped: style has no "composite" source');
+		return;
+	}
+
 	// Insert the layer beneath any symbol layer.
 	const layers = map.getStyle().layers;
+	// undefined when the style has no label layer, in which case addLayer appends on top
 	const labelLayerId = layers.find(
-		(layer) => layer.type === 'symbol' && layer.layout['text-field']
-	).id;
+		(layer) => layer.type === 'symbol' && layer.layout?.['text-field']
+	)?.id;
 	const darkMode = isDarkMode();
 
 	// The 'building' layer in the Mapbox Streets

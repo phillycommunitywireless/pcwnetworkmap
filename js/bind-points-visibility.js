@@ -6,7 +6,8 @@ const visibilityStatus = {
 	LB: true,
 };
 
-// the network state year to show on the map (only show nodes installed before the specified year)
+// the install-year range shown on the map: nodes installed within [year_start, year_to_show],
+// plus any node with no usable year (see yearInRange below)
 // these are starting values only - syncYearRangeToData() replaces them with the real range
 // present in the data once it loads, so a new install year doesn't need a code change
 let year_to_show = 2026
@@ -14,12 +15,32 @@ let year_start = 2020
 
 let networkPointsData = null;
 
+// A year that isn't a positive number (missing, blank or text in the spreadsheet) is "no year".
+// Such a node is always shown, so this must agree with yearInRange() below.
+const hasUsableYear = (year) => {
+	const y = Number(year);
+	return Number.isFinite(y) && y > 0;
+};
+
+// Mapbox expression: true when the feature was installed within [start, end].
+// A node with no usable year must stay visible rather than vanish from the timeline:
+// "to-number" turns a missing or blank year into 0 and, via the fallback argument, text
+// it can't parse into -1, so anything <= 0 means "no year" and always passes.
+const yearInRange = (start, end) => {
+	const year = ['to-number', ['get', 'year'], -1];
+	return ['any', ['<=', year, 0], ['all', ['>=', year, start], ['<=', year, end]]];
+};
+
 function updateNetworkStats() {
 	if (!networkPointsData) return;
 	const features = networkPointsData.features;
+	// a node without a year is on the map for every range, so count it in every range too
+	const inRange = (f) =>
+		!hasUsableYear(f.properties.year) ||
+		(Number(f.properties.year) >= year_start && Number(f.properties.year) <= year_to_show);
 	// APs = rooftop hubs + mesh nodes (both broadcast WiFi); LBs are the point-to-point receivers
-	const rhCount = features.filter(f => (f.properties.type === 'RH' || f.properties.type === 'MN') && Number(f.properties.year) >= year_start && Number(f.properties.year) <= year_to_show).length;
-	const lbCount = features.filter(f => f.properties.type === 'LB' && Number(f.properties.year) >= year_start && Number(f.properties.year) <= year_to_show).length;
+	const rhCount = features.filter(f => (f.properties.type === 'RH' || f.properties.type === 'MN') && inRange(f)).length;
+	const lbCount = features.filter(f => f.properties.type === 'LB' && inRange(f)).length;
 	const rhEl = document.getElementById('rh-count');
 	const lbEl = document.getElementById('lb-count');
 	if (rhEl) rhEl.textContent = rhCount;
@@ -32,8 +53,9 @@ function updateNetworkStats() {
 // The range starts one year before the first install so the timeline begins from zero.
 function syncYearRangeToData() {
 	const years = networkPointsData.features
-		.map(f => Number(f.properties.year))
-		.filter(y => Number.isFinite(y));
+		.map(f => f.properties.year)
+		.filter(hasUsableYear)
+		.map(Number);
 	if (!years.length) return;
 
 	const min = Math.min(...years) - 1;
@@ -61,36 +83,42 @@ function syncYearRangeToData() {
 	}
 }
 
+// Nodes without a usable install year are shown for every range, so the timeline itself
+// can't reveal that one is missing; flag them once per load so the spreadsheet gets fixed.
+function warnAboutMissingYears() {
+	const missing = networkPointsData.features
+		.filter(f => !hasUsableYear(f.properties.year))
+		.map(f => `${f.properties.name} (id ${f.properties.id})`);
+	if (missing.length) {
+		console.warn(`${missing.length} network point(s) have no usable install year and are shown for every year range: ${missing.join(', ')}`);
+	}
+}
+
 export const setNetworkPointsData = (data) => {
 	networkPointsData = data;
+	warnAboutMissingYears();
 	syncYearRangeToData();
 	updateNetworkStats();
 };
 
-// Create an object to store the filter expressions for each layer
-// "all" requires all filter expressions to be met 
-// "to-number" included because we have to cast both the property and the year_to_show var to integers 
-let layerFilters = {
-	HS: ['all', ['==', ['get', 'type'], 'HS'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	RH: ['all', ['==', ['get', 'type'], 'RH'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	MN: ['all', ['==', ['get', 'type'], 'MN'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	LB: ['all', ['==', ['get', 'type'], 'LB'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
+// Build the filter expressions for the current year range, keyed by node/line type.
+// "all" requires all filter expressions to be met; the year clause lives in yearInRange()
+// so the points, line and heatmap layers can never disagree about which years are shown.
+const buildFilters = () => {
+	const inRange = yearInRange(year_start, year_to_show);
+	const byType = (type) => ['all', ['==', ['get', 'type'], type], inRange];
+	const byLineType = (lineType) => ['all', ['==', ['get', 'line_type'], lineType], inRange];
+	return {
+		// network points layer
+		layerFilters: { HS: byType('HS'), RH: byType('RH'), MN: byType('MN'), LB: byType('LB') },
+		// line layers
+		lineFilters: { Layer1: byLineType('Level1'), Layer2: byLineType('Level2'), Layer3: byLineType('Level3'), Layer4: byLineType('Level4') },
+		// heatmap
+		heatmapFilters: { RH: byType('RH'), MN: byType('MN'), LB: byType('LB') },
+	};
 };
 
-// Object storing filter expressions for line layers 
-let lineFilters = {
-	Layer1: ['all', ['==', ['get', 'line_type'], 'Level1'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	Layer2: ['all', ['==', ['get', 'line_type'], 'Level2'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	Layer3: ['all', ['==', ['get', 'line_type'], 'Level3'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	Layer4: ['all', ['==', ['get', 'line_type'], 'Level4'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-}
-
-// Object storing filter expressions for heatmap 
-let heatmapFilters = {
-	RH: ['all', ['==', ['get', 'type'], 'RH'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	MN: ['all', ['==', ['get', 'type'], 'MN'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-	LB: ['all', ['==', ['get', 'type'], 'LB'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-}
+let { layerFilters, lineFilters, heatmapFilters } = buildFilters();
 
 // the Signal tab shows access points only (rooftop hubs + mesh nodes, the same set the
 // "Access Points" count covers); high sites and routers stay on the Network tab
@@ -109,7 +137,9 @@ function updatePointsVisibility() {
 		}
 	}
 
-	map.setFilter('network-points-layer', filters);
+	// the layer is missing when the points fetch failed, and a checkbox can be
+	// clicked before it exists; setFilter on a missing layer fires a Mapbox error event
+	if (map.getLayer('network-points-layer')) map.setFilter('network-points-layer', filters);
 }
 
 // Function to update the visibility of lines (eg - HS to LB) based on filters 
@@ -141,7 +171,8 @@ function updateHeatmapVisibility() {
 		filters.push(heatmapFilters[type]);
 	}
 
-	map.setFilter("heatmap-layer", filters)
+	// same guard as the points layer: the heatmap is only added once the points loaded
+	if (map.getLayer('heatmap-layer')) map.setFilter('heatmap-layer', filters);
 }
 
 const setHeatmapLayer = (state) => {
@@ -200,26 +231,10 @@ export default () => {
 	year_selector.addEventListener('input', updateSliderFill);
 
 	const rebuildFilters = () => {
-		layerFilters = {
-			HS: ['all', ['==', ['get', 'type'], 'HS'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			RH: ['all', ['==', ['get', 'type'], 'RH'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			MN: ['all', ['==', ['get', 'type'], 'MN'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			LB: ['all', ['==', ['get', 'type'], 'LB'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-		};
+		({ layerFilters, lineFilters, heatmapFilters } = buildFilters());
 		updatePointsVisibility();
 		updateNetworkStats();
-		lineFilters = {
-			Layer1: ['all', ['==', ['get', 'line_type'], 'Level1'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			Layer2: ['all', ['==', ['get', 'line_type'], 'Level2'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			Layer3: ['all', ['==', ['get', 'line_type'], 'Level3'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			Layer4: ['all', ['==', ['get', 'line_type'], 'Level4'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-		};
 		updateLineVisibility();
-		heatmapFilters = {
-			RH: ['all', ['==', ['get', 'type'], 'RH'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			MN: ['all', ['==', ['get', 'type'], 'MN'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-			LB: ['all', ['==', ['get', 'type'], 'LB'], ['>=', ['to-number', ['get', 'year']], year_start], ['<=', ['to-number', ['get', 'year']], year_to_show]],
-		};
 		updateHeatmapVisibility();
 	};
 

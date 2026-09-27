@@ -14,6 +14,8 @@ export const loadNetworkLayer = async (endpoint, name) => {
 	} catch (e) {
 		console.error('error loading network connection layer', name, e);
 		showMapError();
+		// No source was added, so callers must not add a layer for it.
+		return undefined;
 	}
 	return layer_data;
 };
@@ -43,7 +45,10 @@ export const initAnimateNetworkLine = (id) => {
 		// divisor in the expression `timestamp / 100` controls the animation speed.
 		const nextStep = parseInt((timestamp / 100) % dashSequence.length);
 		if (nextStep !== step) {
-			map.setPaintProperty(id, 'line-dasharray', dashSequence[step]);
+			// a frame can land after setStyle() has dropped the layer
+			if (map.getLayer(id)) {
+				map.setPaintProperty(id, 'line-dasharray', dashSequence[step]);
+			}
 			step = nextStep;
 		}
 		frameId = requestAnimationFrame(animateNetworkLine);
@@ -52,10 +57,11 @@ export const initAnimateNetworkLine = (id) => {
 		if (frameId === null) animateNetworkLine();
 	};
 	const stopAnimation = () => {
-		cancelAnimationFrame(frameId);
+		if (frameId !== null) cancelAnimationFrame(frameId);
 		frameId = null;
 		step = 0;
-		map.setPaintProperty(id, 'line-dasharray', [1, 0]);
+		// a stop() after a style switch would otherwise target a layer that no longer exists
+		if (map.getLayer(id)) map.setPaintProperty(id, 'line-dasharray', [1, 0]);
 	};
 	return {
 		start: startAnimation,
@@ -76,9 +82,12 @@ export const bindCheckboxAnimation = (animationId, checkboxId) => {
 		this.checked ? start() : stop();
 	};
 	checkbox.addEventListener('change', listener);
-	map.on('layer-style-reset', () => {
+	// once, not on: setStyle() drops this layer and loadNetworkLayers creates a fresh
+	// binding, so a persistent handler would leak one per basemap switch and keep
+	// calling stop() against a layer that is gone. Checkbox state on reset
+	// (unchecked + disabled) is handled for all four lines in bind-elements.js.
+	map.once('layer-style-reset', () => {
 		checkbox.removeEventListener('change', listener);
-		checkbox.checked = false;
 		stop();
 	});
 

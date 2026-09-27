@@ -76,7 +76,9 @@ export const loadNetworkLayers = () => {
 	// is silently ignored under Mapbox's default globe projection.
 	const LINE_Z_OFFSET_M = 35;
 	// Level 1
-	loadNetworkLayer('/get_level1', 'line').then(() => {
+	loadNetworkLayer('/get_level1', 'line').then((data) => {
+		// Leave the checkbox disabled if the fetch failed; there is no source to draw.
+		if (!data) return;
 		const animationLineId = 'highsite-line';
 		map.addLayer({
 			type: 'line',
@@ -101,7 +103,9 @@ export const loadNetworkLayers = () => {
 	});
 
 	// Level 2
-	loadNetworkLayer('/get_level2', 'new-line').then(() => {
+	loadNetworkLayer('/get_level2', 'new-line').then((data) => {
+		// Leave the checkbox disabled if the fetch failed; there is no source to draw.
+		if (!data) return;
 		const animationLineId = 'wiredap-line';
 		map.addLayer({
 			type: 'line',
@@ -127,7 +131,9 @@ export const loadNetworkLayers = () => {
 	});
 
 	// Level 3
-	loadNetworkLayer('/get_level3', 'new-line2').then(() => {
+	loadNetworkLayer('/get_level3', 'new-line2').then((data) => {
+		// Leave the checkbox disabled if the fetch failed; there is no source to draw.
+		if (!data) return;
 		const animationLineId = 'meshnode-line';
 		map.addLayer({
 			type: 'line',
@@ -152,7 +158,9 @@ export const loadNetworkLayers = () => {
 	});
 
 	// Level 4
-	loadNetworkLayer('/get_level4', 'new-line3').then(() => {
+	loadNetworkLayer('/get_level4', 'new-line3').then((data) => {
+		// Leave the checkbox disabled if the fetch failed; there is no source to draw.
+		if (!data) return;
 		const animationLineId = 'ptp-line';
 		map.addLayer({
 			type: 'line',
