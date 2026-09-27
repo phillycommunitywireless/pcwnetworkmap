@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <div id="loading">Loading...</div>
+  <div id="loading" role="status">Loading...</div>
   <div id="map"></div>
   <div id="right-sidebar" class="sidebar right collapsed">
 
@@ -59,28 +59,28 @@
           <input type='checkbox' id="layer1" checked />
           <div class="switch mr6"></div>
           <img class="layer-icon"
-            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png">
+            src="icons/high_sites.png">
           High Sites
         </label>
         <label class='switch-container txt-ms'>
           <input type='checkbox' id="layer4" checked />
           <div class="switch mr6"></div>
           <img class="layer-icon"
-            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png">
+            src="icons/Rooftophubs2.png">
           Main Routers
         </label>
         <label class='switch-container txt-ms'>
           <input type='checkbox' id="layer2" checked />
           <div class="switch mr6"></div>
           <img class="layer-icon"
-            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png">
+            src="icons/RooftopHub.png">
           Access Points
         </label>
         <label class='switch-container txt-ms'>
           <input type='checkbox' id="layer3" checked />
           <div class="switch mr6"></div>
           <img class="layer-icon"
-            src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png">
+            src="icons/icon1.png">
           Mesh Nodes
         </label>
       </div>
@@ -124,6 +124,7 @@
         <input
           type="range"
           id="select-year-start"
+          aria-label="First installation year to show"
           name="select-year-start"
           min="2020"
           max="2026"
@@ -132,6 +133,7 @@
         <input
           type="range"
           id="select-year"
+          aria-label="Last installation year to show"
           name="select-year"
           min="2020"
           max="2026"
@@ -149,19 +151,18 @@
       </div>
       <div id="network-stats-widget">
         <div class="stat-row">
-          <span class="stat-label"><img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png"> Access Points</span>
+          <span class="stat-label"><img class="layer-icon" src="icons/RooftopHub.png"> Access Points</span>
           <span class="stat-value" id="rh-count">—</span>
         </div>
         <div class="stat-row">
-          <span class="stat-label"><img class="layer-icon" src="https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png"> Main Routers</span>
+          <span class="stat-label"><img class="layer-icon" src="icons/Rooftophubs2.png"> Main Routers</span>
           <span class="stat-value" id="lb-count">—</span>
         </div>
       </div>
     </div>
 
-    <button type="button" class="sidebar-toggle right" id="sidebar-toggle"></button>
+    <button type="button" class="sidebar-toggle right" id="sidebar-toggle" aria-label="Show or hide the sidebar"></button>
   </div>
-  <script type="module" src="https://unpkg.com/@turf/turf@7.2.0/turf.min.js"></script>
   <script src="js/main.js" type="module"></script>
 </body>
 

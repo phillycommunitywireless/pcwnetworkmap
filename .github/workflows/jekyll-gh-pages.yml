@@ -33,15 +33,14 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2.3' 
-      - name: Set up jekyll 
-        run: "gem install jekyll"
-        # --version 3.8.5 
+          ruby-version: '3.2.3'
+          # installs the gem versions pinned in Gemfile.lock
+          bundler-cache: true
       # Runs the Jekyll build command in the production environment
       - name: Build site with Jekyll
         env:
           MAPBOX_API: ${{ secrets.MAPBOX_API }}
-        run: 'echo MAPBOX_API: ${{ secrets.MAPBOX_API}} > _config.yml && jekyll build --config _config.yml'   
+        run: 'echo MAPBOX_API: ${{ secrets.MAPBOX_API}} > _config.yml && bundle exec jekyll build --config _config.yml'   
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

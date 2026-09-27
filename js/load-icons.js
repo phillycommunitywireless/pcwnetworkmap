@@ -1,34 +1,43 @@
 const iconData = [
 	{
-		imageUrl:
-			'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/high_sites.png',
+		imageUrl: 'icons/high_sites.png',
 		id: 'HS_icon',
 	},
 	{
-		imageUrl:
-			'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/RooftopHub.png',
+		imageUrl: 'icons/RooftopHub.png',
 		id: 'RH_icon',
 	},
 	{
-		imageUrl:
-			'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/icon1.png',
+		imageUrl: 'icons/icon1.png',
 		id: 'MN_icon',
 	},
 	{
-		imageUrl:
-			'https://raw.githubusercontent.com/phillycommunitywireless/pcwnetworkmap/main/icons/Rooftophubs2.png',
+		imageUrl: 'icons/Rooftophubs2.png',
 		id: 'LB_icon',
 	},
-]
+];
+
+// map.loadImage is callback-only and returns void, so wrap it in a promise
+// the caller can actually await before adding the symbol layer.
+const loadImage = (url) =>
+	new Promise((resolve, reject) => {
+		map.loadImage(url, (err, image) => (err ? reject(err) : resolve(image)));
+	});
 
 export default async () => {
-	Promise.all(iconData.map((img) =>
-		map.loadImage(img.imageUrl, (err, res) => {
-			if (err) {
-				console.error(err);
-				throw err;
+	await Promise.all(
+		iconData.map(async ({ imageUrl, id }) => {
+			try {
+				const image = await loadImage(imageUrl);
+				// Images are dropped on setStyle, so a basemap switch mid-load can
+				// re-run this and hit "image already exists" without the guard.
+				if (!map.hasImage(id)) {
+					map.addImage(id, image);
+				}
+			} catch (err) {
+				// One broken icon shouldn't stop the whole points layer from loading.
+				console.error(`Failed to load icon "${id}" from ${imageUrl}`, err);
 			}
-			map.addImage(img.id, res);
 		})
-	));
+	);
 };
