@@ -1,5 +1,5 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+# Builds the static site and deploys it to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -30,17 +30,19 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2.3'
-          # installs the gem versions pinned in Gemfile.lock
-          bundler-cache: true
-      # Runs the Jekyll build command in the production environment
-      - name: Build site with Jekyll
+      # Copy only the files the site serves, then write the Mapbox token into js/config.js
+      - name: Build site
         env:
           MAPBOX_API: ${{ secrets.MAPBOX_API }}
-        run: 'echo MAPBOX_API: ${{ secrets.MAPBOX_API}} > _config.yml && bundle exec jekyll build --config _config.yml'   
+        run: |
+          if [ -z "$MAPBOX_API" ]; then
+            echo "MAPBOX_API secret is not set" >&2
+            exit 1
+          fi
+          mkdir _site
+          cp -R index.html favicon.ico CNAME css js icons img _site/
+          rm -f _site/js/config.example.js
+          printf "export const MAPBOX_API = '%s';\n" "$MAPBOX_API" > _site/js/config.js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

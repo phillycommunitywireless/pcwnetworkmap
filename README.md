@@ -2,7 +2,7 @@
 
 ![A screenshot of the Philly Community Wireless webmap](/img/readme_screenshot.png)
 
-This map of PCW's network coverage is built with MapBox via Jekyll.
+This map of PCW's network coverage is built with MapBox. It's a static site with no build step.
 
 Deploy previews via `Render`
 
@@ -20,14 +20,14 @@ e.g - `https://map.phillycommunitywireless.org/?latitude=39.95239&longitude=-75.
 ## Setting menu visibility at map load 
 Similarly, the `menu_closed` URL parameter sets if the menu is open or closed at map load time - e.g, `https://map.phillycommunitywireless.org/?menu_closed=true` 
 
-# Local Development 
-You can run this site locally in a container using Docker
+# Local Development
 * Clone the repo with `git clone`
 * Sign up for a [MapBox developer account and get a MapBox public token](https://docs.mapbox.com/help/dive-deeper/access-tokens/)
-* Set `MAPBOX_API` in `_config.yml` to your MapBox public token.  
-* `docker compose up -d`
-* `jekyll` will serve at `localhost:4000`
-* If you change the `Gemfile`, refresh `Gemfile.lock` with `docker run --rm -v .:/app -w /app ruby:3.2 bundle lock`
+* Copy `js/config.example.js` to `js/config.js` and paste your token into it. `js/config.js` is gitignored so the token isn't committed.
+* Serve the repo folder with any static file server, e.g. `python3 -m http.server 4000` or `npx serve -l 4000`, and open `localhost:4000`. Opening `index.html` directly from disk won't work because the JS is loaded as ES modules.
+
+# Deployment
+Pushes to `main` run `.github/workflows/gh-pages.yml`, which copies the site files into `_site`, writes `js/config.js` from the `MAPBOX_API` repository secret and publishes to GitHub Pages. The token is public in the browser either way, so restrict it to the map's domain (and `localhost` if you use it for development) in your Mapbox account.
 
 # Editing map contents
 The map does not ship any GeoJSON of its own. Since 8/20/24 it has fetched its GeoJSON at runtime from an API that generates it dynamically from the content of a spreadsheet - **please contact a PCW staff member for access.**
