@@ -1,3 +1,5 @@
+import { NETWORK_ICON_SIZE, SIGNAL_ICON_SIZE } from './layers/network-layers.js';
+
 export const toggleSidebar = () => {
 	document.getElementById('right-sidebar').classList.toggle('collapsed');
 };
@@ -39,6 +41,11 @@ const syncTabLayers = (tabId) => {
 			'network-points-layer',
 			'visibility',
 			onBasic || onLinks ? 'visible' : 'none'
+		);
+		map.setLayoutProperty(
+			'network-points-layer',
+			'icon-size',
+			onBasic ? SIGNAL_ICON_SIZE : NETWORK_ICON_SIZE
 		);
 	}
 
