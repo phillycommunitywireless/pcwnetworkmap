@@ -76,6 +76,22 @@ body.mobile .mapboxgl-ctrl-bottom {
   bottom: 30px;
 }
 
+/* on phones the basemap selector follows the sidebar: collapsing the panel gives
+   a cleaner map view, and opening it brings the selector back */
+body.mobile #tile-style-control {
+  transition: opacity 500ms, visibility 500ms;
+}
+body.mobile:has(#right-sidebar.collapsed) #tile-style-control {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* collapsed search bar (phones): show only the magnifier, not the geolocate arrow
+   that would otherwise sit on top of it in the 50px-wide button */
+.mapboxgl-ctrl-geocoder--collapsed .mapboxgl-ctrl-geocoder--pin-right {
+  display: none;
+}
+
 button.mapboxgl-popup-close-button {
   padding: 4px 8px;
   font-size: 24px;

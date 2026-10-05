@@ -45,6 +45,8 @@ const geocoder = new MapboxGeocoder({
 	marker: {color: 'blue'},
 	placeholder: 'Search an address',
 	enableGeolocation: true,
+	// on phones the search bar shrinks to a magnifier button and expands when tapped
+	collapsed: isMobile.phone,
 });
 map.addControl(geocoder, isMobile.phone ? 'bottom' : 'top-left');
 
