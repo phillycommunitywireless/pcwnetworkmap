@@ -11,7 +11,7 @@ const isWebUrl = (value) => {
 
 // Popup text comes from the API, so build it with textContent instead of
 // injecting it as HTML.
-const buildPopupContent = ({ name, image, ap_type, type }) => {
+const buildPopupContent = ({ name, image, type }) => {
 	const container = document.createElement('div');
 	container.className = 'popup-image-container';
 
@@ -26,13 +26,6 @@ const buildPopupContent = ({ name, image, ap_type, type }) => {
 		img.alt = name ? `Photo of ${name}` : 'Photo of network node';
 		img.className = 'popup-image';
 		container.appendChild(img);
-	}
-
-	// text that will display under the node name and image (if present)
-	if (ap_type) {
-		const description = document.createElement('p');
-		description.textContent = ap_type;
-		container.appendChild(description);
 	}
 
 	return container;
