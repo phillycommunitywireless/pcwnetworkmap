@@ -38,13 +38,12 @@ function updateNetworkStats() {
 	const inRange = (f) =>
 		!hasUsableYear(f.properties.year) ||
 		(Number(f.properties.year) >= year_start && Number(f.properties.year) <= year_to_show);
-	// APs = rooftop hubs + mesh nodes (both broadcast WiFi); LBs are the point-to-point receivers
-	const rhCount = features.filter(f => (f.properties.type === 'RH' || f.properties.type === 'MN') && inRange(f)).length;
-	const lbCount = features.filter(f => f.properties.type === 'LB' && inRange(f)).length;
-	const rhEl = document.getElementById('rh-count');
-	const lbEl = document.getElementById('lb-count');
-	if (rhEl) rhEl.textContent = rhCount;
-	if (lbEl) lbEl.textContent = lbCount;
+	// Public access points = rooftop hubs + mesh nodes. Both broadcast the open PCW network,
+	// including the ones installed at homes, so every one counts.
+	const isAP = (f) => f.properties.type === 'RH' || f.properties.type === 'MN';
+	const publicCount = features.filter(f => isAP(f) && inRange(f)).length;
+	const el = document.getElementById('public-ap-count');
+	if (el) el.textContent = publicCount;
 }
 
 // Read the real span of install years out of the data and move the sliders to match.
