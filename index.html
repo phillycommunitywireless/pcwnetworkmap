@@ -73,7 +73,7 @@
           <div class="switch mr6"></div>
           <img class="layer-icon"
             src="icons/Rooftophubs2.png">
-          Main Routers
+          Network Hubs
         </label>
         <label class='switch-container txt-ms'>
           <input type='checkbox' id="layer2" checked />
@@ -96,7 +96,7 @@
         <label class="switch-container">
           <input type="checkbox" id="toggleNetworkLinks" disabled />
           <div class="switch"></div>
-          <div class="ml6 txt-ms">High Sites to Routers</div>
+          <div class="ml6 txt-ms">High Sites to Network Hubs</div>
         </label>
         <label class="switch-container">
           <input type="checkbox" id="toggleNetworkLinks4" disabled />
@@ -106,13 +106,31 @@
         <label class="switch-container">
           <input type="checkbox" id="toggleNetworkLinks2" disabled />
           <div class="switch"></div>
-          <div class="ml6 txt-ms">Routers to Wired APs</div>
+          <div class="ml6 txt-ms">Network Hubs to Access Points</div>
         </label>
         <label class="switch-container">
           <input type="checkbox" id="toggleNetworkLinks3" disabled />
           <div class="switch"></div>
-          <div class="ml6 txt-ms">Wired APs to Mesh Nodes</div>
+          <div class="ml6 txt-ms">Access Points to Mesh Nodes</div>
         </label>
+      </div>
+      <div class="network-stats-widget">
+        <div class="stat-row">
+          <span class="stat-label"><img class="layer-icon" src="icons/high_sites.png"> High Sites</span>
+          <span class="stat-value" id="hs-count">—</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label"><img class="layer-icon" src="icons/Rooftophubs2.png"> Network Hubs</span>
+          <span class="stat-value" id="hub-count">—</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label"><img class="layer-icon" src="icons/RooftopHub.png"> Access Points</span>
+          <span class="stat-value" id="rh-count">—</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label"><img class="layer-icon" src="icons/icon1.png"> Mesh Nodes</span>
+          <span class="stat-value" id="mn-count">—</span>
+        </div>
       </div>
     </div>
 

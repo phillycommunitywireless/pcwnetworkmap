@@ -41,9 +41,18 @@ function updateNetworkStats() {
 	// Public access points = rooftop hubs + mesh nodes. Both broadcast the open PCW network,
 	// including the ones installed at homes, so every one counts.
 	const isAP = (f) => f.properties.type === 'RH' || f.properties.type === 'MN';
-	const publicCount = features.filter(f => isAP(f) && inRange(f)).length;
-	const el = document.getElementById('public-ap-count');
-	if (el) el.textContent = publicCount;
+	const count = (test) => features.filter(f => test(f) && inRange(f)).length;
+	const counts = {
+		'public-ap-count': count(isAP),
+		'hs-count': count(f => f.properties.type === 'HS'),
+		'hub-count': count(f => f.properties.type === 'LB'),
+		'rh-count': count(f => f.properties.type === 'RH'),
+		'mn-count': count(f => f.properties.type === 'MN'),
+	};
+	for (const [id, n] of Object.entries(counts)) {
+		const el = document.getElementById(id);
+		if (el) el.textContent = n;
+	}
 }
 
 // Read the real span of install years out of the data and move the sliders to match.
