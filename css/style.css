@@ -34,6 +34,11 @@ body {
   top: unset
 }
 
+/* switched-on state in the map's accent (the active tab and the stat values use the same) */
+input:checked + .switch {
+  background-color: #5262ED;
+}
+
 .popup-image-container {
   margin-top: 10px;
   text-align: center;

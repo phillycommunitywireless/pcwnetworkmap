@@ -105,6 +105,13 @@ export const loadNetworkLayers = () => {
 		map.fire('line-layer-added');
 		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks');
 		cb.disabled = false;
+		// This line is on by default. Only fire the change (which shows the layer and starts
+		// the animation) if the Network tab is already open; otherwise syncTabLayers shows
+		// it when the visitor switches tabs.
+		cb.checked = true;
+		if (document.querySelector('input[name="sidebar-tab"]:checked')?.value === 'tab-links') {
+			cb.dispatchEvent(new Event('change'));
+		}
 	});
 
 	// Level 2
