@@ -73,7 +73,6 @@ The map uses the terms 'main router' for LiteBeams, 'roof hub' for wired APs, an
 ### Schema Mapping
 Each entry in `networkpoints` must obey this schema. Each spreadsheet column corresponds with one of these attributes.
 
-<!-- transcribed from a screenshot in the Drive doc (image6); the street address is replaced with a placeholder -->
 ```json
 {
     "type": "Feature",
@@ -142,7 +141,6 @@ Level1 represents the connections from high sites to LiteBeams/Main Routers.
 ### Schema Mapping
 Each entry in `level1` must obey this schema. Each spreadsheet column corresponds with one of these attributes.
 
-<!-- transcribed from a screenshot in the Drive doc (image13); the street address and the destination name are replaced with placeholders -->
 ```json
 {
     "type": "Feature",
@@ -233,7 +231,6 @@ Each entry in `level1` must obey this schema. Each spreadsheet column correspond
 ### Schema Mapping
 Each entry in `level2` must obey this schema. Each spreadsheet column corresponds with one of these attributes.
 
-<!-- transcribed from a screenshot in the Drive doc (image5); the coordinates are replaced with placeholders -->
 ```json
 {
     "type": "Feature",
@@ -310,7 +307,6 @@ Level3 represents the connections between wired APs/'roof hubs' to mesh nodes.
 ### Schema Mapping
 Each entry in `level3` must obey this schema. Each spreadsheet column corresponds with one of these attributes.
 
-<!-- transcribed from a screenshot in the Drive doc (image11); the two site names and the coordinates are replaced with placeholders -->
 ```json
 {
     "type": "Feature",
