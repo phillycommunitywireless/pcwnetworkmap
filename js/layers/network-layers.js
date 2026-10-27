@@ -9,6 +9,18 @@ import {
 export const NETWORK_ICON_SIZE = ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.45];
 export const SIGNAL_ICON_SIZE = ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.32];
 
+// Every connection line is on by default. Enabling the checkbox and ticking it is enough
+// when the Signal tab is open: syncTabLayers (bind-elements.js) shows the line and starts
+// its animation when the visitor switches to the Network tab. If the Network tab is already
+// open (a basemap switch rebuilds the layers mid-visit), fire the change now.
+const enableByDefault = (checkbox) => {
+	checkbox.disabled = false;
+	checkbox.checked = true;
+	if (document.querySelector('input[name="sidebar-tab"]:checked')?.value === 'tab-links') {
+		checkbox.dispatchEvent(new Event('change'));
+	}
+};
+
 /**
  * @async
  * @returns {Promise<LayerData | null>} 
@@ -103,15 +115,7 @@ export const loadNetworkLayers = () => {
 			},
 		});
 		map.fire('line-layer-added');
-		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks');
-		cb.disabled = false;
-		// This line is on by default. Only fire the change (which shows the layer and starts
-		// the animation) if the Network tab is already open; otherwise syncTabLayers shows
-		// it when the visitor switches tabs.
-		cb.checked = true;
-		if (document.querySelector('input[name="sidebar-tab"]:checked')?.value === 'tab-links') {
-			cb.dispatchEvent(new Event('change'));
-		}
+		enableByDefault(bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks'));
 	});
 
 	// Level 2
@@ -139,7 +143,7 @@ export const loadNetworkLayers = () => {
 		});
 		map.fire('line-layer-added');
 		// Wired links stay solid; only the wireless links (levels 1, 3, 4) animate.
-		document.getElementById('toggleNetworkLinks2').disabled = false;
+		enableByDefault(document.getElementById('toggleNetworkLinks2'));
 	});
 
 	// Level 3
@@ -165,8 +169,7 @@ export const loadNetworkLayers = () => {
 			},
 		});
 		map.fire('line-layer-added');
-		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks3');
-		cb.disabled = false;
+		enableByDefault(bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks3'));
 	});
 
 	// Level 4
@@ -192,7 +195,6 @@ export const loadNetworkLayers = () => {
 			},
 		});
 		map.fire('line-layer-added');
-		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks4');
-		cb.disabled = false;
+		enableByDefault(bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks4'));
 	});
 };

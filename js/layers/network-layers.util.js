@@ -82,12 +82,17 @@ export const bindCheckboxAnimation = (animationId, checkboxId) => {
 		this.checked ? start() : stop();
 	};
 	checkbox.addEventListener('change', listener);
+	// 'pause-animation' is fired by syncTabLayers when the visitor leaves the Network tab:
+	// the line is hidden there, so its frame loop has nothing to draw. The next 'change'
+	// (fired again by syncTabLayers on the way back) restarts it.
+	checkbox.addEventListener('pause-animation', stop);
 	// once, not on: setStyle() drops this layer and loadNetworkLayers creates a fresh
 	// binding, so a persistent handler would leak one per basemap switch and keep
 	// calling stop() against a layer that is gone. Checkbox state on reset
 	// (unchecked + disabled) is handled for all four lines in bind-elements.js.
 	map.once('layer-style-reset', () => {
 		checkbox.removeEventListener('change', listener);
+		checkbox.removeEventListener('pause-animation', stop);
 		stop();
 	});
 

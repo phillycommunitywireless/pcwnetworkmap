@@ -57,9 +57,12 @@ const syncTabLayers = (tabId) => {
 				'visibility',
 				onLinks && checkbox.checked ? 'visible' : 'none'
 			);
-			// a line checked before the tab opened (the default-on one) needs its
-			// animation started; start() is a no-op if it is already running
-			if (onLinks && checkbox.checked) checkbox.dispatchEvent(new Event('change'));
+			// Lines are ticked before the tab opens (on by default), so entering the Network
+			// tab has to start their animations; start() is a no-op if already running.
+			// Leaving it pauses them: a hidden line should not keep a frame loop alive.
+			if (checkbox.checked) {
+				checkbox.dispatchEvent(new Event(onLinks ? 'change' : 'pause-animation'));
+			}
 		}
 	});
 };
