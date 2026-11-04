@@ -4,6 +4,11 @@ import {
 	loadNetworkLayer,
 } from './network-layers.util.js';
 
+// The points layer is shared by both tabs; the Signal tab shows smaller icons so the
+// heatmap underneath stays readable. syncTabLayers (bind-elements.js) swaps between them.
+export const NETWORK_ICON_SIZE = ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.45];
+export const SIGNAL_ICON_SIZE = ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.32];
+
 /**
  * @async
  * @returns {Promise<LayerData | null>} 
@@ -38,7 +43,7 @@ export const loadNetworkPoints = async () => {
 					'LB_icon',
 					'default-icon',
 				],
-				'icon-size': ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.45],
+				'icon-size': NETWORK_ICON_SIZE,
 				'icon-allow-overlap': false,
 				'icon-ignore-placement': true,
 
@@ -100,6 +105,13 @@ export const loadNetworkLayers = () => {
 		map.fire('line-layer-added');
 		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks');
 		cb.disabled = false;
+		// This line is on by default. Only fire the change (which shows the layer and starts
+		// the animation) if the Network tab is already open; otherwise syncTabLayers shows
+		// it when the visitor switches tabs.
+		cb.checked = true;
+		if (document.querySelector('input[name="sidebar-tab"]:checked')?.value === 'tab-links') {
+			cb.dispatchEvent(new Event('change'));
+		}
 	});
 
 	// Level 2

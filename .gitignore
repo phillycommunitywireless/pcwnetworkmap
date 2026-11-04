@@ -2,3 +2,4 @@
 js/config.js
 # local build output
 _site/
+.DS_Store

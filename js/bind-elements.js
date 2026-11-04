@@ -1,3 +1,5 @@
+import { NETWORK_ICON_SIZE, SIGNAL_ICON_SIZE } from './layers/network-layers.js';
+
 export const toggleSidebar = () => {
 	document.getElementById('right-sidebar').classList.toggle('collapsed');
 };
@@ -40,16 +42,24 @@ const syncTabLayers = (tabId) => {
 			'visibility',
 			onBasic || onLinks ? 'visible' : 'none'
 		);
+		map.setLayoutProperty(
+			'network-points-layer',
+			'icon-size',
+			onBasic ? SIGNAL_ICON_SIZE : NETWORK_ICON_SIZE
+		);
 	}
 
 	LINE_LAYER_CHECKBOXES.forEach(([cbId, layerId]) => {
 		if (map.getLayer(layerId)) {
-			const checked = document.getElementById(cbId).checked;
+			const checkbox = document.getElementById(cbId);
 			map.setLayoutProperty(
 				layerId,
 				'visibility',
-				onLinks && checked ? 'visible' : 'none'
+				onLinks && checkbox.checked ? 'visible' : 'none'
 			);
+			// a line checked before the tab opened (the default-on one) needs its
+			// animation started; start() is a no-op if it is already running
+			if (onLinks && checkbox.checked) checkbox.dispatchEvent(new Event('change'));
 		}
 	});
 };
