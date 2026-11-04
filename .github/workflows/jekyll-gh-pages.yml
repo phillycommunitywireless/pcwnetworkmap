@@ -33,7 +33,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2.3'
+          ruby-version: '3.4.12'
           # installs the gem versions pinned in Gemfile.lock
           bundler-cache: true
       # Runs the Jekyll build command in the production environment
