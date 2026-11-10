@@ -2,7 +2,7 @@
 
 ![A screenshot of the Philly Community Wireless webmap](/img/readme_screenshot.png)
 
-This map of PCW's network coverage is built with MapBox via Jekyll.
+This map of PCW's network coverage is built with MapBox. It's a static site with no build step.
 
 Deploy previews via `Render`
 
@@ -20,17 +20,19 @@ e.g - `https://map.phillycommunitywireless.org/?latitude=39.95239&longitude=-75.
 ## Setting menu visibility at map load 
 Similarly, the `menu_closed` URL parameter sets if the menu is open or closed at map load time - e.g, `https://map.phillycommunitywireless.org/?menu_closed=true` 
 
-# Local Development 
-You can run this site locally in a container using Docker
+# Local Development
 * Clone the repo with `git clone`
-* Sign up for a [MapBox developer account and get a MapBox public token]([url](https://docs.mapbox.com/help/dive-deeper/access-tokens/))
-* Set `MAPBOX_API` in `_config.yml` to your MapBox public token.  
-* `docker compose up -d`
-* `jekyll` will serve at `localhost:4000`
-* docker run --rm -v .:/app -w /app ruby:latest bundle lock
+* Sign up for a [MapBox developer account and get a MapBox public token](https://docs.mapbox.com/help/dive-deeper/access-tokens/)
+* Copy `js/config.example.js` to `js/config.js` and paste your token into it. `js/config.js` is gitignored so the token isn't committed.
+* Serve the repo folder with any static file server, e.g. `python3 -m http.server 4000` or `npx serve -l 4000`, and open `localhost:4000`. Opening `index.html` directly from disk won't work because the JS is loaded as ES modules.
+
+# Deployment
+Pushes to `main` run `.github/workflows/gh-pages.yml`, which copies the site files into `_site`, writes `js/config.js` from the `MAPBOX_API` repository secret and publishes to GitHub Pages. The token is public in the browser either way, so restrict it to the map's domain (and `localhost` if you use it for development) in your Mapbox account.
 
 # Editing map contents
-As of 8/20/24, the map **no longer uses the geosjon files in `/data`**. It is now linked to an API that generates GeoJSON files dynamically based of the content of a spreadsheet - **please contact a PCW staff member for access.**
+The map does not ship any GeoJSON of its own. Since 8/20/24 it has fetched its GeoJSON at runtime from an API that generates it dynamically from the content of a spreadsheet - **please contact a PCW staff member for access.**
+
+The code for the API is available here - https://github.com/phillycommunitywireless/pcwnetworkmap-api 
 
 The rest of this section is the PCW Network Map Editing Documentation (last edited 2026-03-04), moved here from PCW's shared drive.
 
@@ -404,3 +406,6 @@ For further assistance, please contact Eugene or Felipe on Slack or via email:
 
 ## Future Improvements
 Future improvements can be found as Github Issues here - https://github.com/phillycommunitywireless/pcwnetworkmap/issues
+
+# Removed features
+The census demographic overlays - median household income and households without broadband access - were removed along with the unused GeoJSON in `/data`. They had been disabled in the UI since March 2025 (commit `01ee2ce`), but the repository still carried several MB of unused GeoJSON and the page still loaded the Turf.js library for every visitor. The code is still in git history; the last commit containing it is `778eea7`. Any future demographic visualization is expected to start as a fresh project rather than revive these layers.

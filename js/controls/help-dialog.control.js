@@ -28,12 +28,6 @@ const popupHTML = `
 		<p>Click the arrow button on the top right of your screen to show / hide the sidebar</p>
 		<p>The sidebar contains various overlays and extra information relevant to PCW</p>
 
-		<h2 class="txt-xl">Points of Interest (POI)</h2>
-		<p>Select a location from the sidebar POI dropdown.
-		Your view will 'fly to' the designated location and shift to a 3D rendering.</p>
-		<p>To reset this view to the normal 2D orientation, click the compass button
-		in the lower-right of the map, below the zoom icons ( +, - )</p>
-		
 		<h2 class="txt-xl">Pre-centering the map via link</h2>
 		<p>
 			It may be useful in some instances to have the map pre-zoomed on a given location of interest
@@ -42,7 +36,7 @@ const popupHTML = `
 			the values to the URL like so: 
 		</p>
 		<a class="help-dialog-link" href="/?latitude=39.95239&longitude=-75.16364&zoom=16">
-			https://phillycommunitywireless.github.io/pcwnetworkmap/?latitude=39.95239&longitude=-75.16364&zoom=16
+			https://map.phillycommunitywireless.org/?latitude=39.95239&longitude=-75.16364&zoom=16
 		</a>
 		<p>
 			For example, the above URL is centered/zoomed on City Hall.

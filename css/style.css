@@ -34,6 +34,11 @@ body {
   top: unset
 }
 
+/* switched-on state in the map's accent (the active tab and the stat values use the same) */
+input:checked + .switch {
+  background-color: #5262ED;
+}
+
 .popup-image-container {
   margin-top: 10px;
   text-align: center;
@@ -74,6 +79,22 @@ body {
 body.mobile .mapboxgl-ctrl-bottom {
   /* override bottom due to 'mapbox' watermark collision on mobile */
   bottom: 30px;
+}
+
+/* on phones the basemap selector follows the sidebar: collapsing the panel gives
+   a cleaner map view, and opening it brings the selector back */
+body.mobile #tile-style-control {
+  transition: opacity 500ms, visibility 500ms;
+}
+body.mobile:has(#right-sidebar.collapsed) #tile-style-control {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* collapsed search bar (phones): show only the magnifier, not the geolocate arrow
+   that would otherwise sit on top of it in the 50px-wide button */
+.mapboxgl-ctrl-geocoder--collapsed .mapboxgl-ctrl-geocoder--pin-right {
+  display: none;
 }
 
 button.mapboxgl-popup-close-button {
@@ -194,14 +215,14 @@ button.mapboxgl-popup-close-button {
 }
 /* END SEARCH BAR */
 
-#network-stats-widget {
+.network-stats-widget {
   font-size: 0.85rem;
   margin-top: 8px;
   border-top: 1px solid #e0e0e0;
   padding-top: 8px;
 }
 
-#network-stats-widget .stat-row {
+.network-stats-widget .stat-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -209,11 +230,11 @@ button.mapboxgl-popup-close-button {
   padding: 2px 0;
 }
 
-#network-stats-widget .stat-label {
+.network-stats-widget .stat-label {
   color: #666;
 }
 
-#network-stats-widget .stat-value {
+.network-stats-widget .stat-value {
   font-weight: bold;
   color: #5262ED;
 }

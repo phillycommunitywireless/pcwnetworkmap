@@ -1,4 +1,5 @@
-# ignore all reflected build files
-_site/*
-.jekyll-cache/*
-Gemfile.lock
+# local Mapbox token, see js/config.example.js
+js/config.js
+# local build output
+_site/
+.DS_Store

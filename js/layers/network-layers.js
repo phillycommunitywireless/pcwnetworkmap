@@ -4,6 +4,11 @@ import {
 	loadNetworkLayer,
 } from './network-layers.util.js';
 
+// The points layer is shared by both tabs; the Signal tab shows smaller icons so the
+// heatmap underneath stays readable. syncTabLayers (bind-elements.js) swaps between them.
+export const NETWORK_ICON_SIZE = ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.45];
+export const SIGNAL_ICON_SIZE = ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.32];
+
 /**
  * @async
  * @returns {Promise<LayerData | null>} 
@@ -38,7 +43,7 @@ export const loadNetworkPoints = async () => {
 					'LB_icon',
 					'default-icon',
 				],
-				'icon-size': ['interpolate', ['linear'], ['zoom'], 0, 0.01, 17, 0.45],
+				'icon-size': NETWORK_ICON_SIZE,
 				'icon-allow-overlap': false,
 				'icon-ignore-placement': true,
 
@@ -76,7 +81,9 @@ export const loadNetworkLayers = () => {
 	// is silently ignored under Mapbox's default globe projection.
 	const LINE_Z_OFFSET_M = 35;
 	// Level 1
-	loadNetworkLayer('/get_level1', 'line').then(() => {
+	loadNetworkLayer('/get_level1', 'line').then((data) => {
+		// Leave the checkbox disabled if the fetch failed; there is no source to draw.
+		if (!data) return;
 		const animationLineId = 'highsite-line';
 		map.addLayer({
 			type: 'line',
@@ -98,10 +105,19 @@ export const loadNetworkLayers = () => {
 		map.fire('line-layer-added');
 		const cb = bindCheckboxAnimation(animationLineId, 'toggleNetworkLinks');
 		cb.disabled = false;
+		// This line is on by default. Only fire the change (which shows the layer and starts
+		// the animation) if the Network tab is already open; otherwise syncTabLayers shows
+		// it when the visitor switches tabs.
+		cb.checked = true;
+		if (document.querySelector('input[name="sidebar-tab"]:checked')?.value === 'tab-links') {
+			cb.dispatchEvent(new Event('change'));
+		}
 	});
 
 	// Level 2
-	loadNetworkLayer('/get_level2', 'new-line').then(() => {
+	loadNetworkLayer('/get_level2', 'new-line').then((data) => {
+		// Leave the checkbox disabled if the fetch failed; there is no source to draw.
+		if (!data) return;
 		const animationLineId = 'wiredap-line';
 		map.addLayer({
 			type: 'line',
@@ -127,7 +143,9 @@ export const loadNetworkLayers = () => {
 	});
 
 	// Level 3
-	loadNetworkLayer('/get_level3', 'new-line2').then(() => {
+	loadNetworkLayer('/get_level3', 'new-line2').then((data) => {
+		// Leave the checkbox disabled if the fetch failed; there is no source to draw.
+		if (!data) return;
 		const animationLineId = 'meshnode-line';
 		map.addLayer({
 			type: 'line',
@@ -152,7 +170,9 @@ export const loadNetworkLayers = () => {
 	});
 
 	// Level 4
-	loadNetworkLayer('/get_level4', 'new-line3').then(() => {
+	loadNetworkLayer('/get_level4', 'new-line3').then((data) => {
+		// Leave the checkbox disabled if the fetch failed; there is no source to draw.
+		if (!data) return;
 		const animationLineId = 'ptp-line';
 		map.addLayer({
 			type: 'line',

@@ -1,3 +1,5 @@
+import { NETWORK_ICON_SIZE, SIGNAL_ICON_SIZE } from './layers/network-layers.js';
+
 export const toggleSidebar = () => {
 	document.getElementById('right-sidebar').classList.toggle('collapsed');
 };
@@ -6,6 +8,16 @@ const getActiveTab = () => {
 	const active = document.querySelector('input[name="sidebar-tab"]:checked');
 	return active ? active.value : 'tab-basic';
 };
+
+// Connection-line checkboxes and the layer each one drives. The layers arrive
+// asynchronously and are rebuilt on every basemap switch, so every layer call
+// below checks map.getLayer first.
+const LINE_LAYER_CHECKBOXES = [
+	['toggleNetworkLinks',  'highsite-line'],
+	['toggleNetworkLinks2', 'wiredap-line'],
+	['toggleNetworkLinks3', 'meshnode-line'],
+	['toggleNetworkLinks4', 'ptp-line'],
+];
 
 // Enforces which layers are visible based on the active tab.
 // Heatmap belongs to Basic; connections belong to Links. Nodes show on both - on Basic
@@ -30,21 +42,24 @@ const syncTabLayers = (tabId) => {
 			'visibility',
 			onBasic || onLinks ? 'visible' : 'none'
 		);
+		map.setLayoutProperty(
+			'network-points-layer',
+			'icon-size',
+			onBasic ? SIGNAL_ICON_SIZE : NETWORK_ICON_SIZE
+		);
 	}
 
-	[
-		['toggleNetworkLinks',  'highsite-line'],
-		['toggleNetworkLinks2', 'wiredap-line'],
-		['toggleNetworkLinks3', 'meshnode-line'],
-		['toggleNetworkLinks4', 'ptp-line'],
-	].forEach(([cbId, layerId]) => {
+	LINE_LAYER_CHECKBOXES.forEach(([cbId, layerId]) => {
 		if (map.getLayer(layerId)) {
-			const checked = document.getElementById(cbId).checked;
+			const checkbox = document.getElementById(cbId);
 			map.setLayoutProperty(
 				layerId,
 				'visibility',
-				onLinks && checked ? 'visible' : 'none'
+				onLinks && checkbox.checked ? 'visible' : 'none'
 			);
+			// a line checked before the tab opened (the default-on one) needs its
+			// animation started; start() is a no-op if it is already running
+			if (onLinks && checkbox.checked) checkbox.dispatchEvent(new Event('change'));
 		}
 	});
 };
@@ -55,45 +70,17 @@ export default () => {
 		.addEventListener('click', toggleSidebar);
 
 	// connection line visibility
-	document
-		.getElementById('toggleNetworkLinks')
-		.addEventListener('change', function () {
+	LINE_LAYER_CHECKBOXES.forEach(([cbId, layerId]) => {
+		document.getElementById(cbId).addEventListener('change', function () {
+			// the layer may not have arrived yet, or may be mid-reload after a style switch
+			if (!map.getLayer(layerId)) return;
 			map.setLayoutProperty(
-				'highsite-line',
+				layerId,
 				'visibility',
 				this.checked ? 'visible' : 'none'
 			);
 		});
-
-	document
-		.getElementById('toggleNetworkLinks2')
-		.addEventListener('change', function () {
-			map.setLayoutProperty(
-				'wiredap-line',
-				'visibility',
-				this.checked ? 'visible' : 'none'
-			);
-		});
-
-	document
-		.getElementById('toggleNetworkLinks3')
-		.addEventListener('change', function () {
-			map.setLayoutProperty(
-				'meshnode-line',
-				'visibility',
-				this.checked ? 'visible' : 'none'
-			);
-		});
-
-	document
-		.getElementById('toggleNetworkLinks4')
-		.addEventListener('change', function () {
-			map.setLayoutProperty(
-				'ptp-line',
-				'visibility',
-				this.checked ? 'visible' : 'none'
-			);
-		});
+	});
 
 	// tab switching
 	document.querySelectorAll('input[name="sidebar-tab"]').forEach((radio) => {
@@ -112,4 +99,16 @@ export default () => {
 	// layers have been added, guaranteeing network-points-layer and
 	// heatmap-layer exist when syncTabLayers runs.
 	map.on('layers-ready', () => syncTabLayers(getActiveTab()));
+
+	// setStyle() drops every line layer, so clear and lock all four checkboxes until
+	// loadNetworkLayers re-enables each one as its layer comes back. Previously only
+	// the animated lines were unchecked, leaving the wired checkbox on with nothing
+	// to show, and any checkbox could be toggled while its layer was mid-reload.
+	map.on('layer-style-reset', () => {
+		LINE_LAYER_CHECKBOXES.forEach(([cbId]) => {
+			const checkbox = document.getElementById(cbId);
+			checkbox.checked = false;
+			checkbox.disabled = true;
+		});
+	});
 };
