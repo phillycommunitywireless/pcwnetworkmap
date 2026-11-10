@@ -215,6 +215,20 @@ button.mapboxgl-popup-close-button {
 }
 /* END SEARCH BAR */
 
+/* Connection legend: one swatch per line, matching the line-color in network-layers.js */
+.line-swatch {
+  display: inline-block;
+  width: 16px;
+  height: 3px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.line-swatch-hs { background: #5E35B1; }
+.line-swatch-ptp { background: #AB47BC; }
+.line-swatch-wired { background: #BDBDBD; }
+.line-swatch-mesh { background: #FF7043; }
+
 .network-stats-widget {
   font-size: 0.85rem;
   margin-top: 8px;
