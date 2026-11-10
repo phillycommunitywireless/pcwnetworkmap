@@ -1,10 +1,9 @@
----
----
 import { toggleSidebar } from './bind-elements.js';
 import testMobile from './util/test-mobile.util.js';
+// js/config.js is not committed: the deploy workflow writes it from the
+// MAPBOX_API secret, and locally it's a copy of js/config.example.js
+import { MAPBOX_API } from './config.js';
 
-// Get current env and load mapbox key 
-const MAPBOX_API = "{{ site.MAPBOX_API }}"
 mapboxgl.accessToken = MAPBOX_API;
 
 // Default values for map center and zoom
